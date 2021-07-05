@@ -20,6 +20,7 @@
     "postcss": "^8.3.5",
     "stylelint-config-recommended": "^5.0.0",
     "tailwindcss": "^2.2.4",
+    "twitter-d": "github:mort3za/twitter-d",
     "typescript": "^4.3.2",
     "vite": "^2.3.8",
     "vite-aliases": "^0.8.2",
