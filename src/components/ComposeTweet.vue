@@ -1,6 +1,7 @@
 <template>
   <div>
-    <textarea v-model="text" id="" cols="30" rows="10"></textarea>
+    <textarea class="border w-full" v-model="text" id="" cols="30" rows="10"></textarea>
+    <button>send</button>
   </div>
 </template>
 

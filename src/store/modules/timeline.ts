@@ -17,15 +17,18 @@ const actions = {
     searchParams.set("count", String(count));
 
     const url = makeApiUrl(`/timelines/latest-tweets?${searchParams.toString()}`);
-    return fetch(url, { method: "GET", credentials: "include", cache: "force-cache" }).then(
-      async (res) => {
-        if (!res.ok) {
-          throw await res.json();
-        }
-        const { list } = await res.json();
-        context.commit("latestTweetsUpdate", list);
-      },
-    );
+    return fetch(url, {
+      method: "GET",
+      credentials: "include",
+      // fixme: remove in prod
+      cache: "force-cache",
+    }).then(async (res) => {
+      if (!res.ok) {
+        throw await res.json();
+      }
+      const { list } = await res.json();
+      context.commit("latestTweetsUpdate", list);
+    });
   },
 };
 const getters = {
