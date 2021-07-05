@@ -1,5 +1,5 @@
 <template>
-  <div>{{ tweet.text }}</div>
+  <div class="border border-blue p-4 block">{{ tweet.text }}</div>
 </template>
 
 <script lang="ts">
