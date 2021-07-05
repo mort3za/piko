@@ -1,7 +1,6 @@
 <template>
   <div>
-    count: {{ count }}
-    <Tweets :tweets="[]" />
+    <Tweets :tweets="latestTweetsGet" />
     <LoginButton />
   </div>
 </template>
@@ -10,14 +9,19 @@
 import { computed, defineComponent } from "vue";
 import LoginButton from "@components/LoginButton.vue";
 import Tweets from "@components/Tweets.vue";
-import { useStore } from "vuex";
+import { useStore, mapGetters, mapActions } from "vuex";
 
 export default defineComponent({
   name: "Home",
   components: { LoginButton, Tweets },
-  setup() {
-    const store = useStore();
-    return { count: computed(() => store.state.count) };
+  computed: {
+    ...mapGetters("timeline", ["latestTweetsGet"]),
+  },
+  methods: {
+    ...mapActions("timeline", ["latestTweetsFetch"]),
+  },
+  created() {
+    this.latestTweetsFetch({});
   },
 });
 </script>

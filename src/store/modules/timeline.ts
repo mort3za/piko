@@ -1,16 +1,33 @@
 import { cloneDeep } from "lodash-es";
 import { makeApiUrl } from "@functions/helpers";
 
-const defaultState = {};
+const defaultState = {
+  latestTweets: [],
+};
 
-const mutations = {};
-const actions = {
-  fetchLatestTweets(context, { count = 20 }) {
-    const url = makeApiUrl("/timelines/latest-tweets");
-    fetch(url, { method: "GET" });
+const mutations = {
+  latestTweetsUpdate(state, payload) {
+    state.latestTweets = payload;
   },
 };
-const getters = {};
+const actions = {
+  async latestTweetsFetch(context, { count = 20 }) {
+    let searchParams = new URLSearchParams("");
+    searchParams.set("count", String(count));
+    console.log("searchParams", searchParams);
+
+    const url = makeApiUrl("/timelines/latest-tweets");
+    return fetch(url, { method: "GET", credentials: "include" }).then(async (res) => {
+      if (!res.ok) {
+        throw await res.json();
+      }
+      return res.json();
+    });
+  },
+};
+const getters = {
+  latestTweetsGet: (state) => state.latestTweets,
+};
 
 export default {
   namespaced: true,
