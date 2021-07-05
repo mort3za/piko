@@ -1,9 +1,12 @@
 <template>
-  <section>hi this is your timeline of Tweets!</section>
+  <section>
+    <Tweet v-for="tweet in tweets" :key="tweet.id" :tweet="tweet"></Tweet>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Tweet from "@components/Tweet.vue";
 export default defineComponent({
   name: "Timeline",
   props: {
@@ -12,5 +15,6 @@ export default defineComponent({
       required: true,
     },
   },
+  components: { Tweet },
 });
 </script>
