@@ -19,7 +19,8 @@
       "@pages/*": ["src/pages/*"],
       "@router/*": ["src/router/*"],
       "@store/*": ["src/store/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@types/*": ["src/types/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
