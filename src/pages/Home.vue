@@ -2,7 +2,7 @@
   <div>
     <div class="max-w-2xl mx-auto">
       <ComposeTweet />
-      <Tweets :tweets="latestTweetsGet" />
+      <Tweets :statuses="latestStatusesGet" />
     </div>
     <LoginButton />
   </div>
@@ -12,20 +12,20 @@
 import { defineComponent, ref } from "vue";
 import LoginButton from "@components/LoginButton.vue";
 import Tweets from "@components/Tweets.vue";
-import { useStore, mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import ComposeTweet from "@components/ComposeTweet.vue";
 
 export default defineComponent({
-  name: "Home",
+  name: "HomePage",
   components: { LoginButton, Tweets, ComposeTweet },
   computed: {
-    ...mapGetters("timeline", ["latestTweetsGet"]),
+    ...mapGetters("timeline", ["latestStatusesGet"]),
   },
   methods: {
-    ...mapActions("timeline", ["latestTweetsFetch"]),
+    ...mapActions("timeline", ["latestStatusesFetch"]),
   },
   created() {
-    this.latestTweetsFetch({ count: 2 });
+    this.latestStatusesFetch({ count: 10 });
   },
 });
 </script>

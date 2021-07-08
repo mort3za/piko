@@ -1,6 +1,12 @@
 <template>
   <section>
-    <Tweet v-for="tweet in tweets" :key="tweet.id" :tweet="tweet"></Tweet>
+    <router-link
+      v-for="status in statuses"
+      :key="status.id"
+      :to="{ name: 'Status', params: { id: status.id, username: status.user.screen_name } }"
+    >
+      <Tweet :status="status"></Tweet>
+    </router-link>
   </section>
 </template>
 
@@ -10,7 +16,7 @@ import Tweet from "@components/Tweet.vue";
 export default defineComponent({
   name: "Timeline",
   props: {
-    tweets: {
+    statuses: {
       type: Array,
       required: true,
     },

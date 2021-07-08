@@ -1,23 +1,25 @@
 import { cloneDeep } from "lodash-es";
-import { makeApiUrl } from "@functions/helpers";
+import { ajax } from "@functions/utils";
 import { Status } from "twitter-d";
 
 const defaultState = {
-  latestTweets: [],
+  latestStatuses: [],
 };
 
 const mutations = {
-  latestTweetsUpdate(state, payload: Status[]) {
-    state.latestTweets = payload;
+  latestStatusesUpdate(state, payload: Status[]) {
+    console.log("payload", payload);
+
+    state.latestStatuses = payload;
   },
 };
 const actions = {
-  async latestTweetsFetch(context, { count = 20 }) {
-    let searchParams = new URLSearchParams("");
-    searchParams.set("count", String(count));
+  async latestStatusesFetch(context, payload: StatusesHomeTimelinePayload = {}) {
+    const searchParams = new URLSearchParams(payload);
+    console.log("searchParams:", searchParams.toString());
 
-    const url = makeApiUrl(`/timelines/latest-tweets?${searchParams.toString()}`);
-    return fetch(url, {
+    const url = `/timelines/latest-statuses?${searchParams.toString()}`;
+    return ajax(url, {
       method: "GET",
       credentials: "include",
       // fixme: remove in prod
@@ -26,13 +28,13 @@ const actions = {
       if (!res.ok) {
         throw await res.json();
       }
-      const { list } = await res.json();
-      context.commit("latestTweetsUpdate", list);
+      const list = await res.json();
+      context.commit("latestStatusesUpdate", list);
     });
   },
 };
 const getters = {
-  latestTweetsGet: (state) => state.latestTweets as Status[],
+  latestStatusesGet: (state) => state.latestStatuses as Status[],
 };
 
 export default {

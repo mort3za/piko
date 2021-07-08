@@ -1,3 +1,7 @@
+body {
+  /* background-color: #777; */
+}
+
 #app {
   @apply font-sans;
   -webkit-font-smoothing: antialiased;
