@@ -12,7 +12,7 @@
 import { defineComponent } from "vue";
 import TButton from "@components/base/TButton.vue";
 import TTextarea from "@components/base/TTextarea.vue";
-import { tweet } from "@functions/api-requests";
+import { mapActions } from "vuex";
 
 export default defineComponent({
   name: "Home",
@@ -21,8 +21,9 @@ export default defineComponent({
   },
   components: { TButton, TTextarea },
   methods: {
+    ...mapActions("status", ["statusPost"]),
     submit() {
-      tweet({ status: this.text });
+      this.statusPost({ status: this.text });
     },
   },
 });

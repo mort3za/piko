@@ -14,23 +14,25 @@ const mutations = {
   },
 };
 const actions = {
-  async latestStatusesFetch(context, payload: StatusesHomeTimelinePayload = {}) {
-    const searchParams = new URLSearchParams(payload);
-    console.log("searchParams:", searchParams.toString());
-
-    const url = `/timelines/latest-statuses?${searchParams.toString()}`;
-    return ajax(url, {
-      method: "GET",
-      credentials: "include",
-      // fixme: remove in prod
-      cache: "force-cache",
-    }).then(async (res) => {
-      if (!res.ok) {
-        throw await res.json();
-      }
-      const list = await res.json();
-      context.commit("latestStatusesUpdate", list);
-    });
+  async latestStatusesFetch(context, params: StatusesHomeTimelinePayload = {}) {
+    const url = `/timelines/latest-statuses`;
+    return ajax({
+      url,
+      options: {
+        method: "GET",
+        credentials: "include",
+        cache: "force-cache",
+      },
+      params,
+    })
+      .then(async (res) => {
+        const result = await res.json();
+        if (!res.ok) throw result;
+        return result;
+      })
+      .then((result) => {
+        context.commit("latestStatusesUpdate", result);
+      });
   },
 };
 const getters = {
