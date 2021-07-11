@@ -7,21 +7,25 @@ const router = createRouter({
   routes: [
     {
       name: "Home",
-      path: "/home",
+      path: getPath("home"),
       component: Home,
     },
     {
       name: "Status",
-      path: "/:username/status/:id",
+      path: getPath(":username/status/:id"),
       component: Status,
     },
     {
-      path: "/",
+      path: getPath(),
       redirect: (to) => {
         return { name: "Home" };
       },
     },
   ],
 });
+
+function getPath(path = "") {
+  return import.meta.env.BASE_URL + path;
+}
 
 export default router;
