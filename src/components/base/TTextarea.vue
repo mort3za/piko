@@ -1,10 +1,5 @@
 <template>
-  <textarea
-    :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
-    v-bind="getAttributes()"
-    :class="componentClass"
-  />
+  <textarea :value="modelValue" @input="onInput" v-bind="getAttributes()" :class="componentClass" />
 </template>
 
 <script lang="ts">
@@ -31,6 +26,9 @@ const TTextarea = defineComponent({
     },
   },
   methods: {
+    onInput($event) {
+      this.$emit("update:modelValue", (<HTMLInputElement>$event.target).value);
+    },
     getAttributes() {
       return {
         ...this.$attrs,

@@ -1,6 +1,7 @@
 import { defineComponent } from "vue";
 import { get } from "lodash-es";
-import CssClass from "@types/general";
+
+type CssClass = string | { [k: string]: any } | Array<string>;
 
 const mergeClasses = (classesA: CssClass, classesB: CssClass): CssClass => {
   let a = classesA;

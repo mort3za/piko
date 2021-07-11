@@ -4,21 +4,9 @@ export function makeApiUrl(path: string) {
   return `${VITE_API_BASE}${path}`;
 }
 
-interface AjaxOptions {
-  url: string;
-  options?: RequestInit;
-  isUrlRelative?: boolean | undefined;
-  params?: Record<string, number | string | boolean | undefined | null>;
-}
-
 export function ajax({ url, options = {}, params = {}, isUrlRelative = undefined }: AjaxOptions) {
-  console.log("url", url, url[0] === "/");
-
   const _isUrlRelative = isUrlRelative ?? url[0] === "/";
-  console.log("_isUrlRelative", _isUrlRelative);
-
   const queryParams = getQueryParams(params);
-  console.log("queryParams", queryParams);
 
   let _url = url;
   if (_isUrlRelative) {
@@ -36,12 +24,11 @@ export function ajax({ url, options = {}, params = {}, isUrlRelative = undefined
     },
     ...options,
   };
-  console.log("_url=======", _url);
 
   return fetch(_url, _options);
 }
 
-function getQueryParams(params: Record<string, number | string | boolean | undefined | null>) {
+function getQueryParams(params: Object) {
   const normalizedParams: Record<string, string> = Object.fromEntries(
     Object.entries(params).map(([key, value]) => {
       let updatedValue = String(value);

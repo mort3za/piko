@@ -1,3 +1,6 @@
-type CssClass = string | { [k: string]: any } | Array<string>;
-
-export default CssClass;
+interface AjaxOptions {
+  url: string;
+  options?: RequestInit;
+  isUrlRelative?: boolean | undefined;
+  params?: Object;
+}

@@ -1,7 +1,7 @@
 <template>
   <input
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="onInput"
     v-bind="getAttributes()"
     type="text"
     :class="componentClass"
@@ -40,6 +40,9 @@ const TInput = defineComponent({
     },
   },
   methods: {
+    onInput($event) {
+      this.$emit("update:modelValue", (<HTMLInputElement>$event.target).value);
+    },
     getAttributes() {
       return {
         ...this.$attrs,

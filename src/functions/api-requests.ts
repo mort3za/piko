@@ -1,1 +1,0 @@
-import { ajax } from "./utils";

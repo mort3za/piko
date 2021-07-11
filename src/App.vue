@@ -4,12 +4,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Tweets from "./components/Tweets.vue";
+import Statuses from "@components/Statuses.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    Tweets,
+    Statuses,
   },
 });
 </script>

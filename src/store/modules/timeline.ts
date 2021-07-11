@@ -8,8 +8,6 @@ const defaultState = {
 
 const mutations = {
   latestStatusesUpdate(state, payload: Status[]) {
-    console.log("payload", payload);
-
     state.latestStatuses = payload;
   },
 };

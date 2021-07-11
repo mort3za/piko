@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
+    "twitter-d": "github:mort3za/twitter-d",
     "vue": "^3.0.5",
     "vue-router": "^4.0.10",
     "vuex": "^4.0.2"
@@ -20,7 +21,6 @@
     "postcss": "^8.3.5",
     "stylelint-config-recommended": "^5.0.0",
     "tailwindcss": "^2.2.4",
-    "twitter-d": "github:mort3za/twitter-d",
     "typescript": "^4.3.2",
     "vite": "^2.3.8",
     "vite-aliases": "^0.8.2",
