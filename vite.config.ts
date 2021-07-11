@@ -12,5 +12,6 @@ const viteAliasesOptions = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/piko/",
   plugins: [vue(), ViteAliases(viteAliasesOptions), VitePWA()],
 });
