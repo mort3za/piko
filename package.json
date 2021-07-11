@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "lodash-es": "^4.17.21",
-    "twitter-d": "github:mort3za/twitter-d",
+    "twitter-d": "https://github.com/mort3za/twitter-d/archive/master.tar.gz",
     "vue": "^3.0.5",
     "vue-router": "^4.0.10",
     "vuex": "^4.0.2"
