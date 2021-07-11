@@ -25,6 +25,7 @@ export default defineComponent({
     ...mapActions("timeline", ["latestStatusesFetch"]),
   },
   created() {
+    console.log("Home...");
     this.latestStatusesFetch({ count: 10 });
   },
 });
