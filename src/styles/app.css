@@ -1,5 +1,11 @@
+html {
+  height: 100vh;
+  height: -webkit-fill-available;
+}
 body {
   /* background-color: #777; */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 #app {
@@ -8,4 +14,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+*,
+*::after,
+*::before {
+  touch-action: manipulation;
 }
