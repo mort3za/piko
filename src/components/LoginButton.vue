@@ -1,3 +1,17 @@
 <template>
-  <a href="http://localhost:6060/api/v1/authenticate">Login</a>
+  <a :href="loginLink">Login</a>
 </template>
+
+<script lang="ts">
+import { makeApiUrl } from "@functions/utils";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "LoginButton",
+  computed: {
+    loginLink() {
+      return makeApiUrl("/authenticate");
+    },
+  },
+});
+</script>
