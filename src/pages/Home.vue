@@ -2,7 +2,12 @@
   <div>
     <div class="max-w-2xl mx-auto">
       <ComposeTweet />
-      <Statuses :statuses="latestStatusesGet" />
+
+      <div v-if="loading">Loading...</div>
+      <div v-else-if="error">{{ error }}</div>
+      <template v-else>
+        <Statuses :statuses="latestStatusesGet" />
+      </template>
     </div>
     <LoginButton />
   </div>
@@ -23,9 +28,22 @@ export default defineComponent({
   },
   methods: {
     ...mapActions("timeline", ["latestStatusesFetch"]),
+    init() {
+      this.loading = true;
+      this.error = "";
+      this.latestStatusesFetch({ count: 10 })
+        .catch((error) => {
+          console.log("error.....", error);
+
+          this.error = error.message;
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
   },
   created() {
-    this.latestStatusesFetch({ count: 10 });
+    this.init();
   },
 });
 </script>

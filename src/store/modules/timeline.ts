@@ -14,12 +14,13 @@ const mutations = {
 const actions = {
   async latestStatusesFetch(context, params: StatusesHomeTimelinePayload = {}) {
     const url = `/timelines/latest-statuses`;
+    console.log("url", url);
     return ajax({
       url,
       options: {
         method: "GET",
         credentials: "include",
-        cache: "force-cache",
+        cache: "no-cache",
       },
       params,
     })

@@ -1,31 +1,29 @@
 {
-  "version": "0.0.1",
+  "name": "piko-client",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
     "ghspa": "^1.0.0",
     "lodash-es": "^4.17.21",
+    "tailwindcss": "^3.0.7",
     "twitter-d": "https://github.com/mort3za/twitter-d/archive/master.tar.gz",
-    "vue": "^3.0.5",
+    "vue": "^3.2.25",
     "vue-router": "^4.0.10",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.0-0"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.4",
-    "@types/node": "^16.0.0",
-    "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.0.5",
-    "autoprefixer": "^10.2.6",
-    "postcss": "^8.3.5",
-    "stylelint-config-recommended": "^5.0.0",
-    "tailwindcss": "^2.2.4",
-    "typescript": "^4.3.2",
-    "vite": "^2.3.8",
-    "vite-aliases": "^0.8.2",
-    "vite-plugin-pwa": "^0.8.1",
-    "vue-tsc": "^0.0.24"
+    "@types/node": "^17.0.5",
+    "@vitejs/plugin-vue": "^2.0.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.5",
+    "postcss-nested": "^5.0.6",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2",
+    "vue-tsc": "^0.29.8"
   }
 }

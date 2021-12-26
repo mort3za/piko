@@ -4,4 +4,6 @@ dist
 dist-ssr
 *.local
 
-src/assets/temp/*
+# new
+HelloWorld.vue
+temp/
