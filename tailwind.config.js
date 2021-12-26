@@ -1,13 +1,13 @@
 module.exports = {
   jit: true,
-  purge: [
+  content: [
     "./public/**/*.html",
     "./src/**/*.html",
     "./src/**/*.vue",
     // "./src/VueTailwind.js",
     // "./node_modules/vue-tailwind/**/*.{js,jsx,ts,tsx,vue}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
