@@ -5,7 +5,7 @@ import { defineStore } from "pinia";
 const actions = {
   latestStatusesFetch(params: StatusesHomeTimelinePayload = {}) {
     const url = `/timelines/latest-statuses`;
-    ajax({
+    return ajax({
       url,
       options: {
         method: "GET",

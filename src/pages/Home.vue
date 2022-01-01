@@ -3,10 +3,7 @@
     <div class="max-w-2xl mx-auto">
       <ComposeTweet />
 
-      {{ latestStatuses }}
-
-      <div v-if="loading">Loading...</div>
-      <div v-else-if="error">{{ error }}</div>
+      <div v-if="error">{{ error }}</div>
       <template v-else>
         <Statuses :statuses="latestStatuses" />
       </template>
@@ -41,8 +38,6 @@ export default defineComponent({
   methods: {
     init() {
       console.log("init");
-
-      this.loading = true;
       this.error = "";
       this.latestStatusesFetch({ count: 10 })
         .catch((error) => {
@@ -50,7 +45,7 @@ export default defineComponent({
           this.error = error.message;
         })
         .finally(() => {
-          this.loading = false;
+          console.log("loading false");
         });
     },
   },
