@@ -17,10 +17,10 @@ interface StatusPayload {
   tweet_mode?: string;
 }
 
-interface StatusesHomeTimelinePayload {
+interface TimelinePaginationParams {
   count?: number;
-  since_id?: number;
-  max_id?: number;
+  since_id?: string;
+  max_id?: string;
   trim_user?: boolean;
   exclude_replies?: boolean;
   include_entities?: boolean;

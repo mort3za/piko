@@ -4,7 +4,7 @@
       <ComposeTweet />
 
       <div v-if="error">{{ error }}</div>
-      <Statuses v-else :statuses="latestStatuses" />
+      <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
     </div>
   </div>
 </template>
@@ -31,13 +31,26 @@ export default defineComponent({
     };
   },
   methods: {
-    init() {
+    load(params: TimelinePaginationParams) {
       this.error = "";
-      this.timelineStore.latestStatusesFetch({ count: 5 }).catch(this.onApiError);
+      this.timelineStore.latestStatusesFetch(params).catch(this.onApiError);
+    },
+    changePage(params: TimelinePaginationParams) {
+      this.$router.push({
+        name: this.$route.name as string,
+        query: { max_id: params.max_id as string, since_id: params.since_id as string },
+      });
+      this.load(params);
     },
   },
   created() {
-    this.init();
+    const since_id = this.$route.query.since_id as string;
+    const max_id = this.$route.query.max_id as string;
+    const params: TimelinePaginationParams = {
+      ...(since_id && { since_id }),
+      ...(max_id && { max_id }),
+    };
+    this.load(params);
   },
 });
 </script>

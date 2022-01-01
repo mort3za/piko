@@ -3,7 +3,7 @@ import { Status } from "twitter-d";
 import { defineStore } from "pinia";
 
 const actions = {
-  latestStatusesFetch(params: StatusesHomeTimelinePayload = {}) {
+  latestStatusesFetch(params: TimelinePaginationParams = {}) {
     const url = `/timelines/latest-statuses`;
     return api({
       url,

@@ -1,12 +1,22 @@
 <template>
   <section>
     <router-link
+      class="block mb-3 last:mb-0"
       v-for="status in statuses"
       :key="status.id_str"
       :to="{ name: 'Status', params: { id: status.id_str, username: status.user.screen_name } }"
     >
       <TweetCard :status="status" />
     </router-link>
+
+    <div class="flex justify-between items-center p-2">
+      <a class="cursor-pointer" @click.prevent="$emit('changePage', { since_id: firstStatus?.id_str })"
+        >Prev</a
+      >
+      <a class="cursor-pointer" @click.prevent="$emit('changePage', { max_id: lastStatus?.id_str })"
+        >Next</a
+      >
+    </div>
   </section>
 </template>
 
@@ -22,6 +32,7 @@ export default defineComponent({
       TweetCard,
     };
   },
+  emits: ["changePage"],
   props: {
     statuses: {
       type: Array as () => Status[],
@@ -29,5 +40,13 @@ export default defineComponent({
     },
   },
   components: { TweetCard },
+  computed: {
+    firstStatus() {
+      return this.statuses.at(0);
+    },
+    lastStatus() {
+      return this.statuses.at(-1);
+    },
+  },
 });
 </script>
