@@ -2,14 +2,10 @@ import { ajax } from "@functions/utils";
 import { Status } from "twitter-d";
 import { defineStore } from "pinia";
 
-const defaultState = {
-  latestStatuses: [],
-};
-
 const actions = {
-  async latestStatusesFetch(params: StatusesHomeTimelinePayload = {}) {
+  latestStatusesFetch(params: StatusesHomeTimelinePayload = {}) {
     const url = `/timelines/latest-statuses`;
-    return ajax({
+    ajax({
       url,
       options: {
         method: "GET",
@@ -20,12 +16,14 @@ const actions = {
     }).then(async (res) => {
       const result = await res.json();
       if (!res.ok) throw result;
-      return result;
+      console.log("result", result);
+
+      this.latestStatuses = result as Status[];
     });
   },
 };
 
 export const useTimelineStore = defineStore("timeline", {
-  state: () => defaultState,
+  state: () => ({ latestStatuses: [] }),
   actions,
 });

@@ -1,4 +1,5 @@
 const { VITE_API_BASE } = import.meta.env;
+// todo: import axios from 'redaxios';
 
 export function makeApiUrl(path: string) {
   return `${VITE_API_BASE}${path}`;

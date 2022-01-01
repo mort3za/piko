@@ -3,6 +3,8 @@
     <div class="max-w-2xl mx-auto">
       <ComposeTweet />
 
+      {{ latestStatuses }}
+
       <div v-if="loading">Loading...</div>
       <div v-else-if="error">{{ error }}</div>
       <template v-else>
