@@ -17,7 +17,7 @@ const actions = {
   },
   statusFetch(id) {
     const url = `/statuses/${id}`;
-    return api({ url, cache: true }).then((res as Response)=> {
+    return api({ url, cache: true }).then((res: Response) => {
       if (!res.ok) throw res.data;
       return res.data as Status;
     });

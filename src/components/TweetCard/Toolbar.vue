@@ -10,6 +10,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Toolbar",
+  props: {
+    status: {
+      type: Object,
+      required: true,
+    },
+  },
 });
 </script>
 

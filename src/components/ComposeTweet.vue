@@ -12,7 +12,7 @@
 import { defineComponent } from "vue";
 import TButton from "@components/base/TButton.vue";
 import TTextarea from "@components/base/TTextarea.vue";
-import { mapActions } from "pinia";
+import { useStatusStore } from "@stores/status-module";
 
 export default defineComponent({
   name: "Home",
@@ -20,8 +20,11 @@ export default defineComponent({
     return { text: "" };
   },
   components: { TButton, TTextarea },
+  setup() {
+    const statusStore = useStatusStore();
+    return { statusPost: statusStore.statusPost };
+  },
   methods: {
-    ...mapActions("status", ["statusPost"]),
     submit() {
       this.statusPost({ status: this.text });
     },
