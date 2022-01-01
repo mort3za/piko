@@ -14,7 +14,7 @@
 <script lang="ts">
 import HeaderBar from "@components/layout/HeaderBar.vue";
 import { defineAsyncComponent, defineComponent } from "vue";
-import { mapActions } from "vuex";
+import { mapActions } from "pinia";
 
 export default defineComponent({
   name: "StatusPage",

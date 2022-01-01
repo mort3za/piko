@@ -6,7 +6,7 @@
       <div v-if="loading">Loading...</div>
       <div v-else-if="error">{{ error }}</div>
       <template v-else>
-        <Statuses :statuses="latestStatusesGet" />
+        <Statuses :statuses="latestStatuses" />
       </template>
     </div>
     <LoginButton />
@@ -14,27 +14,37 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, computed } from "vue";
 import LoginButton from "@components/LoginButton.vue";
 import Statuses from "@components/Statuses.vue";
-import { mapGetters, mapActions } from "vuex";
 import ComposeTweet from "@components/ComposeTweet.vue";
+import { useTimelineStore } from "@stores/timeline-module";
 
 export default defineComponent({
   name: "HomePage",
   components: { LoginButton, Statuses, ComposeTweet },
-  computed: {
-    ...mapGetters("timeline", ["latestStatusesGet"]),
+  setup() {
+    const timelineStore = useTimelineStore();
+
+    const latestStatuses = computed(() => timelineStore.latestStatuses);
+    const latestStatusesFetch = timelineStore.latestStatusesFetch;
+
+    return {
+      latestStatuses,
+      latestStatusesFetch,
+      loading: false,
+      error: "",
+    };
   },
   methods: {
-    ...mapActions("timeline", ["latestStatusesFetch"]),
     init() {
+      console.log("init");
+
       this.loading = true;
       this.error = "";
       this.latestStatusesFetch({ count: 10 })
         .catch((error) => {
           console.log("error.....", error);
-
           this.error = error.message;
         })
         .finally(() => {

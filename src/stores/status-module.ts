@@ -1,11 +1,10 @@
 import { ajax } from "@functions/utils";
-import { cloneDeep } from "lodash-es";
+import { defineStore } from "pinia";
 
 const defaultState = {};
 
-const mutations = {};
 const actions = {
-  statusPost(context, statusPayload: StatusPayload) {
+  statusPost(statusPayload: StatusPayload) {
     return ajax({
       url: "/statuses",
       options: {
@@ -14,7 +13,7 @@ const actions = {
       },
     });
   },
-  statusFetch(context, { id, params }) {
+  statusFetch({ id, params }) {
     const url = `/statuses/${id}`;
     return ajax({ url, options: { cache: "force-cache" }, params }).then(async (res) => {
       const result = await res.json();
@@ -23,12 +22,8 @@ const actions = {
     });
   },
 };
-const getters = {};
 
-export default {
-  namespaced: true,
-  state: cloneDeep(defaultState),
-  getters,
+export const useStatusStore = defineStore("status", {
+  state: () => defaultState,
   actions,
-  mutations,
-};
+});

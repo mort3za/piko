@@ -12,7 +12,7 @@
 import { defineComponent } from "vue";
 import TButton from "@components/base/TButton.vue";
 import TTextarea from "@components/base/TTextarea.vue";
-import { mapActions } from "vuex";
+import { mapActions } from "pinia";
 
 export default defineComponent({
   name: "Home",
