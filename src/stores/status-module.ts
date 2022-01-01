@@ -1,5 +1,7 @@
 import { api } from "@services/api";
 import { defineStore } from "pinia";
+import { Response } from "redaxios";
+import { Status } from "twitter-d";
 
 const defaultState = {};
 
@@ -13,12 +15,11 @@ const actions = {
       },
     });
   },
-  statusFetch({ id, params }) {
+  statusFetch(id) {
     const url = `/statuses/${id}`;
-    return api({ url, params, cache: true }).then(async (res) => {
-      const result = await res.json();
-      if (!res.ok) throw result;
-      return result;
+    return api({ url, cache: true }).then((res as Response)=> {
+      if (!res.ok) throw res.data;
+      return res.data as Status;
     });
   },
 };

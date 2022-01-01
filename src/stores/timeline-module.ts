@@ -8,11 +8,8 @@ const actions = {
     return api({
       url,
       params,
-    }).then(async (res) => {
-      console.log(res);
-
+    }).then((res) => {
       if (!res.ok) throw res.data;
-
       this.latestStatuses = res.data as Status[];
     });
   },
