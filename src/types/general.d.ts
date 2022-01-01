@@ -1,6 +1,6 @@
 interface AjaxOptions {
   url: string;
   options?: RequestInit;
-  isUrlRelative?: boolean | undefined;
+  isRelative?: boolean | undefined;
   params?: Object;
 }

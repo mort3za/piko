@@ -1,24 +1,19 @@
-import { ajax } from "@functions/utils";
+import { api } from "@services/api";
 import { Status } from "twitter-d";
 import { defineStore } from "pinia";
 
 const actions = {
   latestStatusesFetch(params: StatusesHomeTimelinePayload = {}) {
     const url = `/timelines/latest-statuses`;
-    return ajax({
+    return api({
       url,
-      options: {
-        method: "GET",
-        credentials: "include",
-        cache: "no-cache",
-      },
       params,
     }).then(async (res) => {
-      const result = await res.json();
-      if (!res.ok) throw result;
-      console.log("result", result);
+      console.log(res);
 
-      this.latestStatuses = result as Status[];
+      if (!res.ok) throw res.data;
+
+      this.latestStatuses = res.data as Status[];
     });
   },
 };

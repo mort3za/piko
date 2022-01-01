@@ -1,11 +1,11 @@
-import { ajax } from "@functions/utils";
+import { api } from "@services/api";
 import { defineStore } from "pinia";
 
 const defaultState = {};
 
 const actions = {
   statusPost(statusPayload: StatusPayload) {
-    return ajax({
+    return api({
       url: "/statuses",
       options: {
         method: "POST",
@@ -15,7 +15,7 @@ const actions = {
   },
   statusFetch({ id, params }) {
     const url = `/statuses/${id}`;
-    return ajax({ url, options: { cache: "force-cache" }, params }).then(async (res) => {
+    return api({ url, params, cache: true }).then(async (res) => {
       const result = await res.json();
       if (!res.ok) throw result;
       return result;

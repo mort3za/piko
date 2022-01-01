@@ -1,12 +1,10 @@
 <template>
   <div>
-    <header-bar class="mb-4" />
+    <HeaderBar class="mb-4" />
     <div class="max-w-2xl mx-auto">
       Status page
       <hr />
-      <template v-if="status">
-        <TweetCard :status="status" />
-      </template>
+      <TweetCard v-if="status" :status="status" />
     </div>
   </div>
 </template>
@@ -14,17 +12,22 @@
 <script lang="ts">
 import HeaderBar from "@components/layout/HeaderBar.vue";
 import { defineAsyncComponent, defineComponent } from "vue";
-import { mapActions } from "pinia";
+import { useStatusStore } from "@stores/status-module";
 
 export default defineComponent({
   name: "StatusPage",
-  components: { TweetCard: defineAsyncComponent(() => import("@components/TweetCard.vue")), HeaderBar },
-  data: () => ({ status: null }),
-  methods: {
-    ...mapActions("status", ["statusFetch"]),
+  setup() {
+    return {
+      statusStore: useStatusStore(),
+    };
   },
+  components: {
+    TweetCard: defineAsyncComponent(() => import("@components/TweetCard/index.vue")),
+    HeaderBar,
+  },
+  data: () => ({ status: null }),
   async created() {
-    this.status = await this.statusFetch({ id: this.$route.params.id });
+    this.status = await this.statusStore.statusFetch({ id: this.$route.params.id, params: null });
   },
 });
 </script>

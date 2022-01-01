@@ -1,16 +1,18 @@
 <template>
-  <a :href="loginLink">Login</a>
+  <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" :href="loginLink"
+    >Login</a
+  >
 </template>
 
 <script lang="ts">
-import { makeApiUrl } from "@functions/utils";
+import { apiLink } from "@services/api";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LoginButton",
   computed: {
     loginLink() {
-      return makeApiUrl("/authenticate");
+      return apiLink("/authenticate");
     },
   },
 });

@@ -21,3 +21,10 @@ body {
 *::before {
   touch-action: manipulation;
 }
+
+.rtl {
+  direction: rtl;
+}
+.ltr {
+  direction: ltr;
+}

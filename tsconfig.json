@@ -12,8 +12,9 @@
     "lib": ["esnext", "dom"],
     "paths": {
       "@assets/*": ["./src/assets/*"],
+      "@mixins/*": ["./src/mixins/*"],
       "@components/*": ["./src/components/*"],
-      "@functions/*": ["./src/functions/*"],
+      "@services/*": ["./src/services/*"],
       "@pages/*": ["./src/pages/*"],
       "@router/*": ["./src/router/*"],
       "@stores/*": ["./src/stores/*"],

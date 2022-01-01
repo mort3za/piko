@@ -1,6 +1,5 @@
 <template>
   <section>
-    <!-- @ts-ignore -->
     <router-link
       v-for="status in statuses"
       :key="status.id_str"
@@ -13,10 +12,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TweetCard from "@components/TweetCard.vue";
+import TweetCard from "@components/TweetCard/index.vue";
 import { Status } from "twitter-d";
+
 export default defineComponent({
   name: "Tweets",
+  setup() {
+    return {
+      TweetCard,
+    };
+  },
   props: {
     statuses: {
       type: Array as () => Status[],

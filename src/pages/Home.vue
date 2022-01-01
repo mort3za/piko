@@ -4,49 +4,36 @@
       <ComposeTweet />
 
       <div v-if="error">{{ error }}</div>
-      <template v-else>
-        <Statuses :statuses="latestStatuses" />
-      </template>
+      <Statuses v-else :statuses="latestStatuses" />
     </div>
-    <LoginButton />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import LoginButton from "@components/LoginButton.vue";
 import Statuses from "@components/Statuses.vue";
 import ComposeTweet from "@components/ComposeTweet.vue";
 import { useTimelineStore } from "@stores/timeline-module";
+import { apiErrors } from "@mixins/apiErrors";
 
 export default defineComponent({
   name: "HomePage",
-  components: { LoginButton, Statuses, ComposeTweet },
+  components: { Statuses, ComposeTweet },
+  mixins: [apiErrors],
   setup() {
     const timelineStore = useTimelineStore();
-
     const latestStatuses = computed(() => timelineStore.latestStatuses);
-    const latestStatusesFetch = timelineStore.latestStatusesFetch;
 
     return {
+      timelineStore,
       latestStatuses,
-      latestStatusesFetch,
-      loading: false,
       error: "",
     };
   },
   methods: {
     init() {
-      console.log("init");
       this.error = "";
-      this.latestStatusesFetch({ count: 10 })
-        .catch((error) => {
-          console.log("error.....", error);
-          this.error = error.message;
-        })
-        .finally(() => {
-          console.log("loading false");
-        });
+      this.timelineStore.latestStatusesFetch({ count: 5 }).catch(this.onApiError);
     },
   },
   created() {
