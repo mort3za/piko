@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="flex items-center mb-1">
-      <Avatar :user="status.user" class="mr-2" /><span class="mr-2">{{ status.user.screen_name }}</span>
-      <router-link
-        :to="{ name: 'Status', params: { id: status.id_str, username: status.user.screen_name } }"
+      <Avatar :user="user" class="mr-2" /><span class="mr-2">{{ user.screen_name }}</span>
+      <router-link :to="{ name: 'Status', params: { id: status.id_str, username: user.screen_name } }"
         ><time class="text-xs">{{ formatDateTime(status.created_at) }}</time></router-link
       >
     </div>
@@ -23,6 +22,11 @@ export default defineComponent({
   components: { TweetContent, Avatar },
   props: {
     status: { type: Object as () => Status, required: true },
+  },
+  computed: {
+    user() {
+      return (this.status as any).user;
+    },
   },
   methods: {
     formatDateTime,

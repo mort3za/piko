@@ -40,7 +40,7 @@ const TInput = defineComponent({
     },
   },
   methods: {
-    onInput($event) {
+    onInput($event: Event) {
       this.$emit("update:modelValue", (<HTMLInputElement>$event.target).value);
     },
     getAttributes() {

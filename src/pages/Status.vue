@@ -25,7 +25,7 @@ export default defineComponent({
     TweetCard: defineAsyncComponent(() => import("@components/TweetCard/index.vue")),
   },
   async created() {
-    this.status = await this.statusStore.statusFetch(this.$route.params.id);
+    this.status = await this.statusStore.statusFetch(this.$route.params.id as string);
   },
 });
 </script>

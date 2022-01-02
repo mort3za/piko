@@ -72,6 +72,7 @@ const Component = defineComponent({
       }
 
       if (typeof this.variant === "object") {
+        // @ts-ignore
         const truthyVariant = Object.keys(this.variant).find((variant) => !!this.variant[variant]);
         return truthyVariant || undefined;
       }

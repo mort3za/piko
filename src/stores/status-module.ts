@@ -6,7 +6,7 @@ import { Status } from "twitter-d";
 const defaultState = {};
 
 const actions = {
-  statusPost(statusPayload: StatusPayload) {
+  statusPost(statusPayload: Partial<StatusPayload>) {
     return api({
       url: "/statuses",
       options: {
@@ -17,7 +17,7 @@ const actions = {
   },
   statusFetch(id: string) {
     const url = `/statuses/${id}`;
-    return api({ url, cache: true }).then((res: AxiosResponse<Status>) => {
+    return api({ url, cache: true }).then((res: AxiosResponse) => {
       if (!res.ok) throw res.data;
       return res.data as Status;
     });

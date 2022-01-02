@@ -5,7 +5,7 @@ import { defineStore } from "pinia";
 export const useTimelineStore = defineStore("timeline", {
   state: () => ({ latestStatuses: [] }),
   actions: {
-    latestStatusesFetch(params: TimelinePaginationParams = {}) {
+    latestStatusesFetch(params: Partial<TimelinePaginationParams> = {}) {
       const url = `/timelines/latest-statuses`;
       return api({
         url,
