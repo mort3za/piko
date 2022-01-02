@@ -1,5 +1,11 @@
 <template>
-  <div :class="{ rtl: isRTL }" class="border border-blue p-4">{{ text }}</div>
+  <div
+    :class="{ rtl: isRTL }"
+    :dir="lang === 'und' ? 'auto' : undefined"
+    class="border border-blue p-4"
+  >
+    {{ text }}
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,11 +19,14 @@ export default defineComponent({
     status: { type: Object as () => Status, required: true },
   },
   computed: {
-    text() {
-      return this.status.retweeted_status?.text ?? this.status.text;
+    lang() {
+      return this.status.lang;
     },
     isRTL() {
-      return isRTL(this.status.lang);
+      return isRTL(this.lang);
+    },
+    text() {
+      return this.status.retweeted_status?.text ?? this.status.text;
     },
   },
 });
