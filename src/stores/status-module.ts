@@ -9,10 +9,8 @@ const actions = {
   statusPost(statusPayload: Partial<StatusPayload>) {
     return api({
       url: "/statuses",
-      options: {
-        method: "POST",
-        body: JSON.stringify({ status: statusPayload }),
-      },
+      method: "POST",
+      data: JSON.stringify({ status: statusPayload }),
     });
   },
   statusFetch(id: string) {
