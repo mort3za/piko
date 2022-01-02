@@ -1,6 +1,6 @@
 import { api } from "@services/api";
+import { AxiosResponse } from "axios";
 import { defineStore } from "pinia";
-import { Response } from "redaxios";
 import { Status } from "twitter-d";
 
 const defaultState = {};
@@ -15,9 +15,9 @@ const actions = {
       },
     });
   },
-  statusFetch(id) {
+  statusFetch(id: string) {
     const url = `/statuses/${id}`;
-    return api({ url, cache: true }).then((res: Response) => {
+    return api({ url, cache: true }).then((res: AxiosResponse<Status>) => {
       if (!res.ok) throw res.data;
       return res.data as Status;
     });

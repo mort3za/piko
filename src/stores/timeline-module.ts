@@ -12,6 +12,7 @@ export const useTimelineStore = defineStore("timeline", {
         params,
       }).then((res: any) => {
         if (!res.ok) throw res.data;
+        // @ts-ignore
         this.latestStatuses = res.data as Status[];
       });
     },

@@ -1,13 +1,8 @@
 <template>
   <section>
-    <router-link
-      class="block mb-3 last:mb-0"
-      v-for="status in statuses"
-      :key="status.id_str"
-      :to="{ name: 'Status', params: { id: status.id_str, username: status.user.screen_name } }"
-    >
+    <div class="block mb-3 last:mb-0" v-for="status in statuses" :key="status.id_str">
       <TweetCard :status="status" />
-    </router-link>
+    </div>
 
     <div class="flex justify-between items-center p-2">
       <a class="cursor-pointer" @click.prevent="$emit('changePage', { since_id: firstStatus?.id_str })"
