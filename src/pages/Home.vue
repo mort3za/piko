@@ -43,15 +43,23 @@ export default defineComponent({
       this.load(params);
     },
   },
+  computed: {
+    params(): Partial<TimelinePaginationParams> {
+      const since_id = this.$route.query.since_id as string;
+      const max_id = this.$route.query.max_id as string;
+      return {
+        ...(since_id && { since_id }),
+        ...(max_id && { max_id }),
+      };
+    },
+  },
   created() {
-    const since_id = this.$route.query.since_id as string;
-    const max_id = this.$route.query.max_id as string;
-    const params: Partial<TimelinePaginationParams> = {
-      ...(since_id && { since_id }),
-      ...(max_id && { max_id }),
-      // trim_user: true,
-    };
-    this.load(params);
+    this.load(this.params);
+  },
+  watch: {
+    "$route.query"() {
+      this.load(this.params);
+    },
   },
 });
 </script>

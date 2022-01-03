@@ -1,9 +1,12 @@
 <template>
   <section>
     <div class="flex w-full justify-between px-4 py-2 bg-blue-900 sticky top-0">
-      <router-link class="button" v-if="back" :to="{ name: 'Home' }">Back</router-link>
-      <a v-else class="button mb-0" @click="toggleCompose">Tweet</a>
+      <!-- left -->
+      <a class="button mb-0" @click="toggleCompose">Tweet</a>
 
+      <router-link class="text-blue-500" :to="{ name: 'Home' }">Piko</router-link>
+
+      <!-- right -->
       <a :href="logoutLink" class="button mb-0">Logout</a>
     </div>
     <ComposeTweet v-if="showCompose" />
@@ -39,7 +42,7 @@ export default defineComponent({
       return this.layoutStore.showCompose;
     },
     logoutLink() {
-      return apiLink("exit");
+      return apiLink("logout");
     },
   },
 });
