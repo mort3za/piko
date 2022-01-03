@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="max-w-2xl mx-auto">
-      <ComposeTweet />
+      <HeaderBar class="mb-4" :back="false" />
 
       <div v-if="error">{{ error }}</div>
       <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
@@ -12,13 +12,13 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import Statuses from "@components/Statuses.vue";
-import ComposeTweet from "@components/ComposeTweet.vue";
+import HeaderBar from "@components/layout/HeaderBar.vue";
 import { useTimelineStore } from "@stores/timeline-module";
 import { apiErrors } from "@mixins/apiErrors";
 
 export default defineComponent({
   name: "HomePage",
-  components: { Statuses, ComposeTweet },
+  components: { Statuses, HeaderBar },
   mixins: [apiErrors],
   setup() {
     const timelineStore = useTimelineStore();
