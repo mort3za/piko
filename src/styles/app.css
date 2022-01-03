@@ -27,3 +27,7 @@ body {
 .ltr {
   direction: ltr;
 }
+
+.link {
+  @apply text-blue-600;
+}

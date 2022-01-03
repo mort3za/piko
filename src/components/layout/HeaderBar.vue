@@ -1,10 +1,10 @@
 <template>
   <section>
-    <div class="flex w-full justify-between px-4 py-2 bg-orange-light sticky top-0">
-      <router-link v-if="back" :to="{ name: 'Home' }">Back</router-link>
-      <a v-else class="mb-2" @click="toggleCompose">Tweet</a>
+    <div class="flex w-full justify-between px-4 py-2 bg-blue-900 sticky top-0">
+      <router-link class="button" v-if="back" :to="{ name: 'Home' }">Back</router-link>
+      <a v-else class="button mb-0" @click="toggleCompose">Tweet</a>
 
-      <a :href="logoutLink">Logout</a>
+      <a :href="logoutLink" class="button mb-0">Logout</a>
     </div>
     <ComposeTweet v-if="showCompose" />
   </section>

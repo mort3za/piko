@@ -1,16 +1,12 @@
 <template>
-  <section>
-    <div class="block mb-3 last:mb-0" v-for="status in statuses" :key="status.id_str">
+  <section class="px-2">
+    <div class="block mb-6 last:mb-0" v-for="status in statuses" :key="status.id_str">
       <TweetCard :status="status" />
     </div>
 
     <div class="flex justify-between items-center p-2">
-      <a class="cursor-pointer" @click.prevent="$emit('changePage', { since_id: firstStatus?.id_str })"
-        >Prev</a
-      >
-      <a class="cursor-pointer" @click.prevent="$emit('changePage', { max_id: lastStatus?.id_str })"
-        >Next</a
-      >
+      <a class="button" @click.prevent="$emit('changePage', { since_id: firstStatus?.id_str })">Prev</a>
+      <a class="button" @click.prevent="$emit('changePage', { max_id: lastStatus?.id_str })">Next</a>
     </div>
   </section>
 </template>
