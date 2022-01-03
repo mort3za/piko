@@ -26,7 +26,7 @@ export default defineComponent({
       return isRTL(this.lang);
     },
     text() {
-      return this.status.retweeted_status?.text ?? this.status.text;
+      return this.status.retweeted_status?.full_text ?? this.status.full_text;
     },
   },
 });

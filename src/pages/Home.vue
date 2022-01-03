@@ -49,6 +49,7 @@ export default defineComponent({
     const params: Partial<TimelinePaginationParams> = {
       ...(since_id && { since_id }),
       ...(max_id && { max_id }),
+      // trim_user: true,
     };
     this.load(params);
   },
