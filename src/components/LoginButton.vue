@@ -12,7 +12,7 @@ export default defineComponent({
   name: "LoginButton",
   computed: {
     loginLink() {
-      return apiLink("/authenticate");
+      return apiLink("authenticate");
     },
   },
 });

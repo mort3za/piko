@@ -29,5 +29,8 @@ body {
 }
 
 .link {
-  @apply text-blue-600;
+  @apply text-blue-600 cursor-pointer;
+}
+.link--hashtag, .link--symbol {
+  @apply font-bold;
 }
