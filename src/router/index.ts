@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@pages/Home.vue";
 import Status from "@pages/Status.vue";
 import Login from "@pages/Login.vue";
+import Profile from "@pages/Profile.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -18,8 +19,13 @@ export const router = createRouter({
     },
     {
       name: "Status",
-      path: getPath(":username/status/:id"),
+      path: getPath(":screen_name/status/:id"),
       component: Status,
+    },
+    {
+      name: "Profile",
+      path: getPath(":screen_name"),
+      component: Profile,
     },
     {
       path: getPath(),
