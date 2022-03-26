@@ -7,3 +7,5 @@ dist-ssr
 # new
 HelloWorld.vue
 temp/
+# Local Netlify folder
+.netlify
