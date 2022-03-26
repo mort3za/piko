@@ -4,11 +4,12 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy-preview": "ntl deploy",
+    "deploy": "ntl deploy --prod"
   },
   "dependencies": {
     "date-fns": "^2.28.0",
-    "ghspa": "^1.0.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.9",
     "redaxios": "^0.4.1",
@@ -22,6 +23,7 @@
     "@types/node": "^17.0.5",
     "@vitejs/plugin-vue": "^2.0.0",
     "autoprefixer": "^10.4.0",
+    "netlify-cli": "^9.13.5",
     "postcss": "^8.4.5",
     "postcss-nested": "^5.0.6",
     "twitter-d": "^0.4.0",
