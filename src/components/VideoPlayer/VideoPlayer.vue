@@ -2,9 +2,11 @@
   <div :class="{ 'is-paused': isPaused }">
     <video
       ref="video"
-      @click="onClickVideo"
+      @play="isPaused = false"
+      @pause="isPaused = true"
       :src="getChosenVideo()"
-      :cover="mediaItem.media_url_https"
+      :poster="mediaItem.media_url_https"
+      controls
     ></video>
   </div>
 </template>
@@ -23,15 +25,6 @@ export default defineComponent({
       return this.mediaItem.video_info.variants.find(
         (variant: any) => variant.content_type === "video/mp4",
       ).url;
-    },
-    onClickVideo(event: any) {
-      const videoElement = event.target;
-      if (videoElement.paused) {
-        videoElement.play();
-      } else {
-        videoElement.pause();
-      }
-      this.isPaused = videoElement.paused;
     },
   },
 });

@@ -4,9 +4,9 @@
     :dir="lang === 'und' ? 'auto' : undefined"
     class="border border-blue-200 p-4 rounded-md shadow-md shadow-blue-100"
   >
-    <div class="user-content" v-html="text"></div>
+    <div class="user-content whitespace-pre-line leading-5" v-html="text"></div>
 
-    <div class="mt-4" v-if="media">
+    <div class="mt-2" v-if="media">
       <MediaContent :media="media" />
     </div>
   </div>
@@ -32,7 +32,6 @@ export default defineComponent({
       return isRTL(this.lang);
     },
     text() {
-      // todo: remove media urls from rawText here
       const rawText = this.statusContent.full_text;
       return setEntitiesOnText(rawText, this.statusContent.entities);
     },
