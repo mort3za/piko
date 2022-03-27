@@ -6,7 +6,9 @@
   >
     <div class="user-content whitespace-pre-line leading-6" v-html="text"></div>
 
-    <MediaContent v-if="media" class="mt-2" :media="media" />
+    <div class="mt-2" v-if="media">
+      <MediaContent :media="media" />
+    </div>
     <TweetCardContent
       class="mt-2"
       v-if="status.quoted_status"

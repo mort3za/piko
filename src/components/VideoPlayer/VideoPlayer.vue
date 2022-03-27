@@ -1,6 +1,7 @@
 <template>
   <div :class="{ 'is-paused': isPaused }">
     <video
+      class="w-full block"
       ref="video"
       @play="isPaused = false"
       @pause="isPaused = true"
