@@ -23,7 +23,7 @@ import { formatDateTime } from "@services/utils";
 import { defineComponent } from "vue";
 import Avatar from "@components/Avatar.vue";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
-import { Status } from "twitter-d";
+import { FullUser, Status } from "twitter-d";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
 
 export default defineComponent({
@@ -38,7 +38,7 @@ export default defineComponent({
   },
   computed: {
     user() {
-      return this.statusContent.user;
+      return this.statusContent.user as FullUser;
     },
   },
 });

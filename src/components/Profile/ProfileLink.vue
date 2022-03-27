@@ -9,14 +9,14 @@
 </template>
 
 <script lang="ts">
-import { User } from "twitter-d";
+import { FullUser } from "twitter-d";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ProfileLink",
   props: {
     user: {
-      type: Object as () => User,
+      type: Object as () => FullUser,
       required: true,
     },
     showScreenName: {

@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Status, User } from "twitter-d";
+import { Status, FullUser } from "twitter-d";
 import ProfileLink from "./ProfileLink.vue";
 
 export default defineComponent({
@@ -23,7 +23,7 @@ export default defineComponent({
       return this.status.retweeted_status;
     },
     user() {
-      return this.status.user;
+      return this.status.user as FullUser;
     },
   },
 });
