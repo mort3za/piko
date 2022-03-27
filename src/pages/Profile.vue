@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import Statuses from "@components/Statuses.vue";
-import HeaderBar from "@components/layout/HeaderBar.vue";
+import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimelineStore } from "@stores/timeline-module";
 import { apiErrors } from "@mixins/apiErrors";
 
@@ -33,9 +33,13 @@ export default defineComponent({
   methods: {
     load(params: Partial<TimelinePaginationParams>) {
       this.error = "";
-      this.timelineStore
-        .profileStatusesFetch(params, this.$route.params.screen_name as string)
-        .catch(this.onApiError);
+
+      const screen_name = this.$route.params.screen_name as string;
+      if (!screen_name) {
+        this.error = "Screen name is not defined, please refresh!";
+        return;
+      }
+      this.timelineStore.profileStatusesFetch(params, screen_name).catch(this.onApiError);
     },
     changePage(params: Partial<TimelinePaginationParams>) {
       this.$router.push({

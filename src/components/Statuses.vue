@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TweetCard from "@components/TweetCard/index.vue";
+import TweetCard from "@components/TweetCard/TweetCard.vue";
 import { Status } from "twitter-d";
 
 export default defineComponent({

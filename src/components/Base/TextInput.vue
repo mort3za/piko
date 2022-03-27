@@ -1,5 +1,5 @@
 <script lang="ts">
-import HtmlInput from "@components/base/HtmlInput";
+import HtmlInput from "@components/Base/HtmlInput";
 import { defineComponent } from "vue";
 
 const TextInput = defineComponent({

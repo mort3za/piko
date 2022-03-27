@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TweetCardHeader :status="status" />
-    <TweetCardContent :status="status" />
-    <TweetCardToolbar :status="status" />
+    <TweetCardHeader :status="status" :status-content="statusContent" />
+    <TweetCardContent :status="status" :status-content="statusContent" />
+    <TweetCardToolbar :status="status" :status-content="statusContent" />
   </div>
 </template>
 
@@ -18,6 +18,11 @@ export default defineComponent({
   components: { TweetCardContent, TweetCardToolbar, TweetCardHeader },
   props: {
     status: { type: Object as () => Status, required: true },
+  },
+  computed: {
+    statusContent() {
+      return this.status.retweeted_status ?? this.status;
+    },
   },
 });
 </script>

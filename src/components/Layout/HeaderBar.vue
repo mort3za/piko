@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex w-full justify-between px-4 py-2 bg-blue-900 sticky top-0">
+    <div class="flex w-full justify-between px-4 py-2 bg-blue-100 sticky top-0 rounded-b-2xl">
       <!-- left -->
       <a class="button mb-0" @click="toggleCompose">Tweet</a>
 

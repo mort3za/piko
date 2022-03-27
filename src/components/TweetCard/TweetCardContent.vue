@@ -7,7 +7,7 @@
     <div class="user-content" v-html="text"></div>
 
     <div class="mt-4" v-if="media">
-      <img v-for="mediaItem in media" :src="mediaItem.media_url_https" alt="" />
+      <MediaContent :media="media" />
     </div>
   </div>
 </template>
@@ -16,11 +16,13 @@
 import { defineComponent } from "vue";
 import { Status } from "twitter-d";
 import { setEntitiesOnText, isRTL } from "@services/utils";
+import MediaContent from "@components/MediaContent/MediaContent.vue";
 
 export default defineComponent({
   name: "Content",
   props: {
     status: { type: Object as () => Status, required: true },
+    statusContent: { type: Object as () => Status, required: true },
   },
   computed: {
     lang() {
@@ -29,17 +31,15 @@ export default defineComponent({
     isRTL() {
       return isRTL(this.lang);
     },
-    statusSource() {
-      return this.status.retweeted_status ?? this.status;
-    },
     text() {
       // todo: remove media urls from rawText here
-      const rawText = this.statusSource.full_text;
-      return setEntitiesOnText(rawText, this.statusSource.entities);
+      const rawText = this.statusContent.full_text;
+      return setEntitiesOnText(rawText, this.statusContent.entities);
     },
     media() {
-      return this.statusSource.entities.media;
+      return this.statusContent.entities.media;
     },
   },
+  components: { MediaContent },
 });
 </script>

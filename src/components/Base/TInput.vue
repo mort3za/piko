@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import TextInput from "@components/base/TextInput.vue";
+import TextInput from "@components/Base/TextInput.vue";
 import { defineComponent } from "vue";
 
 const TInput = defineComponent({

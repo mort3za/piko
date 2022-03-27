@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TButton from "@components/base/TButton.vue";
-import TTextarea from "@components/base/TTextarea.vue";
+import TButton from "@components/Base/TButton.vue";
+import TTextarea from "@components/Base/TTextarea.vue";
 import { useStatusStore } from "@stores/status-module";
 
 export default defineComponent({

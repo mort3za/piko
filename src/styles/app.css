@@ -6,6 +6,7 @@ body {
   /* background-color: #777; */
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  @apply font-sans;
 }
 
 #app {
@@ -33,4 +34,7 @@ body {
 }
 .link--hashtag, .link--symbol {
   @apply font-bold;
+}
+.muted {
+  @apply text-gray-400;
 }

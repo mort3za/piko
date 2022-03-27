@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, h } from "vue";
-import HtmlInput from "@components/base/HtmlInput";
+import HtmlInput from "@components/Base/HtmlInput";
 
 export default defineComponent({
   name: "TButton",

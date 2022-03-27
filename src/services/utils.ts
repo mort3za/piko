@@ -66,6 +66,7 @@ export const setEntitiesOnText = (rawText: string = "", entities: Entities): str
 
   let simpleTextIndex = 0;
   let textSlices = [] as { text: string; entity?: any }[];
+  // const rawTextInArray = Array.from(rawText);
   entities_all.forEach((entity_item) => {
     const indices_item = entity_item.indices as Indices;
     if (simpleTextIndex < indices_item[0]) {

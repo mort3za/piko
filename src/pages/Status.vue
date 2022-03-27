@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import HeaderBar from "@components/layout/HeaderBar.vue";
+import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { defineAsyncComponent, defineComponent, ref } from "vue";
 import { useStatusStore } from "@stores/status-module";
 
@@ -22,7 +22,7 @@ export default defineComponent({
   },
   components: {
     HeaderBar,
-    TweetCard: defineAsyncComponent(() => import("@components/TweetCard/index.vue")),
+    TweetCard: defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue")),
   },
   async created() {
     this.status = await this.statusStore.statusFetch(this.$route.params.id as string);

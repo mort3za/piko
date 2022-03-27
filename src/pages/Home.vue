@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import Statuses from "@components/Statuses.vue";
-import HeaderBar from "@components/layout/HeaderBar.vue";
+import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimelineStore } from "@stores/timeline-module";
 import { apiErrors } from "@mixins/apiErrors";
 
