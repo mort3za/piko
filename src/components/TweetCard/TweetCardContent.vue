@@ -1,14 +1,18 @@
 <template>
   <div
-    :class="{ rtl: isRTL }"
+    :class="{ rtl: isRTL, ltr: !isRTL }"
     :dir="lang === 'und' ? 'auto' : undefined"
     class="border border-blue-200 p-4 rounded-md shadow-md shadow-blue-100"
   >
-    <div class="user-content whitespace-pre-line leading-5" v-html="text"></div>
+    <div class="user-content whitespace-pre-line leading-6" v-html="text"></div>
 
-    <div class="mt-2" v-if="media">
-      <MediaContent :media="media" />
-    </div>
+    <MediaContent v-if="media" class="mt-2" :media="media" />
+    <TweetCardContent
+      class="mt-2"
+      v-if="status.quoted_status"
+      :status="status.quoted_status"
+      :status-content="status.quoted_status"
+    />
   </div>
 </template>
 
