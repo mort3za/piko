@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="flex w-full justify-between px-4 py-2 bg-blue-100 sticky top-0 rounded-b-2xl">
+    <div class="flex w-full justify-between px-4 py-2 bg-blue-100 sticky top-0 rounded-b-2xl z-10">
       <!-- left -->
       <a class="button mb-0" @click="toggleCompose">Tweet</a>
 
@@ -9,7 +9,7 @@
       <!-- right -->
       <a :href="logoutLink" class="button mb-0">Logout</a>
     </div>
-    <ComposeTweet v-if="showCompose" />
+    <ComposeTweet class="mt-2" v-if="showCompose" />
   </section>
 </template>
 

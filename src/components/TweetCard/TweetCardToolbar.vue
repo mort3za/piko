@@ -5,7 +5,7 @@
       <span v-if="status.retweet_count > 0">RT: {{ status.retweet_count }}</span>
     </div>
     <div class="flex">
-      <a class="link text-xs" :href="twitterLink" rel="noopener noreferrer" target="_blank"
+      <a class="link text-xs muted" :href="twitterLink" rel="noopener noreferrer" target="_blank"
         >Open in Twitter</a
       >
     </div>

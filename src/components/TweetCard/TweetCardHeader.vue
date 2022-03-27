@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between mb-1">
     <div class="flex flex-col">
-      <ProfileDidAction :user="user" />
+      <ProfileDidAction :status="status" />
       <!-- avatar + name/username -->
       <div class="flex items-center leading-3">
         <Avatar :user="user" class="mr-2" />

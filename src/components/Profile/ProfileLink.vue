@@ -3,7 +3,7 @@
     class="flex items-center"
     :to="{ name: 'Profile', params: { screen_name: user.screen_name } }"
   >
-    <span class="mr-2 text-sm">{{ user.name }}</span>
+    <span class="mr-1 text-sm">{{ user.name }}</span>
     <span v-if="showScreenName" class="muted text-xs">{{ user.screen_name }}</span>
   </router-link>
 </template>
