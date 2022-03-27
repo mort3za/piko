@@ -37,7 +37,7 @@ export default defineComponent({
       return setEntitiesOnText(rawText, this.statusContent.entities);
     },
     media() {
-      return this.statusContent.entities.media;
+      return this.statusContent.extended_entities?.media ?? this.statusContent.entities.media;
     },
   },
   components: { MediaContent },
