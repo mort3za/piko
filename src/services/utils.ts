@@ -1,7 +1,7 @@
 export const RTLLanguageCodes = ["fa"];
 import { format } from "date-fns";
 import { cloneDeep } from "lodash-es";
-import { Entities, Status } from "twitter-d";
+import { Entities, QuotedStatusPermalink, Status } from "twitter-d";
 
 type Indices = [number, number];
 export const isRTL = (langCode: Status["lang"]) => RTLLanguageCodes.includes(langCode as string);
@@ -11,7 +11,15 @@ export const formatDateTime = (date: string) => {
   return format(timestamp, "dd/MM/yyyy HH:mm");
 };
 
-export const setEntitiesOnText = (rawText: string = "", entities: Entities): string => {
+export const setEntitiesOnText = ({
+  rawText = "",
+  entities,
+  quoted_status_permalink,
+}: {
+  rawText: string;
+  entities: Entities;
+  quoted_status_permalink?: QuotedStatusPermalink;
+}): string => {
   const linkProps = 'rel="noopener noreferrer" target="_blank"';
   const upgradedEntities = cloneDeep(entities);
   upgradedEntities.hashtags = (upgradedEntities.hashtags ?? []).map((hashtag) => {
@@ -64,25 +72,28 @@ export const setEntitiesOnText = (rawText: string = "", entities: Entities): str
     return (a.indices as Indices)[0] - (b.indices as Indices)[0];
   });
 
-  let simpleTextIndex = 0;
+  let plainTextIndex = 0;
   let textSlices = [] as { text: string; entity?: any }[];
   const rawTextInArray = Array.from(rawText);
   entities_all.forEach((entity_item) => {
     const indices_item = entity_item.indices as Indices;
-    if (simpleTextIndex < indices_item[0]) {
+    // add plain text part to the text slices
+    if (plainTextIndex < indices_item[0]) {
       textSlices.push({
-        text: rawTextInArray.slice(simpleTextIndex, indices_item[0]).join(""),
+        text: rawTextInArray.slice(plainTextIndex, indices_item[0]).join(""),
       });
-      simpleTextIndex = indices_item[1];
+      plainTextIndex = indices_item[1];
     }
+    // add entity part to the text slices
     textSlices.push({
       text: rawTextInArray.slice(indices_item[0], indices_item[1]).join(""),
       entity: entity_item,
     });
   });
-  if (simpleTextIndex < rawTextInArray.length) {
+  // add the last plain text part to the text slices
+  if (plainTextIndex < rawTextInArray.length) {
     textSlices.push({
-      text: rawTextInArray.slice(simpleTextIndex, rawTextInArray.length).join(""),
+      text: rawTextInArray.slice(plainTextIndex, rawTextInArray.length).join(""),
     });
   }
 
@@ -90,6 +101,9 @@ export const setEntitiesOnText = (rawText: string = "", entities: Entities): str
     .map((slice) => {
       // remove media text from status text
       if (slice.entity?.type === "media") {
+        return "";
+      }
+      if (quoted_status_permalink && quoted_status_permalink.url === slice.entity?.url) {
         return "";
       }
 

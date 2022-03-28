@@ -39,7 +39,11 @@ export default defineComponent({
     },
     text() {
       const rawText = this.statusContent.full_text;
-      return setEntitiesOnText(rawText, this.statusContent.entities);
+      return setEntitiesOnText({
+        rawText,
+        entities: this.statusContent.entities,
+        quoted_status_permalink: this.status.quoted_status_permalink,
+      });
     },
     media() {
       return this.statusContent.extended_entities?.media ?? this.statusContent.entities.media;

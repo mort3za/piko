@@ -1,10 +1,11 @@
 <template>
-  <div class="gallery grid grid-cols-2" :class="{ 'grid-rows-2': media.length > 2 }">
+  <div class="gallery grid" :class="rootClasses">
     <img
       class="h-full object-cover"
-      v-for="mediaItem in media"
+      v-for="(mediaItem, index) in media"
       :src="mediaItem.media_url_https"
       alt=""
+      :class="`gallery-image--${index}`"
     />
   </div>
 </template>
@@ -15,6 +16,20 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "PhotoGallery",
   props: ["media"],
+  computed: {
+    rootClasses() {
+      switch (this.media.length) {
+        case 2:
+          return "grid-cols-2 grid-rows-1";
+        case 3:
+          return "grid-cols-2 grid-rows-2 gallery--items-3";
+        case 4:
+          return "grid-cols-2 grid-rows-2";
+        default:
+          return "";
+      }
+    },
+  },
 });
 </script>
 
@@ -22,5 +37,8 @@ export default defineComponent({
 .gallery {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+}
+.gallery--items-3 .gallery-image--0 {
+  @apply col-span-2;
 }
 </style>
