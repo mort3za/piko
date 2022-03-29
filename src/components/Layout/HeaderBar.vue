@@ -2,12 +2,12 @@
   <section>
     <div class="flex w-full justify-between px-4 py-2 bg-blue-100 sticky top-0 rounded-b-2xl z-10">
       <!-- left -->
-      <a class="button mb-0" @click="toggleCompose">Tweet</a>
+      <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
 
-      <router-link class="text-blue-500" :to="{ name: 'Home' }">Piko</router-link>
+      <router-link class="text-blue-500 mx-auto" :to="{ name: 'Home' }">Piko</router-link>
 
       <!-- right -->
-      <a :href="logoutLink" class="button mb-0">Logout</a>
+      <a v-if="isUser" :href="logoutLink" class="button mb-0">Logout</a>
     </div>
     <ComposeTweet class="mt-2" v-if="showCompose" />
   </section>
@@ -23,6 +23,10 @@ export default defineComponent({
   name: "HeaderBar",
   components: { ComposeTweet },
   props: {
+    isUser: {
+      type: Boolean,
+      default: true,
+    },
     back: {
       type: Boolean,
       default: true,

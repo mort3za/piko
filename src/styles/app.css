@@ -3,9 +3,9 @@ html {
   height: -webkit-fill-available;
 }
 body {
-  /* background-color: #777; */
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  min-height: 100dvh;
   @apply font-sans;
 }
 
