@@ -18,7 +18,7 @@ export const setEntitiesOnText = ({
 }: {
   rawText: string;
   entities: Entities;
-  quoted_status_permalink?: QuotedStatusPermalink;
+  quoted_status_permalink?: QuotedStatusPermalink | null;
 }): string => {
   const linkProps = 'rel="noopener noreferrer" target="_blank"';
   const upgradedEntities = cloneDeep(entities);
