@@ -6,8 +6,6 @@ const defaultState = {
 
 const actions = {
   toggleCompose() {
-    console.log("toggle1");
-
     // @ts-ignore
     this.showCompose = !this.showCompose;
   },

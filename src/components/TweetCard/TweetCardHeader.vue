@@ -13,13 +13,13 @@
     <router-link
       class="flex flex-col justify-end"
       :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
-      ><time class="muted text-xs">{{ formatDateTime(status.created_at) }}</time></router-link
+      ><time class="muted text-xs">{{ getRelativeTime(status.created_at) }}</time></router-link
     >
   </div>
 </template>
 
 <script lang="ts">
-import { formatDateTime } from "@services/utils";
+import { getRelativeTime } from "@services/time";
 import { defineComponent } from "vue";
 import Avatar from "@components/Avatar.vue";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
@@ -34,7 +34,7 @@ export default defineComponent({
     statusContent: { type: Object as () => Status, required: true },
   },
   methods: {
-    formatDateTime,
+    getRelativeTime,
   },
   computed: {
     user() {

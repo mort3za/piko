@@ -1,15 +1,9 @@
 export const RTLLanguageCodes = ["fa"];
-import { format } from "date-fns";
 import { cloneDeep } from "lodash-es";
 import { Entities, QuotedStatusPermalink, Status } from "twitter-d";
 
 type Indices = [number, number];
 export const isRTL = (langCode: Status["lang"]) => RTLLanguageCodes.includes(langCode as string);
-
-export const formatDateTime = (date: string) => {
-  const timestamp = new Date(date).getTime();
-  return format(timestamp, "dd/MM/yyyy HH:mm");
-};
 
 export const setEntitiesOnText = ({
   rawText = "",
@@ -75,8 +69,10 @@ export const setEntitiesOnText = ({
   let plainTextIndex = 0;
   let textSlices = [] as { text: string; entity?: any }[];
   const rawTextInArray = Array.from(rawText);
+
   entities_all.forEach((entity_item) => {
     const indices_item = entity_item.indices as Indices;
+
     // add plain text part to the text slices
     if (plainTextIndex < indices_item[0]) {
       textSlices.push({
@@ -84,11 +80,13 @@ export const setEntitiesOnText = ({
       });
       plainTextIndex = indices_item[1];
     }
+
     // add entity part to the text slices
     textSlices.push({
       text: rawTextInArray.slice(indices_item[0], indices_item[1]).join(""),
       entity: entity_item,
     });
+    plainTextIndex = indices_item[1];
   });
   // add the last plain text part to the text slices
   if (plainTextIndex < rawTextInArray.length) {
