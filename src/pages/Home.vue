@@ -50,6 +50,7 @@ export default defineComponent({
       return {
         ...(since_id && { since_id }),
         ...(max_id && { max_id }),
+        exclude_replies: true,
       };
     },
   },

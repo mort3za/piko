@@ -16,6 +16,11 @@ import { useStatusStore } from "@stores/status-module";
 
 export default defineComponent({
   name: "Home",
+  props: {
+    in_reply_to_status_id: {
+      type: String,
+    },
+  },
   data() {
     return { text: "" };
   },
@@ -26,7 +31,12 @@ export default defineComponent({
   },
   methods: {
     submit() {
-      this.statusPost({ status: this.text });
+      this.statusPost({ status: this.text, in_reply_to_status_id: this.in_reply_to_status_id }).then(
+        this.onSubmitSuccess,
+      );
+    },
+    onSubmitSuccess() {
+      this.$emit("success");
     },
   },
 });

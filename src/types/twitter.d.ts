@@ -1,6 +1,6 @@
 interface StatusPayload {
   status: string;
-  in_reply_to_status_id?: number;
+  in_reply_to_status_id?: string;
   auto_populate_reply_metadata?: boolean;
   exclude_reply_user_ids?: number;
   attachment_url?: string;

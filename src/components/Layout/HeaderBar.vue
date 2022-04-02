@@ -9,7 +9,7 @@
       <!-- right -->
       <a v-if="isUser" :href="logoutLink" class="button mb-0">Logout</a>
     </div>
-    <ComposeTweet class="mt-2" v-if="showCompose" />
+    <ComposeTweet v-if="showCompose" class="mt-2" @success="showCompose = false" />
   </section>
 </template>
 
