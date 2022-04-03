@@ -26,7 +26,7 @@ export const getRelativeTime = (dateStr: string): string => {
     ["year", year],
   ] as Periods;
 
-  let output_period: [Intl.RelativeTimeFormatUnit, number] = ["second", 1];
+  let output_period: [Intl.RelativeTimeFormatUnit, number] = ["second", 1000];
 
   for (const [unit, period] of periods) {
     if (diff < period) {

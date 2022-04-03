@@ -5,6 +5,7 @@
     :src="getChosenVideo()"
     :poster="mediaItem.media_url_https"
     controls
+    preload="none"
   ></video>
 </template>
 
