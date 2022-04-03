@@ -15,14 +15,15 @@
       :status="status.quoted_status"
       :status-content="status.quoted_status"
     />
+    <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, defineAsyncComponent } from "vue";
 import { Status } from "twitter-d";
 import { setEntitiesOnText, isRTL } from "@services/utils";
-import MediaContent from "@components/MediaContent/MediaContent.vue";
+const MediaContent = defineAsyncComponent(() => import("@components/MediaContent/MediaContent.vue"));
 
 export default defineComponent({
   name: "Content",
