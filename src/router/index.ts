@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@pages/Home.vue";
-import Status from "@pages/Status.vue";
-import Login from "@pages/Login.vue";
-import Profile from "@pages/Profile.vue";
+const Home = () => import("@pages/Home.vue");
+const Status = () => import("@pages/Status.vue");
+const Login = () => import("@pages/Login.vue");
+const Profile = () => import("@pages/Profile.vue");
 
 export const router = createRouter({
   history: createWebHistory(),

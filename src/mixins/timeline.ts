@@ -1,6 +1,9 @@
 import { ComponentOptions, VueElement } from "vue";
 
 export const timeline = {
+  data: () => ({
+    error: "",
+  }),
   created() {
     this.load(this.params);
   },

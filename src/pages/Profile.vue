@@ -26,7 +26,6 @@ export default defineComponent({
     return {
       timelineStore,
       profileStatuses,
-      error: "",
     };
   },
   methods: {

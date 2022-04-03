@@ -29,7 +29,6 @@ export default defineComponent({
     return {
       timelineStore,
       latestStatuses,
-      error: "",
     };
   },
   methods: {
