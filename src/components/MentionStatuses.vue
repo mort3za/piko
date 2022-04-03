@@ -1,9 +1,7 @@
 <template>
-  <div class="layout--fill max-w-2xl mx-auto">
-    <HeaderBar class="mb-4" :back="false" />
-
+  <div>
     <div v-if="error">{{ error }}</div>
-    <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
+    <Statuses @changePage="(params) => changePage(params)" v-else :statuses="mentionStatuses" />
   </div>
 </template>
 
@@ -19,23 +17,28 @@ export default defineComponent({
   name: "HomePage",
   components: { Statuses, HeaderBar },
   mixins: [apiErrors, timeline],
-  timelineParams: {
-    exclude_replies: true,
+  props: {
+    statusId: {
+      type: String,
+      required: true,
+    },
   },
   setup() {
     const timelineStore = useTimelineStore();
-    const latestStatuses = computed(() => timelineStore.latestStatuses);
+    const mentionStatuses = computed(() => timelineStore.mentionStatuses);
 
     return {
       timelineStore,
-      latestStatuses,
+      mentionStatuses,
       error: "",
     };
   },
   methods: {
     load(params: Partial<TimelinePaginationParams>) {
       this.error = "";
-      this.timelineStore.latestStatusesFetch(params).catch(this.onApiError);
+      this.timelineStore
+        .mentionStatusesFetch(params, `conversation_id:${this.statusId}`)
+        .catch(this.onApiError);
     },
   },
 });

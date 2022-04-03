@@ -4,6 +4,7 @@
     <div class="max-w-2xl mx-auto pb-8" v-if="status">
       <TweetCard :status="status" />
     </div>
+    <MentionStatuses v-if="status" :status-id="status.id_str" />
   </div>
 </template>
 
@@ -22,6 +23,7 @@ export default defineComponent({
   },
   components: {
     HeaderBar,
+    MentionStatuses: defineAsyncComponent(() => import("@components/MentionStatuses.vue")),
     TweetCard: defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue")),
   },
   async created() {

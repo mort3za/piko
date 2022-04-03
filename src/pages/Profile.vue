@@ -13,11 +13,12 @@ import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimelineStore } from "@stores/timeline-module";
 import { apiErrors } from "@mixins/apiErrors";
+import { timeline } from "@mixins/timeline";
 
 export default defineComponent({
   name: "HomePage",
   components: { Statuses, HeaderBar },
-  mixins: [apiErrors],
+  mixins: [apiErrors, timeline],
   setup() {
     const timelineStore = useTimelineStore();
     const profileStatuses = computed(() => timelineStore.profileStatuses);
@@ -38,31 +39,6 @@ export default defineComponent({
         return;
       }
       this.timelineStore.profileStatusesFetch(params, screen_name).catch(this.onApiError);
-    },
-    changePage(params: Partial<TimelinePaginationParams>) {
-      this.$router.push({
-        name: this.$route.name as string,
-        query: { max_id: params.max_id as string, since_id: params.since_id as string },
-      });
-      this.load(params);
-    },
-  },
-  computed: {
-    params(): Partial<TimelinePaginationParams> {
-      const since_id = this.$route.query.since_id as string;
-      const max_id = this.$route.query.max_id as string;
-      return {
-        ...(since_id && { since_id }),
-        ...(max_id && { max_id }),
-      };
-    },
-  },
-  created() {
-    this.load(this.params);
-  },
-  watch: {
-    "$route.query"() {
-      this.load(this.params);
     },
   },
 });
