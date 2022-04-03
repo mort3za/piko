@@ -1,6 +1,6 @@
 {
   "name": "piko-client",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "dev": "vite",
@@ -29,7 +29,7 @@
     "twitter-d": "^0.6.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.1",
-    "vite-plugin-html-env": "^1.1.1",
+    "vite-plugin-html-env": "1.1.1",
     "vue-tsc": "^0.33.9"
   }
 }
