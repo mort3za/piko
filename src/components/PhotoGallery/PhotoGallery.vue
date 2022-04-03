@@ -3,9 +3,11 @@
     <img
       class="h-full object-cover"
       v-for="(mediaItem, index) in media"
+      :key="mediaItem.id"
       :src="mediaItem.media_url_https"
       alt=""
       :class="`gallery-image--${index}`"
+      loading="lazy"
     />
   </div>
 </template>

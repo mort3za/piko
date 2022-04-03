@@ -3,7 +3,7 @@
     <PhotoGallery :media="media" />
   </template>
   <template v-else-if="mediaType === 'video'">
-    <VideoPlayer v-for="mediaItem in media" :media-item="mediaItem" />
+    <VideoPlayer v-for="mediaItem in media" :key="mediaItem.id" :media-item="mediaItem" />
   </template>
 </template>
 
