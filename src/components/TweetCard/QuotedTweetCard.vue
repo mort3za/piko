@@ -1,5 +1,5 @@
 <template>
-  <div class="ltr">
+  <div class="ltr mt-2">
     <TweetCardHeader :status="status" :status-content="statusContent" />
     <TweetCardContent :status="status" :status-content="statusContent" />
   </div>

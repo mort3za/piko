@@ -3,17 +3,13 @@ html {
   height: -webkit-fill-available;
 }
 body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: 100dvh;
-  @apply font-sans;
+  @apply font-sans h-fit-screen;
 }
 
 #app {
-  @apply font-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #222;
+  @apply h-fit-screen text-gray-700;
 }
 
 *,
@@ -22,6 +18,14 @@ body {
   touch-action: manipulation;
 }
 
+
+.h-fit-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.layout--fill {
+  @apply h-fit-screen flex flex-col;
+}
 .rtl {
   direction: rtl;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-2xl mx-auto layout--fill">
     <HeaderBar class="mb-4" :is-user="false" />
     <div class="max-w-2xl mx-auto pb-8">
       <div class="mt-16">

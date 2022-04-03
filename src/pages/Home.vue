@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <div class="max-w-2xl mx-auto">
-      <HeaderBar class="mb-4" :back="false" />
+  <div class="layout--fill max-w-2xl mx-auto">
+    <HeaderBar class="mb-4" :back="false" />
 
-      <div v-if="error">{{ error }}</div>
-      <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
-    </div>
+    <div v-if="error">{{ error }}</div>
+    <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
   </div>
 </template>
 

@@ -4,7 +4,9 @@
       <!-- left -->
       <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
 
-      <router-link class="text-blue-500 mx-auto" :to="{ name: 'Home' }">Piko</router-link>
+      <router-link class="text-blue-500 mx-auto flex items-center" :to="{ name: 'Home' }"
+        >Piko Client</router-link
+      >
 
       <!-- right -->
       <a v-if="isUser" :href="logoutLink" class="button mb-0">Logout</a>

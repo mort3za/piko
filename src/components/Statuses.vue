@@ -1,7 +1,9 @@
 <template>
-  <section class="px-2">
-    <div class="block mb-6 last:mb-0" v-for="status in statuses" :key="status.id_str">
-      <TweetCard :status="status" />
+  <section class="px-2 flex flex-col justify-between flex-grow">
+    <div>
+      <div class="block mb-6 last:mb-0" v-for="status in statuses" :key="status.id_str">
+        <TweetCard :status="status" />
+      </div>
     </div>
 
     <div class="flex justify-between items-center p-2">

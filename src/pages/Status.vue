@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto">
+  <div class="max-w-2xl mx-auto layout--fill">
     <HeaderBar class="mb-4" />
     <div class="max-w-2xl mx-auto pb-8" v-if="status">
       <TweetCard :status="status" />
