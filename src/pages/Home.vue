@@ -3,39 +3,27 @@
     <HeaderBar class="mb-4" :back="false" />
 
     <div v-if="error">{{ error }}</div>
-    <Statuses @changePage="(params) => changePage(params)" v-else :statuses="latestStatuses" />
+    <Statuses
+      @changePage="(params) => changePage(generateParams(params))"
+      v-else
+      :statuses="latestStatuses"
+    />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
-import { useTimelineStore } from "@stores/timeline-module";
-import { apiErrors } from "@mixins/apiErrors";
-import { timeline } from "@mixins/timeline";
+import { useTimeline } from "@mixins/timeline";
 
-export default defineComponent({
-  name: "HomePage",
-  components: { Statuses, HeaderBar },
-  mixins: [apiErrors, timeline],
-  timelineParams: {
+function generateParams(params: Partial<TimelinePaginationParams> = {}) {
+  return {
     exclude_replies: true,
-  },
-  setup() {
-    const timelineStore = useTimelineStore();
-    const latestStatuses = computed(() => timelineStore.latestStatuses);
+    ...params,
+  };
+}
+const { timelineStore, changePage, error } = useTimeline(generateParams());
 
-    return {
-      timelineStore,
-      latestStatuses,
-    };
-  },
-  methods: {
-    load(params: Partial<TimelinePaginationParams>) {
-      this.error = "";
-      this.timelineStore.latestStatusesFetch(params).catch(this.onApiError);
-    },
-  },
-});
+const latestStatuses = computed(() => timelineStore.latestStatuses);
 </script>

@@ -7,6 +7,7 @@ export const useTimelineStore = defineStore("timeline", {
   actions: {
     latestStatusesFetch(params: Partial<TimelinePaginationParams> = {}) {
       const url = `/timelines/latest-statuses`;
+
       return api({
         url,
         params,
@@ -30,6 +31,7 @@ export const useTimelineStore = defineStore("timeline", {
     },
 
     mentionStatusesFetch(params: Partial<TimelinePaginationParams> = {}, query: string) {
+      // documentation: https://developer.twitter.com/en/docs/twitter-api/fields
       const url = `/timelines/search-statuses`;
       return api({
         url,
