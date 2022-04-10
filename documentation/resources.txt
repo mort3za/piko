@@ -1,1 +1,2 @@
-https://github.com/FeedHive/twitter-api-client
+Twitter API https://github.com/FeedHive/twitter-api-client
+Icon pack https://www.figma.com/file/mKkq8bWiUq7KRMVGMTdKoD/SWM-Icon-Pack-(Community)?node-id=1217%3A592
