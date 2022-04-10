@@ -1,7 +1,7 @@
 <template>
   <div class="gallery grid" :class="rootClasses">
     <img
-      class="h-full object-cover"
+      class="h-full object-contain"
       v-for="(mediaItem, index) in media"
       :key="mediaItem.id"
       :src="mediaItem.media_url_https"
@@ -12,26 +12,28 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { computed } from "@vue/reactivity";
+import { MediaEntity } from "twitter-d";
 
-export default defineComponent({
-  name: "PhotoGallery",
-  props: ["media"],
-  computed: {
-    rootClasses() {
-      switch (this.media.length) {
-        case 2:
-          return "grid-cols-2 grid-rows-1";
-        case 3:
-          return "grid-cols-2 grid-rows-2 gallery--items-3";
-        case 4:
-          return "grid-cols-2 grid-rows-2";
-        default:
-          return "";
-      }
-    },
+const props = defineProps({
+  media: {
+    type: Array as () => MediaEntity[],
+    required: true,
   },
+});
+
+const rootClasses = computed(() => {
+  switch (props.media.length) {
+    case 2:
+      return "grid-cols-2 grid-rows-1";
+    case 3:
+      return "grid-cols-2 grid-rows-2 gallery--items-3";
+    case 4:
+      return "grid-cols-2 grid-rows-2";
+    default:
+      return "";
+  }
 });
 </script>
 
