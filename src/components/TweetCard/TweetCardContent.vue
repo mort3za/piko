@@ -9,12 +9,6 @@
     <div class="mt-2" v-if="media">
       <MediaContent :media="media" />
     </div>
-    <TweetCardContent
-      class="mt-2"
-      v-if="status.quoted_status"
-      :status="status.quoted_status"
-      :status-content="status.quoted_status"
-    />
     <slot />
   </div>
 </template>
