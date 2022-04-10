@@ -1,7 +1,7 @@
 <template>
   <div class="gallery grid" :class="rootClasses">
     <img
-      class="h-full object-contain"
+      class="object-contain h-fit"
       v-for="(mediaItem, index) in media"
       :key="mediaItem.id"
       :src="mediaItem.media_url_https"
@@ -28,9 +28,9 @@ const rootClasses = computed(() => {
     case 2:
       return "grid-cols-2 grid-rows-1";
     case 3:
-      return "grid-cols-2 grid-rows-2 gallery--items-3";
+      return "grid-cols-2 gallery--items-3";
     case 4:
-      return "grid-cols-2 grid-rows-2";
+      return "grid-cols-2";
     default:
       return "";
   }
@@ -39,8 +39,8 @@ const rootClasses = computed(() => {
 
 <style scoped>
 .gallery {
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
 }
 .gallery--items-3 .gallery-image--0 {
   @apply col-span-2;
