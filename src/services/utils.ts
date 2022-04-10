@@ -35,7 +35,7 @@ export const setEntitiesOnText = ({
   upgradedEntities.user_mentions = (upgradedEntities.user_mentions ?? []).map((mention) => {
     return {
       ...mention,
-      linkStart: `<a class="link link--mention" ${linkProps} href="https://twitter.com/${mention.screen_name}">`,
+      linkStart: `<a class="link link--mention inline-flex ltr" ${linkProps} href="https://twitter.com/${mention.screen_name}">`,
       linkEnd: "</a>",
       type: "mention",
     };

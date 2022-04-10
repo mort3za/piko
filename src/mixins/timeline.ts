@@ -1,6 +1,6 @@
 import { ref, computed, watch } from "vue";
-import { useRoute } from "vue-router";
-import { useApiErrors } from "@mixins/apiErrors";
+import { useRoute, useRouter } from "vue-router";
+import { useErrorHnadler } from "@mixins/errorHandler";
 
 type loadFunction = (params: Partial<TimelinePaginationParams>) => Promise<any>;
 
@@ -9,7 +9,7 @@ export function useTimeline(
   timelineParams: Partial<TimelinePaginationParams> | null = {},
 ) {
   const route = useRoute();
-  const { onApiError } = useApiErrors();
+  const router = useRouter();
 
   const error = ref("");
   const params = computed(() => {
@@ -33,6 +33,9 @@ export function useTimeline(
 
   function loadTimeline() {
     error.value = "";
-    load(params.value).catch(onApiError);
+    load(params.value).catch((error) => {
+      const { onApiError } = useErrorHnadler();
+      return onApiError(error, router);
+    });
   }
 }

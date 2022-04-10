@@ -1,8 +1,6 @@
 import { api } from "@services/api";
 import { onJsonResponse } from "@services/response";
-import { AxiosResponse } from "axios";
 import { defineStore } from "pinia";
-import { Status } from "twitter-d";
 
 const defaultState = {};
 

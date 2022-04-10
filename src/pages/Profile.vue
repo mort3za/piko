@@ -3,7 +3,7 @@
     <HeaderBar class="mb-4" :back="false" />
 
     <div v-if="error">{{ error }}</div>
-    <Statuses v-else :statuses="profileStatuses" :key="timelineKey" />
+    <Statuses v-else :statuses="profileStatuses" />
   </div>
 </template>
 
@@ -24,7 +24,7 @@ function load(params: Partial<TimelinePaginationParams>) {
   return timelineStore.profileStatusesFetch(params, screen_name);
 }
 
-const { timelineKey, error } = useTimeline(load);
+const { error } = useTimeline(load);
 
 const profileStatuses = computed(() => timelineStore.profileStatuses);
 </script>

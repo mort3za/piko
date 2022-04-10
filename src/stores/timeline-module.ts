@@ -1,4 +1,4 @@
-import { api } from "@services/api";
+import { api, statusesAdaptorV2 } from "@services/api";
 import { Status } from "twitter-d";
 import { defineStore } from "pinia";
 import { getQueryParamsString } from "@services/url";
@@ -36,23 +36,31 @@ export const useTimelineStore = defineStore("timeline", {
         });
     },
 
+    // api v2
     mentionStatusesFetch(paginationParams: Partial<TimelinePaginationParams> = {}, query: string) {
-      const qParams = {
-        ...paginationParams,
-        query,
-        // documentation: https://developer.twitter.com/en/docs/twitter-api/fields
+      // documentation: https://developer.twitter.com/en/docs/twitter-api/fields
+      const defaultQueryParams = {
         "tweet.fields":
-          "attachments,author_id,context_annotations,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld",
+          "attachments,author_id,conversation_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,reply_settings,source,text,withheld",
         "media.fields":
           "alt_text,duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width",
         "user.fields":
           "created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld",
+        expansions: "attachments.poll_ids,attachments.media_keys,author_id",
+      };
+      const qParams = {
+        ...defaultQueryParams,
+        ...paginationParams,
+        query,
       };
       const path = `/timelines/search-statuses${getQueryParamsString(qParams)}`;
       return api(path, {
         method: "GET",
       })
         .then(onJsonResponse)
+        .then(({ data, includes }) => {
+          return statusesAdaptorV2(data, includes);
+        })
         .then((result: Status[]) => {
           this.mentionStatuses = result;
         });

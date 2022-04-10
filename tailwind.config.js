@@ -4,6 +4,7 @@ module.exports = {
     "./public/**/*.html",
     "./src/**/*.html",
     "./src/**/*.vue",
+    "./src/**/*.ts",
     // "./src/VueTailwind.js",
     // "./node_modules/vue-tailwind/**/*.{js,jsx,ts,tsx,vue}",
   ],
