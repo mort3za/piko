@@ -6,10 +6,7 @@
       </div>
     </div>
 
-    <div class="flex justify-between items-center p-2">
-      <a class="button" @click.prevent="$emit('changePage', { since_id: firstStatus?.id_str })">Prev</a>
-      <a class="button" @click.prevent="$emit('changePage', { max_id: lastStatus?.id_str })">Next</a>
-    </div>
+    <NextPrevPagination :since-id="firstStatus?.id_str" :max-id="lastStatus?.id_str" />
   </section>
 </template>
 
@@ -17,6 +14,7 @@
 import { defineComponent } from "vue";
 import TweetCard from "@components/TweetCard/TweetCard.vue";
 import { Status } from "twitter-d";
+import NextPrevPagination from "./Pagination/NextPrevPagination.vue";
 
 export default defineComponent({
   name: "Tweets",
@@ -32,7 +30,7 @@ export default defineComponent({
       required: true,
     },
   },
-  components: { TweetCard },
+  components: { TweetCard, NextPrevPagination },
   computed: {
     firstStatus() {
       return this.statuses.at(0);

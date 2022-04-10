@@ -1,13 +1,15 @@
 import { ref, computed, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useApiErrors } from "@mixins/apiErrors";
-import { useTimelineStore } from "@stores/timeline-module";
 
-export function useTimeline(timelineParams: Partial<TimelinePaginationParams>) {
+type loadFunction = (params: Partial<TimelinePaginationParams>) => Promise<any>;
+
+export function useTimeline(
+  load: loadFunction,
+  timelineParams: Partial<TimelinePaginationParams> | null = {},
+) {
   const route = useRoute();
-  const router = useRouter();
   const { onApiError } = useApiErrors();
-  const timelineStore = useTimelineStore();
 
   const error = ref("");
   const params = computed(() => {
@@ -21,24 +23,16 @@ export function useTimeline(timelineParams: Partial<TimelinePaginationParams>) {
     return result as Partial<TimelinePaginationParams>;
   });
 
-  load(params.value);
+  loadTimeline();
+  const fullPath = computed(() => route.fullPath.split("#")[0]);
+  watch(fullPath, loadTimeline);
 
   return {
     error,
-    timelineStore,
-    changePage,
   };
 
-  function load(params: Partial<TimelinePaginationParams>) {
+  function loadTimeline() {
     error.value = "";
-    timelineStore.latestStatusesFetch(params).catch(onApiError);
-  }
-
-  function changePage(params: Partial<TimelinePaginationParams>) {
-    router.push({
-      name: route.name as string,
-      query: { max_id: params.max_id as string, since_id: params.since_id as string },
-    });
-    load(params);
+    load(params.value).catch(onApiError);
   }
 }

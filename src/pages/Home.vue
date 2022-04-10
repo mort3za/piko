@@ -3,11 +3,7 @@
     <HeaderBar class="mb-4" :back="false" />
 
     <div v-if="error">{{ error }}</div>
-    <Statuses
-      @changePage="(params) => changePage(generateParams(params))"
-      v-else
-      :statuses="latestStatuses"
-    />
+    <Statuses v-else :statuses="latestStatuses" />
   </div>
 </template>
 
@@ -16,14 +12,15 @@ import { computed } from "vue";
 import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimeline } from "@mixins/timeline";
+import { useTimelineStore } from "@stores/timeline-module";
 
-function generateParams(params: Partial<TimelinePaginationParams> = {}) {
-  return {
-    exclude_replies: true,
-    ...params,
-  };
+const timelineStore = useTimelineStore();
+
+function load(tParams: Partial<TimelinePaginationParams>) {
+  return timelineStore.latestStatusesFetch(tParams);
 }
-const { timelineStore, changePage, error } = useTimeline(generateParams());
+
+const { error } = useTimeline(load, { exclude_replies: true });
 
 const latestStatuses = computed(() => timelineStore.latestStatuses);
 </script>

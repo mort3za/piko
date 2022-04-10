@@ -48,7 +48,7 @@ export default defineComponent({
       return this.layoutStore.showCompose;
     },
     logoutLink() {
-      return apiLink("logout");
+      return apiLink("/logout");
     },
   },
 });

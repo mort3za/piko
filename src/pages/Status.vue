@@ -1,33 +1,27 @@
 <template>
-  <div class="max-w-2xl mx-auto layout--fill">
+  <div class="layout--fill max-w-2xl mx-auto">
     <HeaderBar class="mb-4" />
-    <div class="max-w-2xl mx-auto pb-8" v-if="status">
-      <TweetCard :status="status" />
+    <div class="max-w-2xl mx-auto pb-8" v-if="state.status">
+      <TweetCard :status="state.status" />
     </div>
-    <MentionStatuses v-if="status" :status-id="status.id_str" />
+    <MentionStatuses class="flex flex-grow" v-if="state.status" :status-id="state.status.id_str" />
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" async setup>
 import HeaderBar from "@components/Layout/HeaderBar.vue";
-import { defineAsyncComponent, defineComponent, ref } from "vue";
+import { defineAsyncComponent, onMounted, shallowReactive } from "vue";
 import { useStatusStore } from "@stores/status-module";
+import { useRoute } from "vue-router";
+import { Status } from "twitter-d";
+const TweetCard = defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue"));
+const MentionStatuses = defineAsyncComponent(() => import("@components/MentionStatuses.vue"));
 
-export default defineComponent({
-  name: "StatusPage",
-  setup() {
-    return {
-      statusStore: useStatusStore(),
-      status: ref(null),
-    };
-  },
-  components: {
-    HeaderBar,
-    MentionStatuses: defineAsyncComponent(() => import("@components/MentionStatuses.vue")),
-    TweetCard: defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue")),
-  },
-  async created() {
-    this.status = await this.statusStore.statusFetch(this.$route.params.id as string);
-  },
+const statusStore = useStatusStore();
+const route = useRoute();
+
+const state = shallowReactive({ status: null as unknown as Status });
+onMounted(async () => {
+  state.status = (await statusStore.statusFetch(route.params.id as string)) as Status;
 });
 </script>

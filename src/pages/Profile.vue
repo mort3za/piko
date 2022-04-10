@@ -3,42 +3,28 @@
     <HeaderBar class="mb-4" :back="false" />
 
     <div v-if="error">{{ error }}</div>
-    <Statuses @changePage="(params) => changePage(params)" v-else :statuses="profileStatuses" />
+    <Statuses v-else :statuses="profileStatuses" :key="timelineKey" />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
+import { useTimeline } from "@mixins/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
-import { apiErrors } from "@mixins/apiErrors";
-import { timeline } from "@mixins/timeline";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  name: "HomePage",
-  components: { Statuses, HeaderBar },
-  mixins: [apiErrors, timeline],
-  setup() {
-    const timelineStore = useTimelineStore();
-    const profileStatuses = computed(() => timelineStore.profileStatuses);
+const timelineStore = useTimelineStore();
 
-    return {
-      timelineStore,
-      profileStatuses,
-    };
-  },
-  methods: {
-    load(params: Partial<TimelinePaginationParams>) {
-      this.error = "";
+function load(params: Partial<TimelinePaginationParams>) {
+  const route = useRoute();
+  const screen_name = route.params.screen_name as string;
 
-      const screen_name = this.$route.params.screen_name as string;
-      if (!screen_name) {
-        this.error = "Screen name is not defined, please refresh!";
-        return;
-      }
-      this.timelineStore.profileStatusesFetch(params, screen_name).catch(this.onApiError);
-    },
-  },
-});
+  return timelineStore.profileStatusesFetch(params, screen_name);
+}
+
+const { timelineKey, error } = useTimeline(load);
+
+const profileStatuses = computed(() => timelineStore.profileStatuses);
 </script>
