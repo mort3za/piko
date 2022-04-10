@@ -1,7 +1,7 @@
 <template>
   <div class="layout--fill max-w-2xl mx-auto">
     <HeaderBar class="mb-4" />
-    <div class="w-full mx-auto pb-8" v-if="state.status">
+    <div class="w-full mx-auto pb-8 padding-x" v-if="state.status">
       <TweetCard :status="state.status" />
     </div>
     <MentionStatuses class="flex flex-grow" v-if="state.status" :status-id="state.status.id_str" />

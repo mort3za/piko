@@ -1,6 +1,6 @@
 <template>
-  <section class="px-2 flex flex-col justify-between flex-grow">
-    <div>
+  <section class="flex flex-col justify-between flex-grow">
+    <div class="padding-x">
       <div class="block mb-6 last:mb-0" v-for="status in statuses" :key="status.id_str">
         <TweetCard :status="status" />
       </div>

@@ -42,3 +42,7 @@ body {
 .muted {
   @apply text-gray-400;
 }
+
+.padding-x {
+  @apply px-2 md:px-0;
+}

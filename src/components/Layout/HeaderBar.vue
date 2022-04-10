@@ -1,11 +1,13 @@
 <template>
-  <section>
-    <div class="flex w-full justify-between px-4 py-2 bg-blue-100 sticky top-0 rounded-b-2xl z-10">
+  <section class="mb-8">
+    <div class="flex w-full justify-between padding-x py-2 border-b border-blue-200 sticky top-0 z-10">
       <!-- left -->
       <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
 
-      <router-link class="text-blue-500 mx-auto flex items-center" :to="{ name: 'Home' }"
-        >Piko Client</router-link
+      <router-link
+        class="text-blue-400 mx-auto flex items-center uppercase text-xs px-4"
+        :to="{ name: 'Home' }"
+        ><span>Piko Client</span></router-link
       >
 
       <!-- right -->
