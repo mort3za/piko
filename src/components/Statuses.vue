@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <NextPrevPagination :since-id="firstStatus?.id_str" :max-id="maxId" />
+    <NextPrevPagination :since-id="firstStatus?.id_str" :max-id="lastStatus?.id_str" />
   </section>
 </template>
 
@@ -15,7 +15,6 @@ import { defineComponent } from "vue";
 import TweetCard from "@components/TweetCard/TweetCard.vue";
 import { Status } from "twitter-d";
 import NextPrevPagination from "./Pagination/NextPrevPagination.vue";
-import { supportsBigInt } from "@services/number";
 
 export default defineComponent({
   name: "Tweets",
@@ -38,11 +37,6 @@ export default defineComponent({
     },
     lastStatus() {
       return this.statuses.at(-1);
-    },
-    maxId() {
-      if (!this.lastStatus?.id_str) return;
-      if (!supportsBigInt) return this.lastStatus?.id_str;
-      return String(BigInt(this.lastStatus?.id_str) - BigInt(1));
     },
   },
 });
