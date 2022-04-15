@@ -5,6 +5,9 @@ const Login = () => import("@pages/Login.vue");
 const Profile = () => import("@pages/Profile.vue");
 
 export const router = createRouter({
+  scrollBehavior() {
+    return { top: 0 };
+  },
   history: createWebHistory(),
   routes: [
     {

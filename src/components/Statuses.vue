@@ -6,7 +6,7 @@
       </div>
     </div>
 
-    <NextPrevPagination :since-id="firstStatus?.id_str" :max-id="lastStatus?.id_str" />
+    <NextPrevPagination :since-id="firstStatus?.id_str" :max-id="maxId" />
   </section>
 </template>
 
@@ -37,6 +37,11 @@ export default defineComponent({
     },
     lastStatus() {
       return this.statuses.at(-1);
+    },
+    maxId() {
+      if (!this.lastStatus?.id_str) return;
+      const maxId = BigInt(this.lastStatus?.id_str) - 1n;
+      return maxId.toString();
     },
   },
 });
