@@ -4,11 +4,11 @@ import { defineStore } from "pinia";
 import { getQueryParamsString } from "@services/url";
 import { onJsonResponse } from "@services/response";
 
+export type TimelineTypes = "latestStatuses" | "profileStatuses" | "mentionStatuses";
+
 export const useTimelineStore = defineStore("timeline", {
   state: () => ({
-    latestStatuses: [] as Status[],
-    profileStatuses: [] as Status[],
-    mentionStatuses: [] as Status[],
+    statuses: [] as Status[],
   }),
   actions: {
     latestStatusesFetch(params: Partial<TimelinePaginationParams> = {}) {
@@ -20,7 +20,7 @@ export const useTimelineStore = defineStore("timeline", {
       })
         .then(onJsonResponse)
         .then((result: Status[]) => {
-          this.latestStatuses = result;
+          this.statuses = result;
         });
     },
 
@@ -32,7 +32,7 @@ export const useTimelineStore = defineStore("timeline", {
       })
         .then(onJsonResponse)
         .then((result: Status[]) => {
-          this.profileStatuses = result;
+          this.statuses = result;
         });
     },
 
@@ -62,7 +62,7 @@ export const useTimelineStore = defineStore("timeline", {
           return statusesAdaptorV2(data, includes);
         })
         .then((result: Status[]) => {
-          this.mentionStatuses = result;
+          this.statuses = result;
         });
     },
   },

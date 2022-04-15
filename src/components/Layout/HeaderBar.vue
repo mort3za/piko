@@ -1,18 +1,25 @@
 <template>
-  <section class="mb-8">
-    <div class="flex w-full justify-between padding-x py-2 sticky top-0 z-10">
-      <!-- left -->
-      <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
+  <section class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm">
+    <div class="flex justify-between items-center shrink-0">
+      <div>
+        <a v-if="isUser" class="flex py-3 px-6" @click="toggleCompose">
+          <img src="/icons/message-square-lines.svg" alt="" />
+        </a>
+      </div>
 
       <!-- center -->
       <router-link
         class="text-blue-400 mx-auto flex items-center uppercase text-xs px-4"
         :to="{ name: 'Home' }"
-        ><a @click="onClickLogo" class="cursor-pointer">Piko Client</a></router-link
+        ><a @click="onClickHome" class="cursor-pointer text-gray-500">Piko Client</a></router-link
       >
 
-      <!-- right -->
-      <a v-if="isUser" :href="logoutLink" class="button mb-0">Logout</a>
+      <div>
+        <!-- right -->
+        <a class="flex py-3 px-6" v-if="isUser" :href="logoutLink">
+          <img class="scale-x-[-1]" src="/icons/logout.svg" alt="" />
+        </a>
+      </div>
     </div>
     <ComposeTweet v-if="showCompose" class="mt-2" @success="showCompose = false" />
   </section>
@@ -24,6 +31,7 @@ import { useLayoutStore } from "@stores/layout-module";
 import { computed } from "vue";
 import ComposeTweet from "@components/ComposeTweet.vue";
 import { useRoute } from "vue-router";
+import { isHomeExact } from "@services/url";
 
 const route = useRoute();
 defineProps({
@@ -36,7 +44,7 @@ defineProps({
     default: true,
   },
 });
-const emit = defineEmits(["clicked-logo"]);
+const emit = defineEmits(["clicked-home"]);
 
 const layoutStore = useLayoutStore();
 const toggleCompose = layoutStore.toggleCompose;
@@ -44,10 +52,9 @@ const toggleCompose = layoutStore.toggleCompose;
 const showCompose = computed(() => layoutStore.showCompose);
 const logoutLink = apiLink("/logout");
 
-function onClickLogo() {
-  const isHome = route.fullPath === "/home";
-  if (isHome) {
-    emit("clicked-logo");
+function onClickHome() {
+  if (isHomeExact(route)) {
+    emit("clicked-home");
   }
 }
 </script>

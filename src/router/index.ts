@@ -3,6 +3,7 @@ const Home = () => import("@pages/Home.vue");
 const Status = () => import("@pages/Status.vue");
 const Login = () => import("@pages/Login.vue");
 const Profile = () => import("@pages/Profile.vue");
+const Settings = () => import("@pages/Settings.vue");
 
 export const router = createRouter({
   scrollBehavior() {
@@ -19,6 +20,11 @@ export const router = createRouter({
       name: "Home",
       path: getPath("home"),
       component: Home,
+    },
+    {
+      name: "Settings",
+      path: getPath("settings"),
+      component: Settings,
     },
     {
       name: "Status",

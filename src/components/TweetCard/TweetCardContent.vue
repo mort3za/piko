@@ -2,7 +2,7 @@
   <div
     :class="{ rtl: isRTL, ltr: !isRTL }"
     :dir="lang === 'und' ? 'auto' : undefined"
-    class="border border-blue-200 p-4 rounded-md shadow-md shadow-blue-100"
+    class="border border-blue-200 p-4 rounded-sm shadow-md shadow-blue-100"
   >
     <div class="user-content whitespace-pre-line leading-6" v-html="text"></div>
 

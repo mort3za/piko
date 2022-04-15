@@ -2,18 +2,21 @@
   <div class="max-w-2xl mx-auto layout--fill">
     <HeaderBar class="mb-4" :back="false" />
 
-    <div v-if="error">{{ error }}</div>
-    <Statuses v-else :statuses="profileStatuses" />
+    <ErrorMessage v-if="error.message" :error="error" />
+    <Statuses v-else :statuses="statuses" />
+
+    <NavigationPrimary />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
 import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 import { useRoute } from "vue-router";
+import ErrorMessage from "@components/ErrorMessage.vue";
+import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
 
 const timelineStore = useTimelineStore();
 
@@ -24,7 +27,5 @@ function load(params: Partial<TimelinePaginationParams>) {
   return timelineStore.profileStatusesFetch(params, screen_name);
 }
 
-const { error } = useTimeline(load);
-
-const profileStatuses = computed(() => timelineStore.profileStatuses);
+const { error, statuses } = useTimeline(load);
 </script>

@@ -1,6 +1,7 @@
 import { ref, computed, watch, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useErrorHnadler } from "@services/errorHandler";
+import { useTimelineStore } from "@stores/timeline-module";
 
 type loadFunction = (params: Partial<TimelinePaginationParams>) => Promise<any>;
 
@@ -10,6 +11,7 @@ export function useTimeline(
 ) {
   const route = useRoute();
   const router = useRouter();
+  const timelineStore = useTimelineStore();
 
   const error = reactive({ message: null, response: null });
   const loading = ref(false);
@@ -29,10 +31,13 @@ export function useTimeline(
   const fullPath = computed(() => route.fullPath.split("#")[0]);
   watch(fullPath, loadTimeline);
 
+  const statuses = computed(() => timelineStore.statuses);
+
   return {
     loading,
     error,
     loadTimeline,
+    statuses,
   };
 
   async function loadTimeline() {
