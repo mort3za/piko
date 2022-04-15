@@ -15,6 +15,7 @@ import { defineComponent } from "vue";
 import TweetCard from "@components/TweetCard/TweetCard.vue";
 import { Status } from "twitter-d";
 import NextPrevPagination from "./Pagination/NextPrevPagination.vue";
+import { supportsBigInt } from "@services/number";
 
 export default defineComponent({
   name: "Tweets",
@@ -40,8 +41,8 @@ export default defineComponent({
     },
     maxId() {
       if (!this.lastStatus?.id_str) return;
-      const maxId = BigInt(this.lastStatus?.id_str) - 1n;
-      return maxId.toString();
+      if (!supportsBigInt) return this.lastStatus?.id_str;
+      return String(BigInt(this.lastStatus?.id_str) - BigInt(1));
     },
   },
 });

@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { useTimeline } from "@mixins/timeline";
+import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 import Statuses from "@components/Statuses.vue";
 

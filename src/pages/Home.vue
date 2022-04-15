@@ -11,7 +11,7 @@
 import { computed } from "vue";
 import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
-import { useTimeline } from "@mixins/timeline";
+import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 
 const timelineStore = useTimelineStore();

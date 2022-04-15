@@ -1,6 +1,6 @@
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useErrorHnadler } from "@mixins/errorHandler";
+import { useErrorHnadler } from "@services/errorHandler";
 
 type loadFunction = (params: Partial<TimelinePaginationParams>) => Promise<any>;
 
