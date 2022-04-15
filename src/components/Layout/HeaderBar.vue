@@ -4,10 +4,11 @@
       <!-- left -->
       <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
 
+      <!-- center -->
       <router-link
         class="text-blue-400 mx-auto flex items-center uppercase text-xs px-4"
         :to="{ name: 'Home' }"
-        ><span>Piko Client</span></router-link
+        ><a @click="onClickLogo" class="cursor-pointer">Piko Client</a></router-link
       >
 
       <!-- right -->
@@ -17,41 +18,36 @@
   </section>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { apiLink } from "@services/api";
 import { useLayoutStore } from "@stores/layout-module";
-import { defineComponent } from "vue";
+import { computed } from "vue";
 import ComposeTweet from "@components/ComposeTweet.vue";
+import { useRoute } from "vue-router";
 
-export default defineComponent({
-  name: "HeaderBar",
-  components: { ComposeTweet },
-  props: {
-    isUser: {
-      type: Boolean,
-      default: true,
-    },
-    back: {
-      type: Boolean,
-      default: true,
-    },
+const route = useRoute();
+defineProps({
+  isUser: {
+    type: Boolean,
+    default: true,
   },
-  setup() {
-    const layoutStore = useLayoutStore();
-
-    return {
-      layoutStore,
-      toggleCompose: layoutStore.toggleCompose,
-    };
-  },
-
-  computed: {
-    showCompose() {
-      return this.layoutStore.showCompose;
-    },
-    logoutLink() {
-      return apiLink("/logout");
-    },
+  back: {
+    type: Boolean,
+    default: true,
   },
 });
+const emit = defineEmits(["clicked-logo"]);
+
+const layoutStore = useLayoutStore();
+const toggleCompose = layoutStore.toggleCompose;
+
+const showCompose = computed(() => layoutStore.showCompose);
+const logoutLink = apiLink("/logout");
+
+function onClickLogo() {
+  const isHome = route.fullPath === "/home";
+  if (isHome) {
+    emit("clicked-logo");
+  }
+}
 </script>

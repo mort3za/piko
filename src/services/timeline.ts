@@ -29,6 +29,7 @@ export function useTimeline(
 
   return {
     error,
+    loadTimeline,
   };
 
   function loadTimeline() {
