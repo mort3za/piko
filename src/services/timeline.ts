@@ -1,4 +1,4 @@
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useErrorHnadler } from "@services/errorHandler";
 
@@ -11,7 +11,9 @@ export function useTimeline(
   const route = useRoute();
   const router = useRouter();
 
-  const error = ref("");
+  const error = reactive({ message: null, response: null });
+  const loading = ref(false);
+
   const params = computed(() => {
     const since_id = route.query.since_id as string;
     const max_id = route.query.max_id as string;
@@ -28,15 +30,22 @@ export function useTimeline(
   watch(fullPath, loadTimeline);
 
   return {
+    loading,
     error,
     loadTimeline,
   };
 
-  function loadTimeline() {
-    error.value = "";
-    load(params.value).catch((error) => {
-      const { onApiError } = useErrorHnadler();
-      return onApiError(error, router);
-    });
+  async function loadTimeline() {
+    loading.value = true;
+    error.message = null;
+    await load(params.value).catch(onError);
+    loading.value = false;
+  }
+
+  async function onError(e: Response) {
+    const { onApiError, message, response } = await useErrorHnadler(e);
+    error.message = message;
+    error.response = response;
+    return onApiError(e, router);
   }
 }

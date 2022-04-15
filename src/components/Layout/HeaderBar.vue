@@ -1,6 +1,6 @@
 <template>
   <section class="mb-8">
-    <div class="flex w-full justify-between padding-x py-2 border-b border-blue-200 sticky top-0 z-10">
+    <div class="flex w-full justify-between padding-x py-2 sticky top-0 z-10">
       <!-- left -->
       <a v-if="isUser" class="button mb-0" @click="toggleCompose">Tweet</a>
 

@@ -1,5 +1,6 @@
 <template>
-  <section class="flex flex-col justify-between flex-grow">
+  <div v-if="loading">Loading...</div>
+  <section v-else class="flex flex-col justify-between flex-grow">
     <div class="padding-x">
       <div class="block mb-6 last:mb-0" v-for="status in statuses" :key="status.id_str">
         <TweetCard :status="status" />
@@ -25,6 +26,10 @@ export default defineComponent({
   },
   emits: ["changePage"],
   props: {
+    loading: {
+      type: Boolean,
+      default: false,
+    },
     statuses: {
       type: Array as () => Status[],
       required: true,
