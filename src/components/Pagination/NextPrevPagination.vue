@@ -3,7 +3,7 @@
     <a
       :class="{ disabled: isPrevDisabled }"
       class="px-6 py-3 text-5xl leading-3"
-      @click.prevent="updateRoute({ since_id: sinceId })"
+      @click.prevent="goBack"
     >
       <img src="/icons/chevron-left.svg" alt="" />
     </a>
@@ -22,7 +22,7 @@ import { LocationQueryRaw, useRoute, useRouter } from "vue-router";
 import { useTimelineStore } from "@stores/timeline-module";
 const timelineStore = useTimelineStore();
 
-const sinceId = computed(() => timelineStore.statuses.at(0)?.id_str);
+// const sinceId = computed(() => timelineStore.statuses.at(0)?.id_str);
 const maxId = computed(() => timelineStore.statuses.at(-1)?.id_str);
 
 const route = useRoute();
@@ -42,5 +42,8 @@ function updateRoute(queryParams: LocationQueryRaw) {
     name: route.name as string,
     query: queryParams,
   });
+}
+function goBack() {
+  history.back();
 }
 </script>
