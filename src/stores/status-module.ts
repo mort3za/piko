@@ -9,7 +9,8 @@ const actions = {
     const url = "/statuses";
     return api(url, {
       method: "POST",
-      body: JSON.stringify({ status: statusPayload }),
+      body: JSON.stringify(statusPayload),
+      headers: { "Content-Type": "application/json", credentials: "include" },
     });
   },
   statusFetch(id: string) {
