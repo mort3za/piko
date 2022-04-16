@@ -1,6 +1,10 @@
 <template>
   <div class="flex justify-between items-center gap-6">
-    <a class="px-6 py-3 text-5xl leading-3" @click.prevent="updateRoute({ since_id: sinceId })">
+    <a
+      :class="{ disabled: isPrevDisabled }"
+      class="px-6 py-3 text-5xl leading-3"
+      @click.prevent="updateRoute({ since_id: sinceId })"
+    >
       <img src="/icons/chevron-left.svg" alt="" />
     </a>
 
@@ -24,12 +28,14 @@ const maxId = computed(() => timelineStore.statuses.at(-1)?.id_str);
 const route = useRoute();
 const router = useRouter();
 
-// maxId - 1
+// fixed maxId = maxId - 1
 const maxIdFixed = computed(() => {
   if (!maxId.value) return;
   if (!supportsBigInt) return maxId.value;
   return String(BigInt(maxId.value) - BigInt(1));
 });
+
+const isPrevDisabled = computed(() => !route.query.max_id && !route.query.since_id);
 
 function updateRoute(queryParams: LocationQueryRaw) {
   router.push({

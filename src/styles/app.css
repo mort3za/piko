@@ -18,6 +18,13 @@ body {
   touch-action: manipulation;
 }
 
+a {
+  @apply cursor-pointer;
+}
+a.disabled {
+  @apply pointer-events-none opacity-25;
+}
+
 
 .h-fit-screen {
   min-height: 100vh;
