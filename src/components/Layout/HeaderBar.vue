@@ -21,7 +21,7 @@
         </a>
       </div>
     </div>
-    <ComposeTweet v-if="showCompose" class="mt-2" @success="showCompose = false" />
+    <ComposeTweet v-if="showCompose" class="mt-2 px-4" @success="showCompose = false" />
   </section>
 </template>
 
