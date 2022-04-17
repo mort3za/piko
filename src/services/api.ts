@@ -1,12 +1,18 @@
 import { Status } from "twitter-d";
 
 const { VITE_API_ORIGIN, VITE_API_BASE } = import.meta.env;
-
 const apiUrl = `${VITE_API_ORIGIN}${VITE_API_BASE}`;
-export const api = (path: string, options: RequestInit) => {
-  const headers = new Headers();
 
-  const req = new Request(`${apiUrl}${path}`, { credentials: "include", headers, ...options });
+export const api = (path: string, options: RequestInit = {}) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+
+  const req = new Request(`${apiUrl}${path}`, {
+    method: "GET",
+    headers,
+    ...options,
+    credentials: "include",
+  });
   return fetch(req).then((response) => {
     if (!response.ok) {
       return Promise.reject(response);

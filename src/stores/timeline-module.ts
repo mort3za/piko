@@ -14,10 +14,7 @@ export const useTimelineStore = defineStore("timeline", {
     latestStatusesFetch(params: Partial<TimelinePaginationParams> = {}) {
       const path = `/timelines/latest-statuses${getQueryParamsString(params)}`;
 
-      return api(path, {
-        method: "GET",
-        // cache: "force-cache",
-      })
+      return api(path)
         .then(onJsonResponse)
         .then((result: Status[]) => {
           this.statuses = result;
@@ -27,9 +24,7 @@ export const useTimelineStore = defineStore("timeline", {
     profileStatusesFetch(paginationParams: Partial<TimelinePaginationParams>, screen_name: string) {
       const qParams = { ...paginationParams, screen_name };
       const path = `/timelines/profile-statuses${getQueryParamsString(qParams)}`;
-      return api(path, {
-        method: "GET",
-      })
+      return api(path)
         .then(onJsonResponse)
         .then((result: Status[]) => {
           this.statuses = result;
@@ -54,9 +49,7 @@ export const useTimelineStore = defineStore("timeline", {
         query,
       };
       const path = `/timelines/search-statuses${getQueryParamsString(qParams)}`;
-      return api(path, {
-        method: "GET",
-      })
+      return api(path)
         .then(onJsonResponse)
         .then(({ data, includes }) => {
           return statusesAdaptorV2(data, includes);
