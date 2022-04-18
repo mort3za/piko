@@ -20,6 +20,7 @@ export const router = createRouter({
       name: "Home",
       path: getPath("home"),
       component: Home,
+      meta: { timeline: { exclude_replies: true } },
     },
     {
       name: "Settings",
@@ -35,6 +36,7 @@ export const router = createRouter({
       name: "Profile",
       path: getPath(":screen_name"),
       component: Profile,
+      props: (route) => ({ timeline: { screen_name: route.params.screen_name } }),
     },
     {
       path: getPath(),

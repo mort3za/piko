@@ -5,7 +5,7 @@
     :src="getChosenVideo()"
     :poster="mediaItem.media_url_https"
     controls
-    preload="none"
+    :preload="shouldPreload"
   ></video>
 </template>
 
@@ -20,6 +20,9 @@ const props = defineProps({
   },
 });
 
+// todo: check navigator.connection
+const shouldPreload = "none";
+
 const video = ref(null as unknown as HTMLVideoElement);
 // pause video when it's not in viewport
 const observer = new IntersectionObserver(
@@ -33,6 +36,7 @@ const observer = new IntersectionObserver(
   { threshold: 0 },
 );
 onMounted(() => {
+  if (!video.value) return;
   observer.observe(video.value);
 });
 onBeforeUnmount(() => {

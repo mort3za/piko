@@ -9,7 +9,7 @@
         </router-link>
       </li>
       <li>
-        <NextPrevPagination v-on="$attrs" />
+        <NextPrevPagination v-on="$attrs" @change="emit('change-navigation')" />
       </li>
       <li>
         <router-link class="flex py-3 px-6" :to="{ name: 'Settings' }">
@@ -25,12 +25,12 @@ import NextPrevPagination from "@components/Pagination/NextPrevPagination.vue";
 import { isHomeExact } from "@services/url";
 import { useRoute } from "vue-router";
 
-const emit = defineEmits(["clicked-home"]);
+const emit = defineEmits(["change-navigation"]);
 const route = useRoute();
 
 function onClickHome() {
   if (isHomeExact(route)) {
-    emit("clicked-home");
+    emit("change-navigation");
   }
 }
 </script>

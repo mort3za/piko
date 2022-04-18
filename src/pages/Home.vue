@@ -5,7 +5,7 @@
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" :loading="loading" />
 
-    <NavigationPrimary @clicked-home="loadTimeline" />
+    <NavigationPrimary @change-navigation="loadTimeline" />
   </div>
 </template>
 
@@ -18,11 +18,6 @@ import { useTimelineStore } from "@stores/timeline-module";
 import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
 const ErrorMessage = defineAsyncComponent(() => import("@components/ErrorMessage.vue"));
 
-const timelineStore = useTimelineStore();
-
-function load(tParams: Partial<TimelinePaginationParams>) {
-  return timelineStore.latestStatusesFetch(tParams);
-}
-
-const { loading, error, statuses, loadTimeline } = useTimeline(load, { exclude_replies: true });
+const { latestStatusesFetch: load } = useTimelineStore();
+const { loading, error, statuses, loadTimeline } = useTimeline(load);
 </script>

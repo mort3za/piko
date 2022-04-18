@@ -2,14 +2,17 @@ import { Router } from "vue-router";
 
 export const useErrorHnadler = async (e: any) => {
   const onApiError = (error: any, router?: Router) => {
-    if (error.status === 401 && router) {
+    if (error?.status === 401 && router) {
       router.push({ name: "Login" });
     }
 
-    // todo: show snackbar on other errors
     console.log("onApiError", error);
   };
 
+  if (!e) {
+    console.trace("error with no message.");
+    return { onApiError, message: "", response: null };
+  }
   if (!e.json) {
     return { onApiError, message: e.message, response: e };
   }

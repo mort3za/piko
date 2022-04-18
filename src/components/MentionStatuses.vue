@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex-grow">
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" />
 
@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+// import { computed } from "vue";
 import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 import Statuses from "@components/Statuses.vue";
 import ErrorMessage from "./ErrorMessage.vue";
-import NavigationPrimary from "./NavigationPrimary/NavigationPrimary.vue";
+// import NavigationPrimary from "./NavigationPrimary/NavigationPrimary.vue";
 
 const props = defineProps({
   statusId: {

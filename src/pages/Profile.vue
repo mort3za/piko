@@ -5,7 +5,7 @@
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" />
 
-    <NavigationPrimary />
+    <NavigationPrimary @change-navigation="loadTimeline" />
   </div>
 </template>
 
@@ -14,18 +14,17 @@ import Statuses from "@components/Statuses.vue";
 import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
-import { useRoute } from "vue-router";
 import ErrorMessage from "@components/ErrorMessage.vue";
 import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
 
-const timelineStore = useTimelineStore();
+const props = defineProps({
+  screen_name: {
+    type: String,
+    required: true,
+  },
+});
 
-function load(params: Partial<TimelinePaginationParams>) {
-  const route = useRoute();
-  const screen_name = route.params.screen_name as string;
-
-  return timelineStore.profileStatusesFetch(params, screen_name);
-}
-
-const { error, statuses } = useTimeline(load);
+const { profileStatusesFetch } = useTimelineStore();
+const load = () => profileStatusesFetch(props.screen_name);
+const { error, statuses, loadTimeline } = useTimeline(load);
 </script>

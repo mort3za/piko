@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { supportsBigInt } from "@services/number";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { LocationQueryRaw, useRoute, useRouter } from "vue-router";
 
 import { useTimelineStore } from "@stores/timeline-module";
@@ -36,6 +36,14 @@ const maxIdFixed = computed(() => {
 });
 
 const isPrevDisabled = computed(() => !route.query.max_id && !route.query.since_id);
+
+const emit = defineEmits(["change"]);
+const fullPath = computed(() => route.fullPath.split("#")[0]);
+watch(fullPath, onPathChange, { immediate: true, flush: "post" });
+
+function onPathChange() {
+  emit("change");
+}
 
 function updateRoute(queryParams: LocationQueryRaw) {
   router.push({
