@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import Button from "@components/Base/Button.vue";
 import TTextarea from "@components/Base/TTextarea.vue";
-import { useErrorHnadler } from "@services/errorHandler";
+import { useErrorHandler } from "@services/errorHandler";
 import { useStatusStore } from "@stores/status-module";
 import { reactive, ref } from "vue";
 
@@ -35,7 +35,7 @@ function submit() {
 }
 
 async function onError(e: Response) {
-  const { onApiError, message, response } = await useErrorHnadler(e);
+  const { onApiError, message, response } = await useErrorHandler(e);
   error.message = message;
   error.response = response;
   return onApiError(e);

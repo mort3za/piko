@@ -1,6 +1,6 @@
 import { Router } from "vue-router";
 
-export const useErrorHnadler = async (e: any) => {
+export const useErrorHandler = async (e: any) => {
   const onApiError = (error: any, router?: Router) => {
     if (error?.status === 401 && router) {
       router.push({ name: "Login" });

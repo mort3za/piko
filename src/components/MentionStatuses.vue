@@ -1,7 +1,7 @@
 <template>
   <div class="flex-grow">
     <ErrorMessage v-if="error.message" :error="error" />
-    <Statuses v-else :statuses="statuses" />
+    <Statuses v-else :statuses="statuses" :loading="loading" />
 
     <!-- <NavigationPrimary /> -->
   </div>
@@ -24,5 +24,5 @@ const props = defineProps({
 
 const { mentionStatusesFetch } = useTimelineStore();
 const load = () => mentionStatusesFetch(`conversation_id:${props.statusId}`);
-const { error, statuses } = useTimeline(load);
+const { error, loading, statuses } = useTimeline(load);
 </script>

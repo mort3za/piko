@@ -3,7 +3,7 @@
     <HeaderBar class="mb-4" :back="false" />
 
     <ErrorMessage v-if="error.message" :error="error" />
-    <Statuses v-else :statuses="statuses" />
+    <Statuses v-else :statuses="statuses" :loading="loading" />
 
     <NavigationPrimary @change-navigation="loadTimeline" />
   </div>
@@ -21,5 +21,5 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const { profileStatusesFetch } = useTimelineStore();
 const load = () => profileStatusesFetch(route.params.screen_name as string);
-const { error, statuses, loadTimeline } = useTimeline(load);
+const { error, loading, statuses, loadTimeline } = useTimeline(load);
 </script>

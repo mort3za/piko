@@ -1,6 +1,6 @@
-import { ref, computed, watch, reactive } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useErrorHnadler } from "@services/errorHandler";
+import { ref, reactive, toRef } from "vue";
+import { useRouter } from "vue-router";
+import { useErrorHandler } from "@services/errorHandler";
 import { useTimelineStore } from "@stores/timeline-module";
 
 type loadFunction = () => Promise<any>;
@@ -12,12 +12,10 @@ export function useTimeline(load: loadFunction) {
   const error = reactive({ message: null, response: null });
   const loading = ref(false);
 
-  const statuses = computed(() => timelineStore.statuses);
-
   return {
     loading,
     error,
-    statuses,
+    statuses: toRef(timelineStore, "statuses"),
     loadTimeline,
   };
 
@@ -29,7 +27,7 @@ export function useTimeline(load: loadFunction) {
   }
 
   async function onError(e: Response) {
-    const { onApiError, message, response } = await useErrorHnadler(e);
+    const { onApiError, message, response } = await useErrorHandler(e);
     error.message = message;
     error.response = response;
     return onApiError(e, router);
