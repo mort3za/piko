@@ -4,8 +4,7 @@ const { VITE_API_ORIGIN, VITE_API_BASE } = import.meta.env;
 const apiUrl = `${VITE_API_ORIGIN}${VITE_API_BASE}`;
 
 export const api = (path: string, options: RequestInit = {}) => {
-  const headers = new Headers();
-  headers.append("Content-Type", "application/json");
+  const headers = new Headers({ "Content-Type": "application/json" });
 
   const req = new Request(`${apiUrl}${path}`, {
     method: "GET",
@@ -24,7 +23,7 @@ export const api = (path: string, options: RequestInit = {}) => {
 export const apiLink = (path: string) => `${apiUrl}${path}`;
 
 // adapt api v2 statuses
-export const statusesAdaptorV2 = (data: any[], includes: any): Status[] => {
+export const statusesAdaptorV2 = (data: any[] = [], includes: any): Status[] => {
   const v1status = data.map((v2item: any) => {
     const {
       created_at,

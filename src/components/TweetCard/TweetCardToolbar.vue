@@ -31,6 +31,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ComposeTweet from "@components/ComposeTweet.vue";
+import { FullUser, Status } from "twitter-d";
 
 export default defineComponent({
   name: "TweetCardToolbar",
@@ -39,14 +40,20 @@ export default defineComponent({
     showReplyCompose: false,
   }),
   props: {
+    statusContent: {
+      type: Object as () => Status,
+      required: true,
+    },
     status: {
-      type: Object,
+      type: Object as () => Status,
       required: true,
     },
   },
   computed: {
     twitterLink() {
-      return `https://twitter.com/${this.status.user.screen_name}/status/${this.status.id_str}`;
+      return `https://twitter.com/${(this.statusContent.user as FullUser).screen_name}/status/${
+        this.statusContent.id_str
+      }`;
     },
   },
   methods: {
