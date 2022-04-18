@@ -6,7 +6,6 @@ import { useTimelineStore } from "@stores/timeline-module";
 type loadFunction = () => Promise<any>;
 
 export function useTimeline(load: loadFunction) {
-  const route = useRoute();
   const router = useRouter();
   const timelineStore = useTimelineStore();
 

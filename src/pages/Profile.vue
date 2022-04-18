@@ -16,15 +16,10 @@ import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 import ErrorMessage from "@components/ErrorMessage.vue";
 import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
+import { useRoute } from "vue-router";
 
-const props = defineProps({
-  screen_name: {
-    type: String,
-    required: true,
-  },
-});
-
+const route = useRoute();
 const { profileStatusesFetch } = useTimelineStore();
-const load = () => profileStatusesFetch(props.screen_name);
+const load = () => profileStatusesFetch(route.params.screen_name as string);
 const { error, statuses, loadTimeline } = useTimeline(load);
 </script>

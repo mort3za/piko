@@ -40,6 +40,7 @@ onMounted(() => {
   observer.observe(video.value);
 });
 onBeforeUnmount(() => {
+  if (!video.value) return;
   observer.unobserve(video.value);
 });
 

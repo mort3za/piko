@@ -19,7 +19,6 @@ export const useTimelineStore = defineStore("timeline", {
         ...(since_id && { since_id }),
         ...(max_id && { max_id }),
         ...((router.currentRoute.value.meta?.timeline as Object) ?? {}),
-        ...((router.currentRoute.value.params?.timeline as Object) ?? {}),
       };
       return result as Partial<TimelinePaginationParams>;
     },
