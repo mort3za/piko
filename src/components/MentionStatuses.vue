@@ -22,11 +22,7 @@ const props = defineProps({
   },
 });
 
-const timelineStore = useTimelineStore();
-
-function load(tParams: Partial<TimelinePaginationParams>) {
-  return timelineStore.mentionStatusesFetch(tParams, `conversation_id:${props.statusId}`);
-}
-
+const { mentionStatusesFetch } = useTimelineStore();
+const load = () => mentionStatusesFetch(`conversation_id:${props.statusId}`);
 const { error, statuses } = useTimeline(load);
 </script>
