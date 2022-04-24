@@ -1,6 +1,6 @@
 <template>
   <div>
-    <t-textarea class="w-full mb-2" v-model="text" cols="30" rows="6" :maxlength="280"></t-textarea>
+    <TextArea class="w-full mb-2" v-model="text" cols="30" rows="6" :maxlength="280"></TextArea>
     <div class="flex justify-between w-full items-center mb-4">
       <meter min="0" max="280" low="0" high="200" optimum="140" :value="text.length"></meter>
       <Button class="button" @click="submit">Send</Button>
@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import Button from "@components/Base/Button.vue";
-import TTextarea from "@components/Base/TTextarea.vue";
+import TextArea from "@components/Base/TextArea.vue";
 import { useErrorHandler } from "@services/errorHandler";
 import { useStatusStore } from "@stores/status-module";
 import { reactive, ref } from "vue";

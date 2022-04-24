@@ -1,5 +1,7 @@
 <template>
-  <section class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm">
+  <section
+    class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm min-h-12"
+  >
     <div class="flex justify-between items-center shrink-0">
       <div>
         <a v-if="isUser" class="flex py-3 px-6" @click="toggleCompose">
