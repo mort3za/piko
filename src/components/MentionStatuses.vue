@@ -1,19 +1,17 @@
 <template>
-  <div class="flex-grow">
+  <div class="flex flex-grow items-center" v-bind="$attrs">
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" :loading="loading" />
-
-    <!-- <NavigationPrimary /> -->
   </div>
+  <NavigationPrimary @change-navigation="loadTimeline" />
 </template>
 
 <script lang="ts" setup>
-// import { computed } from "vue";
 import { useTimeline } from "@services/timeline";
 import { useTimelineStore } from "@stores/timeline-module";
 import Statuses from "@components/Statuses.vue";
 import ErrorMessage from "./ErrorMessage.vue";
-// import NavigationPrimary from "./NavigationPrimary/NavigationPrimary.vue";
+import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
 
 const props = defineProps({
   statusId: {
@@ -24,5 +22,5 @@ const props = defineProps({
 
 const { mentionStatusesFetch } = useTimelineStore();
 const load = () => mentionStatusesFetch(`conversation_id:${props.statusId}`);
-const { error, loading, statuses } = useTimeline(load);
+const { error, loading, statuses, loadTimeline } = useTimeline(load);
 </script>

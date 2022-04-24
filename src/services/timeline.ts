@@ -12,14 +12,8 @@ export function useTimeline(load: loadFunction) {
   const error = reactive({ message: null, response: null });
   const loading = ref(false);
 
-  return {
-    loading,
-    error,
-    statuses: toRef(timelineStore, "statuses"),
-    loadTimeline,
-  };
-
   async function loadTimeline() {
+    timelineStore.clear();
     loading.value = true;
     error.message = null;
     await load().catch(onError);
@@ -32,4 +26,11 @@ export function useTimeline(load: loadFunction) {
     error.response = response;
     return onApiError(e, router);
   }
+
+  return {
+    loading,
+    error,
+    statuses: toRef(timelineStore, "statuses"),
+    loadTimeline,
+  };
 }

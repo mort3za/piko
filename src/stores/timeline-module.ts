@@ -24,6 +24,9 @@ export const useTimelineStore = defineStore("timeline", {
     },
   },
   actions: {
+    clear() {
+      this.statuses = [];
+    },
     latestStatusesFetch() {
       const path = `/timelines/latest-statuses${getQueryParamsString(this.timelineParams)}`;
 
