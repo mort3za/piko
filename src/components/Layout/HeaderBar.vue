@@ -1,6 +1,6 @@
 <template>
   <section
-    class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm min-h-12"
+    class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm min-h-[48px]"
   >
     <div class="flex justify-between items-center shrink-0">
       <div>
