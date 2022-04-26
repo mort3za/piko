@@ -1,24 +1,21 @@
 <template>
   <div>
-    <div class="toolbar flex justify-between items-center mt-2 px-4 muted select-none">
-      <div class="flex gap-6 items-center text-xs">
-        <button @click="toggleReply" aria-label="Reply">
-          <img class="icon" src="/icons/reply.svg" alt="" />
-        </button>
+    <div class="toolbar flex justify-between items-center mt-5 px-4 muted select-none">
+      <button @click="toggleReply" aria-label="Reply">
+        <img class="icon" src="/icons/reply.svg" alt="" />
+      </button>
 
-        <span class="mr-4 flex items-center" v-if="status.retweet_count > 0"
-          ><img class="mr-1 icon" src="/icons/retweet.svg" alt="" /> {{ status.retweet_count }}</span
-        >
-        <span v-if="status.favorite_count > 0" class="mr-4 flex items-center">
-          <img class="mr-1 icon" src="/icons/heart.svg" alt="" />
-          {{ status.favorite_count }}</span
-        >
-      </div>
-      <div class="flex">
-        <a class="link text-xs muted" :href="twitterLink" rel="noopener noreferrer" target="_blank"
-          ><img class="icon" src="/icons/external.svg" alt=""
-        /></a>
-      </div>
+      <span class="flex items-center" v-if="status.retweet_count > 0"
+        ><img class="mr-1 icon" src="/icons/retweet.svg" alt="" /> {{ status.retweet_count }}</span
+      >
+      <span v-if="status.favorite_count > 0" class="flex items-center">
+        <img class="mr-1 icon" src="/icons/heart.svg" alt="" />
+        {{ status.favorite_count }}</span
+      >
+
+      <a class="link text-xs muted" :href="twitterLink" rel="noopener noreferrer" target="_blank"
+        ><img class="icon" src="/icons/external.svg" alt=""
+      /></a>
     </div>
     <ComposeTweet
       v-if="showReplyCompose"
@@ -66,7 +63,7 @@ export default defineComponent({
 
 <style scoped>
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 </style>

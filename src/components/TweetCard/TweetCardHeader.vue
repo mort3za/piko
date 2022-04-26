@@ -1,47 +1,32 @@
 <template>
-  <div class="flex justify-between mb-1">
+  <div class="flex justify-start items-center mb-1">
     <div class="flex flex-col">
       <ProfileDidAction :status="status" />
-      <!-- avatar + name/username -->
-      <div class="flex items-center leading-3">
-        <Avatar :user="user" class="mr-2" />
+      <div class="flex leading-3">
         <ProfileLink class="mr-2 shrink-0" :user="user" />
+        <span class="mr-2 flex items-center mted">·</span>
+        <!-- time -->
+        <router-link
+          class="flex items-center"
+          :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
+          ><time class="muted text-xs">{{ getRelativeTime(status.created_at) }}</time></router-link
+        >
       </div>
     </div>
-
-    <!-- time -->
-    <router-link
-      class="flex flex-col justify-end shrink-0"
-      :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
-      ><time class="muted text-xs">{{ getRelativeTime(status.created_at) }}</time></router-link
-    >
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { getRelativeTime } from "@services/time";
-import { defineComponent } from "vue";
-import Avatar from "@components/Avatar.vue";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import { FullUser, Status } from "twitter-d";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
+import { computed } from "@vue/reactivity";
 
-export default defineComponent({
-  name: "TweetCardHeader",
-  components: { Avatar, ProfileLink, ProfileDidAction },
-  props: {
-    status: { type: Object as () => Status, required: true },
-    statusContent: { type: Object as () => Status, required: true },
-  },
-  methods: {
-    getRelativeTime,
-  },
-  computed: {
-    user() {
-      return this.statusContent.user as FullUser;
-    },
-  },
+const props = defineProps({
+  status: { type: Object as () => Status, required: true },
+  statusContent: { type: Object as () => Status, required: true },
 });
-</script>
 
-<style scoped></style>
+const user = computed(() => props.statusContent.user as FullUser);
+</script>

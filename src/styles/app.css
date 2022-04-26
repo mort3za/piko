@@ -47,7 +47,7 @@ a.disabled {
   @apply font-bold;
 }
 .muted {
-  @apply text-gray-400;
+  @apply text-gray-500;
 }
 
 .padding-x {
