@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div v-if="!played" class="absolute top-0 right-0 bg-white bg-opacity-80 px-1 rounded-bl-md">
+    <div v-if="!played" class="absolute top-1 right-1 bg-white bg-opacity-80 px-1 rounded-lg">
       {{ videoLengthDisplay }}
     </div>
     <video

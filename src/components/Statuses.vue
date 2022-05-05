@@ -1,6 +1,7 @@
 <template>
   <img src="/icons/loading.svg" v-if="loading" class="mx-auto shadow-zinc-400 flex-grow w-10 h-10" />
   <section v-else class="flex flex-col justify-between flex-grow">
+    <h2 v-if="title && statuses.length > 0" class="text-lg mb-2 padding-x">{{ title }}</h2>
     <div class="first:border-t border-b block" v-for="status in statuses" :key="status.id_str">
       <TweetCard class="padding-x" :status="status" />
     </div>
@@ -12,6 +13,7 @@ import TweetCard from "@components/TweetCard/TweetCard.vue";
 import { Status } from "twitter-d";
 
 defineProps({
+  title: { type: String, default: "" },
   loading: {
     type: Boolean,
     default: false,

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-grow items-center" v-bind="$attrs">
     <ErrorMessage v-if="error.message" :error="error" />
-    <Statuses v-else :statuses="statuses" :loading="loading" />
+    <Statuses v-else :statuses="statuses" :loading="loading" title="Replies" />
   </div>
   <NavigationPrimary @change-navigation="loadTimeline" />
 </template>
