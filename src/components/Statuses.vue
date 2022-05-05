@@ -1,10 +1,8 @@
 <template>
   <img src="/icons/loading.svg" v-if="loading" class="mx-auto shadow-zinc-400 flex-grow w-10 h-10" />
   <section v-else class="flex flex-col justify-between flex-grow">
-    <div class="padding-x">
-      <div class="first:border-t border-b block" v-for="status in statuses" :key="status.id_str">
-        <TweetCard :status="status" />
-      </div>
+    <div class="first:border-t border-b block" v-for="status in statuses" :key="status.id_str">
+      <TweetCard class="padding-x" :status="status" />
     </div>
   </section>
 </template>

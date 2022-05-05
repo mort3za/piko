@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: "Vazirmatn, sans-serif",
+        sans: "Roboto, Vazirmatn, sans-serif",
       },
       colors: {
         transparent: "transparent",

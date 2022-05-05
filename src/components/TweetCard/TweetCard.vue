@@ -1,6 +1,6 @@
 <template>
   <div class="flex py-3">
-    <AvatarLine :status="status" :status-content="statusContent" />
+    <AvatarLine class="shrink-0" :status="status" :status-content="statusContent" />
     <div class="flex-grow">
       <TweetCardHeader :status="status" :status-content="statusContent" />
 

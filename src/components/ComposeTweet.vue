@@ -1,9 +1,13 @@
 <template>
   <div>
     <TextArea class="w-full mb-2" v-model="text" cols="30" rows="6" :maxlength="280"></TextArea>
-    <div class="flex justify-between w-full items-center mb-4">
-      <meter min="0" max="280" low="0" high="200" optimum="140" :value="text.length"></meter>
-      <Button class="button" @click="submit">Send</Button>
+    <div class="flex justify-between w-full items-center">
+      <div class="w-20">
+        <div v-if="text.length > 140" class="w-full bg-gray-200 h-1">
+          <div class="bg-blue-600 h-1" :style="{ width: `${(text.length / 280) * 100}%` }"></div>
+        </div>
+      </div>
+      <Button class="button" @click="submit">{{ submitText }}</Button>
     </div>
   </div>
 </template>
@@ -19,6 +23,10 @@ const emit = defineEmits(["success"]);
 const props = defineProps({
   in_reply_to_status_id: {
     type: String,
+  },
+  submitText: {
+    type: String,
+    default: "Tweet",
   },
 });
 

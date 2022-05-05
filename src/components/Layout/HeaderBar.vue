@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm min-h-[48px]"
-  >
+  <section class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm">
     <div class="flex justify-between items-center shrink-0">
       <div>
         <a v-if="isUser" class="flex py-3 px-6" @click="toggleCompose">
@@ -11,7 +9,7 @@
 
       <!-- center -->
       <router-link
-        class="text-blue-400 mx-auto flex items-center uppercase text-xs px-4"
+        class="text-blue-400 mx-auto flex items-center uppercase text-xs px-4 min-h-[48px]"
         :to="{ name: 'Home' }"
         ><a @click="onClickHome" class="cursor-pointer text-gray-500">Piko Client</a></router-link
       >
@@ -23,7 +21,7 @@
         </a>
       </div>
     </div>
-    <ComposeTweet v-if="showCompose" class="mt-2 px-4" @success="showCompose = false" />
+    <ComposeTweet v-if="showCompose" class="mb-2 px-4" @success="showCompose = false" />
   </section>
 </template>
 

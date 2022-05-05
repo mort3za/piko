@@ -3,13 +3,15 @@
     <div class="flex flex-col">
       <ProfileDidAction :status="status" />
       <div class="flex leading-3">
-        <ProfileLink class="mr-2 shrink-0" :user="user" />
+        <ProfileLink class="mr-2 shrink-0 truncate" :user="user" />
         <span class="mr-2 flex items-center mted">·</span>
         <!-- time -->
         <router-link
           class="flex items-center"
           :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
-          ><time class="muted text-xs">{{ getRelativeTime(status.created_at) }}</time></router-link
+          ><time class="muted text-xs shrink-0">{{
+            getRelativeTime(status.created_at)
+          }}</time></router-link
         >
       </div>
     </div>
