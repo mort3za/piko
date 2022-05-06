@@ -7,7 +7,7 @@
       <TweetCardContent :status="status" :status-content="statusContent">
         <QuotedTweetCard v-if="statusContent.quoted_status" :status="statusContent.quoted_status" />
       </TweetCardContent>
-      <TweetCardToolbar :status="status" :status-content="statusContent" />
+      <TweetCardToolbar :status="statusContent" :status-content="statusContent" />
     </div>
   </div>
 </template>

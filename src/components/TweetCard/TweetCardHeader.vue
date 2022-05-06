@@ -1,18 +1,22 @@
 <template>
-  <div class="flex justify-between sm:justify-start items-center mb-1 w-full">
+  <div>
     <ProfileDidAction :status="status" />
-    <div class="flex leading-3">
-      <!-- name + username -->
-      <ProfileLink class="mr-1 sm:mr-2 shrink-0" :user="user" />
-      <!-- separator -->
-      <span class="hidden sm:flex items-center mr-1 sm:mr-2">·</span>
+    <div class="flex justify-between sm:justify-start items-center mb-1 w-full">
+      <div class="flex">
+        <!-- name + username -->
+        <ProfileLink class="mr-1 sm:mr-2 shrink-0" :user="user" />
+        <!-- separator -->
+        <span class="hidden sm:flex items-center mr-1 sm:mr-2">·</span>
+      </div>
+      <!-- time -->
+      <router-link
+        class="flex items-center"
+        :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
+        ><time class="muted text-xs shrink-0">{{
+          getRelativeTime(status.created_at)
+        }}</time></router-link
+      >
     </div>
-    <!-- time -->
-    <router-link
-      class="flex items-center"
-      :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
-      ><time class="muted text-xs shrink-0">{{ getRelativeTime(status.created_at) }}</time></router-link
-    >
   </div>
 </template>
 

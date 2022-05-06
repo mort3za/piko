@@ -1,10 +1,10 @@
 <template>
   <router-link
-    class="flex items-center"
+    class="flex items-center muted"
     :to="{ name: 'Profile', params: { screen_name: user.screen_name } }"
   >
-    <span class="mr-1 text-sm truncate max-w-[100px] sm:max-w-none">{{ user.name }}</span>
-    <span v-if="showScreenName" class="muted text-xs truncate max-w-[80px] sm:max-w-none"
+    <span class="mr-1 truncate max-w-[120px] sm:max-w-none">{{ user.name }}</span>
+    <span v-if="showScreenName" class="text-xs truncate max-w-[100px] sm:max-w-none font-normal"
       >@{{ user.screen_name }}</span
     >
   </router-link>
