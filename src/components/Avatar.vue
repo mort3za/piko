@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <img class="rounded-full" :src="user.profile_image_url_https" alt="" />
-  </div>
+  <img
+    class="rounded-full aspect-square w-full self-start"
+    :src="user.profile_image_url_https"
+    alt=""
+  />
 </template>
 
 <script lang="ts">
