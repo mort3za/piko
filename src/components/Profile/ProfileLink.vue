@@ -1,10 +1,18 @@
 <template>
+  <!-- todo: user.protected, user.verified -->
   <router-link
-    class="flex items-center muted"
+    class="flex items-center muted text-xs gap-1"
+    :class="[large ? 'sm:text-sm' : '']"
     :to="{ name: 'Profile', params: { screen_name: user.screen_name } }"
   >
-    <span class="mr-1 truncate max-w-[120px] sm:max-w-none">{{ user.name }}</span>
-    <span v-if="showScreenName" class="text-xs truncate max-w-[100px] sm:max-w-none font-normal"
+    <span class="profile-name truncate sm:max-w-none">{{ user.name }}</span>
+    <img
+      v-if="showVerified"
+      src="/icons/check-circle.svg"
+      class="w-4 h-4 bg-white/[0.5] rounded-full text-blue-400"
+      alt=""
+    />
+    <span v-if="showScreenName" class="profile-username text-xs truncate font-normal sm:max-w-none"
       >@{{ user.screen_name }}</span
     >
   </router-link>
@@ -12,8 +20,9 @@
 
 <script lang="ts" setup>
 import { FullUser } from "twitter-d";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   truncate: {
     type: Boolean,
     default: true,
@@ -26,7 +35,15 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  large: {
+    type: Boolean,
+    default: true,
+  },
+  minimal: {
+    type: Boolean,
+    default: false,
+  },
 });
-</script>
 
-<style scoped></style>
+const showVerified = computed(() => props.user.verified && !props.minimal);
+</script>

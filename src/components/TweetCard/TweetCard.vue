@@ -1,5 +1,7 @@
 <template>
-  <div class="root grid py-3">
+  <div
+    class="grid py-3 grid-cols-[44px,calc(100%-44px)] grid-rows[auto,1fr] sm:grid-cols-[60px,calc(100%-60px)]"
+  >
     <ProfileDidAction :status="status" class="col-start-2" />
     <AvatarLine class="shrink-0" :status="status" :status-content="statusContent" />
     <div>
@@ -43,15 +45,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.root {
-  grid-template-columns: 44px calc(100% - 44px);
-  grid-template-rows: auto 1fr;
-}
-@screen md {
-  .root {
-    grid-template-columns: 60px calc(100% - 60px);
-  }
-}
-</style>
