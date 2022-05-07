@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto layout--fill">
-    <HeaderBar class="mb-4" :back="false" />
+    <HeaderBar class="mb-4" />
 
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" :loading="loading" />

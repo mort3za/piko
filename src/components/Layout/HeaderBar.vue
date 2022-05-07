@@ -39,10 +39,6 @@ defineProps({
     type: Boolean,
     default: true,
   },
-  back: {
-    type: Boolean,
-    default: true,
-  },
 });
 const emit = defineEmits(["clicked-home"]);
 

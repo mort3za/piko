@@ -1,6 +1,6 @@
 <template>
   <div class="layout--fill max-w-2xl mx-auto">
-    <HeaderBar class="mb-4" :back="false" @clicked-home="loadTimeline" />
+    <HeaderBar class="mb-4" @clicked-home="loadTimeline" />
 
     <ErrorMessage v-if="error.message" :error="error" />
     <Statuses v-else :statuses="statuses" :loading="loading" />

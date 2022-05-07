@@ -8,7 +8,7 @@
           <img src="/icons/home.svg" alt="" />
         </router-link>
       </li>
-      <li>
+      <li v-if="hasTimeline">
         <NextPrevPagination v-on="$attrs" @change="emit('change-navigation')" />
       </li>
       <li>
@@ -27,6 +27,12 @@ import { useRoute } from "vue-router";
 
 const emit = defineEmits(["change-navigation"]);
 const route = useRoute();
+defineProps({
+  hasTimeline: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 function onClickHome() {
   if (isHomeExact(route)) {
