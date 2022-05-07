@@ -1,5 +1,7 @@
 <template>
-  <img class="rounded-full w-8 h-8" :src="user.profile_image_url_https" alt="" />
+  <div>
+    <img class="rounded-full" :src="user.profile_image_url_https" alt="" />
+  </div>
 </template>
 
 <script lang="ts">

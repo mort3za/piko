@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ProfileDidAction :status="status" />
     <div class="flex justify-between sm:justify-start items-center mb-1 w-full">
       <div class="flex">
         <!-- name + username -->
@@ -24,7 +23,6 @@
 import { getRelativeTime } from "@services/time";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import { FullUser, Status } from "twitter-d";
-import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({

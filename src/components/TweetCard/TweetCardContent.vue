@@ -1,6 +1,6 @@
 <template>
   <div :class="{ rtl: isRTL, ltr: !isRTL }" :dir="lang === 'und' ? 'auto' : undefined">
-    <div class="user-content whitespace-pre-line leading-6" v-html="text"></div>
+    <div class="user-content whitespace-pre-line leading-6 break-words" v-html="text"></div>
 
     <div class="mt-2" v-if="media">
       <MediaContent :media="media" />
