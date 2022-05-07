@@ -10,21 +10,21 @@
   </router-link>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { FullUser } from "twitter-d";
-import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "ProfileLink",
-  props: {
-    user: {
-      type: Object as () => FullUser,
-      required: true,
-    },
-    showScreenName: {
-      type: Boolean,
-      default: true,
-    },
+defineProps({
+  truncate: {
+    type: Boolean,
+    default: true,
+  },
+  user: {
+    type: Object as () => FullUser,
+    required: true,
+  },
+  showScreenName: {
+    type: Boolean,
+    default: true,
   },
 });
 </script>

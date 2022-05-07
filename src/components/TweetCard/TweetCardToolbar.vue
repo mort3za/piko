@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="toolbar flex justify-between items-center mt-3 px-4 muted select-none">
+    <div class="toolbar flex justify-between items-center mt-3 px-2 muted select-none">
       <button @click="toggleReply" aria-label="Reply">
         <img class="icon" src="/icons/reply.svg" alt="" />
       </button>

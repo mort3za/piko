@@ -1,32 +1,21 @@
 <template>
   <div class="flex muted text-xs leading-5" v-if="isRetweeted">
-    <ProfileLink :user="user" :show-screen-name="false" /><span>retweeted</span>
+    <ProfileLink :user="user" :show-screen-name="false" :truncate="false" /><span>retweeted</span>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { computed } from "vue";
 import { Status, FullUser } from "twitter-d";
 import ProfileLink from "./ProfileLink.vue";
 
-export default defineComponent({
-  name: "ProfileDidAction",
-  props: {
-    status: {
-      type: Object as () => Status,
-      required: true,
-    },
-  },
-  components: { ProfileLink },
-  computed: {
-    isRetweeted() {
-      return this.status.retweeted_status;
-    },
-    user() {
-      return this.status.user as FullUser;
-    },
+const props = defineProps({
+  status: {
+    type: Object as () => Status,
+    required: true,
   },
 });
-</script>
 
-<style scoped></style>
+const isRetweeted = computed(() => props.status.retweeted_status);
+const user = computed(() => props.status.user as FullUser);
+</script>
