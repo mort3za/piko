@@ -12,8 +12,8 @@
         <NextPrevPagination v-on="$attrs" @change="emit('change-navigation')" />
       </li>
       <li>
-        <router-link class="flex py-3 px-6" :to="{ name: 'Settings' }">
-          <img src="/icons/filters.svg" alt="" />
+        <router-link class="flex py-3 px-6" :to="{ name: 'Lists' }">
+          <img src="/icons/list-center.svg" alt="" />
         </router-link>
       </li>
     </ul>
