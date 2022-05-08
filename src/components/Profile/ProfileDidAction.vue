@@ -1,5 +1,5 @@
 <template>
-  <div class="flex muted leading-5" v-if="isRetweeted">
+  <div class="flex muted leading-5 gap-1" v-if="isRetweeted">
     <ProfileLink :user="user" :show-screen-name="false" :large="false" :minimal="true" /><span
       class="text-xs"
       >retweeted</span
