@@ -9,14 +9,14 @@
         ><img class="mr-1 icon" src="/icons/retweet.svg" alt="" /><small
           class="text-xs"
           :class="{ invisible: !status.retweet_count }"
-          >{{ status.retweet_count }}</small
+          >{{ formatCompact(status.retweet_count) }}</small
         ></span
       >
       <span class="flex items-center">
         <img class="mr-1 icon" src="/icons/heart.svg" alt="" /><small
           class="text-xs"
           :class="{ invisible: !status.favorite_count }"
-          >{{ status.favorite_count }}</small
+          >{{ formatCompact(status.favorite_count) }}</small
         ></span
       >
 
@@ -34,40 +34,34 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import ComposeTweet from "@components/ComposeTweet.vue";
+<script lang="ts" setup>
+import { computed, defineAsyncComponent, ref } from "vue";
 import { FullUser, Status } from "twitter-d";
+import { formatCompact } from "@services/number";
+const ComposeTweet = defineAsyncComponent(() => import("@components/ComposeTweet.vue"));
 
-export default defineComponent({
-  name: "TweetCardToolbar",
-  components: { ComposeTweet },
-  data: () => ({
-    showReplyCompose: false,
-  }),
-  props: {
-    statusContent: {
-      type: Object as () => Status,
-      required: true,
-    },
-    status: {
-      type: Object as () => Status,
-      required: true,
-    },
+const showReplyCompose = ref(false);
+const props = defineProps({
+  statusContent: {
+    type: Object as () => Status,
+    required: true,
   },
-  computed: {
-    twitterLink() {
-      return `https://twitter.com/${(this.statusContent.user as FullUser).screen_name}/status/${
-        this.statusContent.id_str
-      }`;
-    },
-  },
-  methods: {
-    toggleReply() {
-      this.showReplyCompose = !this.showReplyCompose;
-    },
+  status: {
+    type: Object as () => Status,
+    required: true,
   },
 });
+
+const twitterLink = computed(
+  () =>
+    `https://twitter.com/${(props.statusContent.user as FullUser).screen_name}/status/${
+      props.statusContent.id_str
+    }`,
+);
+
+function toggleReply() {
+  showReplyCompose.value = !showReplyCompose.value;
+}
 </script>
 
 <style scoped>
