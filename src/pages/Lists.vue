@@ -4,7 +4,9 @@
 
     <div class="flex-grow padding-x">
       <h1 class="text-xl mb-4">Lists</h1>
-      <ul>
+
+      <p v-if="listsList && listsList.length === 0">You have no lists.</p>
+      <ul v-else>
         <li class="border-b" v-for="item in listsList" :key="item.id_str">
           <router-link
             class="link py-2 my-1 block"
@@ -27,9 +29,8 @@ import { ref } from "vue";
 
 const accountStore = useAccountStore();
 
-const listsList: any = ref([]);
+const listsList: any = ref(null as unknown as any[]);
 accountStore.listsListFetch().then((lists: any) => {
   listsList.value = lists.reverse();
 });
-console.log("listsList", listsList);
 </script>
