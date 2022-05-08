@@ -4,6 +4,7 @@ const Status = () => import("@pages/Status.vue");
 const Login = () => import("@pages/Login.vue");
 const Profile = () => import("@pages/Profile.vue");
 const Settings = () => import("@pages/Settings.vue");
+const List = () => import("@pages/List.vue");
 
 export const router = createRouter({
   scrollBehavior() {
@@ -26,6 +27,11 @@ export const router = createRouter({
       name: "Settings",
       path: getPath("settings"),
       component: Settings,
+    },
+    {
+      name: "List",
+      path: getPath("i/lists/:id"),
+      component: List,
     },
     {
       name: "Status",

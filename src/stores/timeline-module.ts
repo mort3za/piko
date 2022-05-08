@@ -47,6 +47,16 @@ export const useTimelineStore = defineStore("timeline", {
         });
     },
 
+    listStatusesFetch(list_id: string) {
+      const qParams = { ...this.timelineParams, list_id };
+      const path = `/timelines/list-statuses${getQueryParamsString(qParams)}`;
+      return api(path)
+        .then(onJsonResponse)
+        .then((result: Status[]) => {
+          this.statuses = result;
+        });
+    },
+
     // api v2
     mentionStatusesFetch(query: string) {
       // documentation: https://developer.twitter.com/en/docs/twitter-api/fields
