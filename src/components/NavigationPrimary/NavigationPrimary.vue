@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="sticky bottom-0 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-400 rounded-t-sm mt-8"
+    class="sticky bottom-0 bg-white dark:bg-slate-800 bg-opacity-90 select-none shadow-sm shadow-zinc-400 dark:shadow-zinc-900 rounded-t-sm mt-8"
   >
     <ul class="flex justify-between items-center shrink-0">
       <li>
         <router-link class="flex py-3 px-6" :to="{ name: 'Home' }" @click="onClickHome">
-          <img src="/icons/home.svg" alt="" />
+          <IconHome />
         </router-link>
       </li>
       <li v-if="hasTimeline">
@@ -13,7 +13,7 @@
       </li>
       <li>
         <router-link class="flex py-3 px-6" :to="{ name: 'Lists' }">
-          <img src="/icons/list-center.svg" alt="" />
+          <IconListCenter />
         </router-link>
       </li>
     </ul>
@@ -24,6 +24,8 @@
 import NextPrevPagination from "@components/Pagination/NextPrevPagination.vue";
 import { isHomeExact } from "@services/url";
 import { useRoute } from "vue-router";
+import IconHome from "@assets/icons/home.svg?component";
+import IconListCenter from "@assets/icons/list-center.svg?component";
 
 const emit = defineEmits(["change-navigation"]);
 const route = useRoute();

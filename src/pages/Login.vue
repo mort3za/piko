@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto layout--fill">
+  <div class="page max-w-2xl mx-auto layout--fill">
     <HeaderBar class="mb-4" :is-user="false" />
     <div class="max-w-2xl mx-auto">
       <h1 class="text-lg mb-3 mt-16">Coolest Twitter client <sub>❄️</sub>❄️<sup>❄️</sup></h1>

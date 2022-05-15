@@ -6,12 +6,6 @@ body {
   @apply font-sans h-fit-screen;
 }
 
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @apply h-fit-screen text-gray-700;
-}
-
 *,
 *::after,
 *::before {
@@ -25,6 +19,12 @@ a.disabled {
   @apply pointer-events-none opacity-25;
 }
 
+
+.app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply text-sm h-fit-screen text-gray-700 dark:bg-slate-800 dark:text-slate-300;
+}
 
 .h-fit-screen {
   min-height: 100vh;

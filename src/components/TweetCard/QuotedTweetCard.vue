@@ -1,5 +1,5 @@
 <template>
-  <div class="ltr mt-2 border border-zinc-150 rounded-lg p-3">
+  <div class="ltr mt-2 border border-zinc-150 dark:border-slate-700 dark:bg-slate-700 rounded-lg p-3">
     <TweetCardHeader :status="status" :status-content="statusContent" :quoted="true" />
     <TweetCardContent :status="status" :status-content="statusContent" />
   </div>

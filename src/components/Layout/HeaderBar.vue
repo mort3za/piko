@@ -1,9 +1,11 @@
 <template>
-  <section class="mb-8 bg-white bg-opacity-90 select-none shadow-sm shadow-zinc-300 rounded-b-sm">
+  <section
+    class="mb-8 bg-white dark:bg-slate-800 bg-opacity-90 select-none shadow-sm shadow-zinc-300 dark:shadow-zinc-900 rounded-b-sm"
+  >
     <div class="flex justify-between items-center shrink-0">
       <div>
         <a v-if="isUser" class="flex py-3 px-6" @click="toggleCompose">
-          <img src="/icons/message-square-lines.svg" alt="" />
+          <IconMessageSquareLines />
         </a>
       </div>
 
@@ -17,7 +19,7 @@
       <div>
         <!-- right -->
         <a class="flex py-3 px-6" v-if="isUser" :href="logoutLink">
-          <img class="scale-x-[-1]" src="/icons/logout.svg" alt="" />
+          <IconLogout class="scale-x-[-1]" />
         </a>
       </div>
     </div>
@@ -32,6 +34,8 @@ import { computed } from "vue";
 import ComposeTweet from "@components/ComposeTweet.vue";
 import { useRoute } from "vue-router";
 import { isHomeExact } from "@services/url";
+import IconMessageSquareLines from "@assets/icons/message-square-lines.svg?component";
+import IconLogout from "@assets/icons/logout.svg?component";
 
 const route = useRoute();
 defineProps({

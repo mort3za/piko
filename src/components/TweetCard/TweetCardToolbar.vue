@@ -2,27 +2,25 @@
   <div>
     <div class="toolbar flex justify-between items-center mt-3 px-2 muted select-none">
       <button @click="toggleReply" aria-label="Reply">
-        <img class="icon" src="/icons/reply.svg" alt="" />
+        <IconReply class="w-5 h-5" />
       </button>
 
-      <span class="flex items-center"
-        ><img class="mr-1 icon" src="/icons/retweet.svg" alt="" /><small
-          class="text-xs"
-          :class="{ invisible: !status.retweet_count }"
-          >{{ formatCompact(status.retweet_count) }}</small
-        ></span
-      >
       <span class="flex items-center">
-        <img class="mr-1 icon" src="/icons/heart.svg" alt="" /><small
-          class="text-xs"
-          :class="{ invisible: !status.favorite_count }"
-          >{{ formatCompact(status.favorite_count) }}</small
-        ></span
+        <IconRetweet class="w-5 h-5 mr-1" />
+        <small class="text-xs" :class="{ invisible: !status.retweet_count }">{{
+          formatCompact(status.retweet_count)
+        }}</small>
+      </span>
+      <span class="flex items-center">
+        <IconHeart class="w-5 h-5 mr-1" />
+        <small class="text-xs" :class="{ invisible: !status.favorite_count }">{{
+          formatCompact(status.favorite_count)
+        }}</small></span
       >
 
-      <a class="link text-xs muted" :href="twitterLink" rel="noopener noreferrer" target="_blank"
-        ><img class="icon" src="/icons/external.svg" alt=""
-      /></a>
+      <a class="link text-xs muted" :href="twitterLink" rel="noopener noreferrer" target="_blank">
+        <IconExternal class="w-5 h-5" />
+      </a>
     </div>
     <ComposeTweet
       v-if="showReplyCompose"
@@ -38,6 +36,10 @@
 import { computed, defineAsyncComponent, ref } from "vue";
 import { FullUser, Status } from "twitter-d";
 import { formatCompact } from "@services/number";
+import IconExternal from "@assets/icons/external.svg?component";
+import IconReply from "@assets/icons/reply.svg?component";
+import IconHeart from "@assets/icons/heart.svg?component";
+import IconRetweet from "@assets/icons/retweet.svg?component";
 const ComposeTweet = defineAsyncComponent(() => import("@components/ComposeTweet.vue"));
 
 const showReplyCompose = ref(false);
@@ -63,10 +65,3 @@ function toggleReply() {
   showReplyCompose.value = !showReplyCompose.value;
 }
 </script>
-
-<style scoped>
-.icon {
-  width: 20px;
-  height: 20px;
-}
-</style>

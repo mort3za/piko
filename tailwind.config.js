@@ -1,5 +1,6 @@
 module.exports = {
   jit: true,
+  darkMode: "class",
   content: [
     "./public/**/*.html",
     "./src/**/*.html",
@@ -8,7 +9,6 @@ module.exports = {
     // "./src/VueTailwind.js",
     // "./node_modules/vue-tailwind/**/*.{js,jsx,ts,tsx,vue}",
   ],
-  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {

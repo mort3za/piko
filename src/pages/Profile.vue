@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto layout--fill">
+  <div class="page max-w-2xl mx-auto layout--fill">
     <HeaderBar class="mb-4" />
 
     <ErrorMessage v-if="error.message" :error="error" />

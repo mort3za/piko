@@ -5,12 +5,12 @@
       class="px-6 py-3 text-5xl leading-3"
       @click.prevent="goBack"
     >
-      <img src="/icons/chevron-left.svg" alt="" />
+      <IconChevronLeft />
     </a>
 
-    <a class="px-6 py-3 text-5xl leading-3" @click.prevent="updateRoute({ max_id: maxIdFixed })"
-      ><img src="/icons/chevron-right.svg" alt=""
-    /></a>
+    <a class="px-6 py-3 text-5xl leading-3" @click.prevent="updateRoute({ max_id: maxIdFixed })">
+      <IconChevronRight />
+    </a>
   </div>
 </template>
 
@@ -18,6 +18,8 @@
 import { supportsBigInt } from "@services/number";
 import { computed, watch } from "vue";
 import { LocationQueryRaw, useRoute, useRouter } from "vue-router";
+import IconChevronRight from "@assets/icons/chevron-right.svg?component";
+import IconChevronLeft from "@assets/icons/chevron-left.svg?component";
 
 import { useTimelineStore } from "@stores/timeline-module";
 const timelineStore = useTimelineStore();
