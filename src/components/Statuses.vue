@@ -3,7 +3,7 @@
   <section v-else class="flex flex-col justify-between flex-grow">
     <h2 v-if="title && statuses.length > 0" class="text-lg mb-2 padding-x">{{ title }}</h2>
     <div
-      class="first:border-t border-b block dark:border-slate-900"
+      class="first:border-t border-b block dark:border-slate-700/[0.5]"
       v-for="status in statuses"
       :key="status.id_str"
     >

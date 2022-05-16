@@ -2,13 +2,13 @@
   <div class="flex justify-between items-center gap-6">
     <a
       :class="{ disabled: isPrevDisabled }"
-      class="px-6 py-3 text-5xl leading-3"
+      class="px-5 py-3 text-5xl leading-3"
       @click.prevent="goBack"
     >
       <IconChevronLeft />
     </a>
 
-    <a class="px-6 py-3 text-5xl leading-3" @click.prevent="updateRoute({ max_id: maxIdFixed })">
+    <a class="px-5 py-3 text-5xl leading-3" @click.prevent="updateRoute({ max_id: maxIdFixed })">
       <IconChevronRight />
     </a>
   </div>
