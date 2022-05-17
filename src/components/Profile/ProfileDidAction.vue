@@ -1,9 +1,22 @@
 <template>
-  <div class="flex muted leading-5 gap-1" v-if="isRetweeted">
-    <ProfileLink :user="user" :show-screen-name="false" :large="false" :minimal="true" /><span
-      class="text-xs"
-      >retweeted</span
+  <div class="flex muted leading-5 gap-1">
+    <span v-if="status.in_reply_to_screen_name" class="text-xs"
+      >In reply to
+      <router-link
+        class="link"
+        :to="{
+          name: 'Status',
+          params: { screen_name: status.in_reply_to_screen_name, id: status.in_reply_to_status_id_str },
+        }"
+        >{{ status.in_reply_to_screen_name }}</router-link
+      ></span
     >
+    <span v-if="isRetweeted" class="inline-flex gap-1">
+      <ProfileLink :user="user" :show-screen-name="false" :large="false" :minimal="true" /><span
+        class="text-xs"
+        >retweeted</span
+      >
+    </span>
   </div>
 </template>
 
