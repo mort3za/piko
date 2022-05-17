@@ -4,7 +4,7 @@
       {{ videoLengthDisplay }}
     </div>
     <video
-      class="w-full block"
+      class="w-full block video"
       ref="video"
       :src="getChosenVideo()"
       :poster="mediaItem.media_url_https"
@@ -59,7 +59,15 @@ onBeforeUnmount(() => {
 
 function getChosenVideo() {
   // @ts-ignore
-  return props.mediaItem.video_info.variants.find((variant) => variant.content_type === "video/mp4")
-    .url;
+  return props.mediaItem.video_info.variants
+    .filter((variant) => variant.content_type === "video/mp4")
+    .sort((a: any, b: any) => a.bitrate - b.bitrate)
+    .at(-1).url;
 }
 </script>
+
+<style scoped>
+.video {
+  max-height: calc(100vh - 48px);
+}
+</style>
