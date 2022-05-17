@@ -3,11 +3,15 @@
     <HeaderBar class="mb-4" />
 
     <div class="flex-grow padding-x">
-      <h1 class="text-xl mb-4">Lists</h1>
+      <h1 class="text-xs font-bold mb-4 uppercase text-slate-400">Lists</h1>
 
       <p v-if="listsList && listsList.length === 0">You have no lists.</p>
       <ul v-else>
-        <li class="border-b" v-for="item in listsList" :key="item.id_str">
+        <li
+          class="first:border-t border-b dark:border-slate-700/[0.5]"
+          v-for="item in listsList"
+          :key="item.id_str"
+        >
           <router-link
             class="link py-2 my-1 block"
             :to="{ name: 'List', params: { id: item.id_str } }"
