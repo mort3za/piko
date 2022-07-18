@@ -1,7 +1,6 @@
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
-import VitePluginHtmlEnv from "vite-plugin-html-env";
 import SvgLoader from "vite-svg-loader";
 
 // https://vitejs.dev/config/
@@ -24,6 +23,6 @@ export default defineConfig(({ command, mode }) => {
         "@types": path.resolve(__dirname, "./src/types"),
       },
     },
-    plugins: [vue(), VitePluginHtmlEnv(), SvgLoader()],
+    plugins: [vue(), SvgLoader()],
   };
 });
