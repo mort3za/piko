@@ -1,16 +1,21 @@
 <template>
   <div class="flex justify-between items-center gap-6">
-    <a
+    <button
+      type="button"
       :class="{ disabled: isPrevDisabled }"
       class="px-5 py-3 text-5xl leading-3"
       @click.prevent="goBack"
     >
       <IconChevronLeft />
-    </a>
+    </button>
 
-    <a class="px-5 py-3 text-5xl leading-3" @click.prevent="updateRoute({ max_id: maxIdFixed })">
+    <button
+      type="button"
+      class="px-5 py-3 text-5xl leading-3"
+      @click.prevent="updateRoute({ max_id: maxIdFixed })"
+    >
       <IconChevronRight />
-    </a>
+    </button>
   </div>
 </template>
 

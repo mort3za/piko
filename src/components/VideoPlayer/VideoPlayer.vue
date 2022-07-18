@@ -1,15 +1,33 @@
 <template>
   <div class="relative">
-    <div
-      v-if="!played"
-      class="absolute top-1 right-1 bg-white dark:bg-slate-700 bg-opacity-80 px-1 rounded-lg"
-    >
-      {{ videoLengthDisplay }}
+    <div class="absolute top-1 right-1 flex flex-col items-end gap-5 z-10">
+      <button type="button" @click="isSettingsVisible = !isSettingsVisible">
+        <IconSettings />
+      </button>
+      <div
+        v-if="!played"
+        class="bg-white bg-opacity-80 dark:bg-slate-700 dark:bg-opacity-100 px-1 rounded-lg"
+      >
+        {{ videoLengthDisplay }}
+      </div>
     </div>
+    <dialog :open="isSettingsVisible" class="z-20 top-8 bg-white">
+      <div class="flex gap-8">
+        <button
+          type="button"
+          class="button button--sm"
+          v-for="(bitrate, i) in bitrates"
+          :key="i"
+          @click="setCurrentBitrateIndex(i)"
+        >
+          {{ bitrateButtonText(bitrate) }}
+        </button>
+      </div>
+    </dialog>
     <video
-      class="w-full block video"
+      class="w-full block video dark:bg-slate-700"
       ref="video"
-      :src="getChosenVideo()"
+      :src="getChosenVideo(currentBitrateIndex)"
       :poster="mediaItem.media_url_https"
       controls
       :preload="shouldPreload"
@@ -23,6 +41,8 @@
 <script lang="ts" setup>
 import { MediaEntity } from "twitter-d";
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import IconSettings from "@assets/icons/settings.svg?component";
+import { computed } from "@vue/reactivity";
 
 const props = defineProps({
   mediaItem: {
@@ -31,7 +51,9 @@ const props = defineProps({
   },
 });
 
-// todo: check navigator.connection
+const isSettingsVisible = ref(false);
+const currentBitrateIndex = ref(0);
+
 const shouldPreload = "none";
 const videoLength = (props.mediaItem?.video_info as any)?.duration_millis;
 const videoLengthDisplay =
@@ -60,12 +82,25 @@ onBeforeUnmount(() => {
   observer.unobserve(video.value);
 });
 
-function getChosenVideo() {
+const bitrates = computed(() => {
   // @ts-ignore
-  return props.mediaItem.video_info.variants
+  return props?.mediaItem.video_info.variants
     .filter((variant) => variant.content_type === "video/mp4")
-    .sort((a: any, b: any) => a.bitrate - b.bitrate)
-    .at(-1).url;
+    .sort((a: any, b: any) => a.bitrate - b.bitrate);
+});
+
+function getChosenVideo(index: number = 0): string {
+  // @ts-ignore
+  return bitrates.value.at(index).url;
+}
+
+function bitrateButtonText({ bitrate }: any): string {
+  return `${bitrate / 1000}kbps`;
+}
+
+function setCurrentBitrateIndex(index: number) {
+  currentBitrateIndex.value = index;
+  isSettingsVisible.value = false;
 }
 </script>
 

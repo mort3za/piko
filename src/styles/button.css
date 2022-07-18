@@ -1,3 +1,8 @@
-.button {
+/* todo: remove specificity. fix default 'button' style with transparent bg */
+.button.button {
   @apply bg-blue-400 hover:bg-blue-500 focus:bg-blue-500 text-white no-underline cursor-pointer rounded-sm leading-5 shadow-sm px-4 py-2 md:px-8 md:py-4 text-xs md:text-sm tracking-wide uppercase transition-colors duration-150;
+}
+
+.button.button--sm {
+  @apply px-2 py-1;
 }

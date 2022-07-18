@@ -12,7 +12,7 @@ body {
   touch-action: manipulation;
 }
 
-a {
+a, button[type="button"] {
   @apply cursor-pointer;
 }
 a.disabled {
