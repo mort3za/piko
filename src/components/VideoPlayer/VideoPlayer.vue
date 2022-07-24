@@ -1,13 +1,15 @@
 <template>
   <div class="relative">
-    <div class="absolute top-1 right-1 flex flex-col items-end gap-5 z-10">
-      <button type="button" @click="isSettingsVisible = !isSettingsVisible">
+    <div class="absolute top-4 right-4 flex flex-col items-end gap-4 z-10">
+      <button
+        v-if="!playing"
+        type="button"
+        class="video-info"
+        @click="isSettingsVisible = !isSettingsVisible"
+      >
         <IconSettings />
       </button>
-      <div
-        v-if="!played"
-        class="bg-white bg-opacity-80 dark:bg-slate-700 dark:bg-opacity-100 px-1 rounded-lg"
-      >
+      <div v-if="!played" class="video-info">
         {{ videoLengthDisplay }}
       </div>
     </div>
@@ -34,6 +36,8 @@
       :loop="shouldLoop"
       v-bind="$attrs"
       @play="played = true"
+      @playing="playing = true"
+      @pause="playing = false"
     ></video>
   </div>
 </template>
@@ -60,6 +64,8 @@ const videoLengthDisplay =
   videoLength && `${Math.floor(videoLength / 1000 / 60)}:${Math.floor((videoLength / 1000) % 60)}`;
 const shouldLoop = videoLength <= 15000;
 const played = ref(false);
+const playing = ref(false);
+const isDurationInfoVisible = computed(() => !(played || playing));
 
 const video = ref(null as unknown as HTMLVideoElement);
 // pause video when it's not in viewport
@@ -107,5 +113,8 @@ function setCurrentBitrateIndex(index: number) {
 <style scoped>
 .video {
   max-height: calc(100vh - 48px);
+}
+.video-info {
+  @apply bg-white bg-opacity-80 dark:bg-slate-700 dark:bg-opacity-100 px-1 rounded-lg flex items-center justify-center min-w-[48px] min-h-[48px];
 }
 </style>
