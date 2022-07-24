@@ -1,6 +1,13 @@
 <template>
   <div>
-    <TextArea class="w-full mb-2" v-model="text" cols="30" rows="6" :maxlength="280"></TextArea>
+    <TextArea
+      class="w-full mb-2"
+      v-model="text"
+      cols="30"
+      rows="6"
+      :maxlength="280"
+      dir="auto"
+    ></TextArea>
     <div class="flex justify-between w-full items-center">
       <div class="w-20">
         <div v-if="text.length > 140" class="w-full bg-gray-200 h-1">
