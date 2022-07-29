@@ -31,7 +31,7 @@ export const router = createRouter({
     },
     {
       name: "Lists",
-      path: getPath("lists"),
+      path: getPath("lists/all"),
       component: Lists,
     },
     {
