@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky bottom-0 bg-white dark:bg-slate-800 bg-opacity-90 select-none shadow-sm shadow-zinc-400 dark:shadow-zinc-900 rounded-t-sm mt-8 z-20"
+    class="sticky bottom-0 bg-white dark:bg-slate-800 bg-opacity-90 select-none shadow-sm shadow-zinc-400 dark:shadow-zinc-900 rounded-t-sm mt-4 z-20"
   >
     <ul class="flex justify-between items-center shrink-0">
       <li>

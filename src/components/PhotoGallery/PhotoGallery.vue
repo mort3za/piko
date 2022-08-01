@@ -1,7 +1,7 @@
 <template>
   <div class="gallery grid" :class="rootClasses">
     <img
-      class="object-contain h-fit"
+      class="object-contain max-h-[88vh]"
       v-for="(mediaItem, index) in media"
       :key="mediaItem.id"
       :src="mediaItem.media_url_https"

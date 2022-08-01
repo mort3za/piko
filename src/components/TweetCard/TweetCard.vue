@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="grid py-3 grid-cols-[44px,calc(100%-44px)] grid-rows[auto,1fr] sm:grid-cols-[60px,calc(100%-60px)]"
-  >
-    <ProfileDidAction :status="status" class="col-start-2" />
-    <AvatarLine class="shrink-0" :status="status" :status-content="statusContent" />
+  <div class="py-3">
+    <ProfileDidAction :status="status" class="col-start-2 mb-1" />
     <div>
       <TweetCardHeader :status="status" :status-content="statusContent" />
 
@@ -20,7 +17,6 @@ import { defineComponent, defineAsyncComponent } from "vue";
 import TweetCardContent from "./TweetCardContent.vue";
 import TweetCardToolbar from "./TweetCardToolbar.vue";
 import TweetCardHeader from "./TweetCardHeader.vue";
-import AvatarLine from "./AvatarLine.vue";
 import { Status } from "twitter-d";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
 const QuotedTweetCard = defineAsyncComponent(() => import("./QuotedTweetCard.vue"));
@@ -28,7 +24,6 @@ const QuotedTweetCard = defineAsyncComponent(() => import("./QuotedTweetCard.vue
 export default defineComponent({
   name: "Tweet",
   components: {
-    AvatarLine,
     QuotedTweetCard,
     TweetCardContent,
     TweetCardToolbar,
