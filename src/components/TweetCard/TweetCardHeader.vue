@@ -4,7 +4,7 @@
       class="grid grid-cols-[1fr,auto] gap-1 sm:flex justify-between sm:justify-start items-center mb-1 w-full"
     >
       <div class="flex truncate">
-        <Avatar :user="status.user" class="w-8 mr-1 my-auto" />
+        <Avatar :user="statusContent.user" class="w-8 mr-1 my-auto" />
         <!-- name + username -->
         <ProfileLink class="mr-1 sm:mr-2 shrink-0" :user="user" />
         <!-- separator -->
