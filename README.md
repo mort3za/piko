@@ -13,8 +13,11 @@ This is a lightweight web client for Twitter.
 - Upgrade to Twitter API v2
 - Improve replies section 
 
-Backend project: https://github.com/mort3za/piko-server
+## Usage
 
-Frontend is deployed on Netlify, backend on Vercel.
+You can use the deployed version (https://pikopiko.netlify.app)
+
+Or clone and deploy it yourself. Frontend project (this repository) should be installed on Netlify, backend project (https://github.com/mort3za/piko-server) can be installed on Vercel. 
+You'll need to sign up for a Twitter developer account and get the required API keys. Check .env.example file to see what you need.
 
 <img src="https://user-images.githubusercontent.com/510242/183120451-43c1f79a-fbde-4663-85cc-25d6ad972cf1.png" width=460 />
