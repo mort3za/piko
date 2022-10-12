@@ -2,6 +2,7 @@ html {
   height: 100vh;
   height: -webkit-fill-available;
 }
+
 body {
   @apply font-sans h-fit-screen;
 }
