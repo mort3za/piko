@@ -28,7 +28,6 @@ a.disabled {
 
 .h-fit-screen {
   min-height: 100vh;
-  min-height: 100dvh;
 }
 .layout--fill {
   @apply h-fit-screen flex flex-col;
