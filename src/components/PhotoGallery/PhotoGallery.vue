@@ -15,6 +15,7 @@
 <script lang="ts" setup>
 import { computed } from "@vue/reactivity";
 import { MediaEntity } from "twitter-d";
+import { components } from "@twitter";
 
 const props = defineProps({
   media: {

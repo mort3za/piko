@@ -8,6 +8,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Status } from "twitter-d";
+import { components } from "@twitter";
 import TweetCardHeader from "./TweetCardHeader.vue";
 import TweetCardContent from "./TweetCardContent.vue";
 

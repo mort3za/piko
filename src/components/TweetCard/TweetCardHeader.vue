@@ -27,6 +27,7 @@ import { getRelativeTime } from "@services/time";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import Avatar from "@components/Avatar.vue";
 import { FullUser, Status } from "twitter-d";
+import { components } from "@twitter";
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({

@@ -1,6 +1,7 @@
 export const RTLLanguageCodes = ["fa"];
 import { cloneDeep } from "lodash-es";
 import { Entities, QuotedStatusPermalink, Status } from "twitter-d";
+import { components } from "@twitter";
 
 type Indices = [number, number];
 export const isRTL = (langCode: Status["lang"]) => RTLLanguageCodes.includes(langCode as string);

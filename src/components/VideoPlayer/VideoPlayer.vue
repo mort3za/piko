@@ -44,6 +44,7 @@
 
 <script lang="ts" setup>
 import { MediaEntity } from "twitter-d";
+import { components } from "@twitter";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import IconSettings from "@assets/icons/settings.svg?component";
 import { computed } from "@vue/reactivity";

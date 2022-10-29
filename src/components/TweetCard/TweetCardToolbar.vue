@@ -35,6 +35,7 @@
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from "vue";
 import { FullUser, Status } from "twitter-d";
+import { components } from "@twitter";
 import { formatCompact } from "@services/number";
 import IconExternal from "@assets/icons/external.svg?component";
 import IconReply from "@assets/icons/reply.svg?component";

@@ -12,6 +12,7 @@
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from "vue";
 import { Status } from "twitter-d";
+import { components } from "@twitter";
 import { setEntitiesOnText, isRTL } from "@services/text";
 const MediaContent = defineAsyncComponent(() => import("@components/MediaContent/MediaContent.vue"));
 

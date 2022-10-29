@@ -1,15 +1,16 @@
 import { api, statusesAdaptorV2 } from "@services/api";
-import { Status } from "twitter-d";
+import { components } from "@twitter";
 import { defineStore } from "pinia";
 import { getQueryParamsString } from "@services/url";
 import { onJsonResponse } from "@services/response";
+import { onTimelineResponse } from "@services/statuses";
 import { router } from "@router/index";
 
 export type TimelineTypes = "latestStatuses" | "profileStatuses" | "mentionStatuses";
 
 export const useTimelineStore = defineStore("timeline", {
   state: () => ({
-    statuses: [] as Status[],
+    statuses: [] as components["schemas"]["Tweet"][],
   }),
   getters: {
     timelineParams: (state) => {
@@ -32,8 +33,11 @@ export const useTimelineStore = defineStore("timeline", {
 
       return api(path)
         .then(onJsonResponse)
-        .then((result: Status[]) => {
-          this.statuses = result;
+        .then(onTimelineResponse)
+        .then((result) => {
+          console.log(result.data.data);
+
+          this.statuses = result.data.data as components["schemas"]["Tweet"][];
         });
     },
 

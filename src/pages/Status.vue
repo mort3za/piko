@@ -13,15 +13,17 @@ import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { defineAsyncComponent, onMounted, shallowReactive } from "vue";
 import { useStatusStore } from "@stores/status-module";
 import { useRoute } from "vue-router";
-import { Status } from "twitter-d";
+import { components } from "@twitter";
 const TweetCard = defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue"));
 const MentionStatuses = defineAsyncComponent(() => import("@components/MentionStatuses.vue"));
 
 const statusStore = useStatusStore();
 const route = useRoute();
 
-const state = shallowReactive({ status: null as unknown as Status });
+const state = shallowReactive({ status: null as unknown as components["schemas"]["Tweet"] });
 onMounted(async () => {
-  state.status = (await statusStore.statusFetch(route.params.id as string)) as Status;
+  state.status = (await statusStore.statusFetch(
+    route.params.id as string,
+  )) as components["schemas"]["Tweet"];
 });
 </script>

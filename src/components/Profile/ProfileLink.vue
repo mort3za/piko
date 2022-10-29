@@ -15,6 +15,7 @@
 
 <script lang="ts" setup>
 import { FullUser } from "twitter-d";
+import { components } from "@twitter";
 import { computed } from "vue";
 import IconCheckCircle from "@assets/icons/check-circle.svg?component";
 

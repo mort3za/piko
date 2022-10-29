@@ -18,6 +18,7 @@ import TweetCardContent from "./TweetCardContent.vue";
 import TweetCardToolbar from "./TweetCardToolbar.vue";
 import TweetCardHeader from "./TweetCardHeader.vue";
 import { Status } from "twitter-d";
+import { components } from "@twitter";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
 const QuotedTweetCard = defineAsyncComponent(() => import("./QuotedTweetCard.vue"));
 

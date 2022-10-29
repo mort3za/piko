@@ -23,6 +23,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { Status, FullUser } from "twitter-d";
+import { components } from "@twitter";
 import ProfileLink from "./ProfileLink.vue";
 
 const props = defineProps({

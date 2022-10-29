@@ -13,6 +13,7 @@
     "noUncheckedIndexedAccess": true,
     "typeRoots": ["./src/types", "./node_modules/@types"],
     "paths": {
+      "@twitter": ["./node_modules/twitter-api-sdk/dist/gen/openapi-types"],
       "@assets/*": ["./src/assets/*"],
       "@mixins/*": ["./src/mixins/*"],
       "@components/*": ["./src/components/*"],

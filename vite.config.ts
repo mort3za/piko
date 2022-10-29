@@ -12,6 +12,7 @@ export default defineConfig(({ command, mode }) => {
     // base: "/piko/",
     resolve: {
       alias: {
+        "@twitter": path.resolve(__dirname, "./node_modules/twitter-api-sdk/dist/gen/openapi-types"),
         "@pages": path.resolve(__dirname, "./src/pages"),
         "@assets": path.resolve(__dirname, "./src/assets"),
         "@mixins": path.resolve(__dirname, "./src/mixins"),
