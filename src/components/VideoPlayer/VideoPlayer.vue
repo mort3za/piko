@@ -22,7 +22,7 @@
           :key="i"
           @click="setCurrentBitrateIndex(i)"
         >
-          {{ bitrateButtonText(bitrate) }}
+          {{ bitrateButtonText(bitrate?.bit_rate as number) }}
         </button>
       </div>
     </dialog>
@@ -30,10 +30,10 @@
       class="w-full block video dark:bg-slate-700"
       ref="video"
       :src="getChosenVideo(currentBitrateIndex)"
-      :poster="mediaItem.media_url_https"
+      :poster="mediaItem.preview_image_url"
       controls
       :preload="shouldPreload"
-      :loop="shouldLoop"
+      :loop="false"
       v-bind="$attrs"
       @play="played = true"
       @playing="playing = true"
@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-import { MediaEntity } from "twitter-d";
 import { components } from "@twitter";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import IconSettings from "@assets/icons/settings.svg?component";
@@ -51,7 +50,7 @@ import { computed } from "@vue/reactivity";
 
 const props = defineProps({
   mediaItem: {
-    type: Object as () => MediaEntity,
+    type: Object as () => components["schemas"]["Video"],
     required: true,
   },
 });
@@ -60,13 +59,11 @@ const isSettingsVisible = ref(false);
 const currentBitrateIndex = ref(0);
 
 const shouldPreload = "none";
-const videoLength = (props.mediaItem?.video_info as any)?.duration_millis;
+const videoLength = props.mediaItem?.duration_ms;
 const videoLengthDisplay =
   videoLength && `${Math.floor(videoLength / 1000 / 60)}:${Math.floor((videoLength / 1000) % 60)}`;
-const shouldLoop = videoLength <= 15000;
 const played = ref(false);
 const playing = ref(false);
-const isDurationInfoVisible = computed(() => !(played || playing));
 
 const video = ref(null as unknown as HTMLVideoElement);
 // pause video when it's not in viewport
@@ -90,10 +87,9 @@ onBeforeUnmount(() => {
 });
 
 const bitrates = computed(() => {
-  // @ts-ignore
-  return props?.mediaItem.video_info.variants
+  return (props.mediaItem.variants ?? [])
     .filter((variant) => variant.content_type === "video/mp4")
-    .sort((a: any, b: any) => a.bitrate - b.bitrate);
+    .sort((a: any, b: any) => a?.bit_rate - b?.bit_rate);
 });
 
 function getChosenVideo(index: number = 0): string {
@@ -101,7 +97,7 @@ function getChosenVideo(index: number = 0): string {
   return bitrates.value.at(index).url;
 }
 
-function bitrateButtonText({ bitrate }: any): string {
+function bitrateButtonText(bitrate: number): string {
   return `${bitrate / 1000}kbps`;
 }
 

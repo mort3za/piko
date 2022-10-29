@@ -22,17 +22,16 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { Status, FullUser } from "twitter-d";
 import { components } from "@twitter";
 import ProfileLink from "./ProfileLink.vue";
 
 const props = defineProps({
   status: {
-    type: Object as () => Status,
+    type: Object as () => components["schemas"]["Tweet"],
     required: true,
   },
 });
 
 const isRetweeted = computed(() => props.status.retweeted_status);
-const user = computed(() => props.status.user as FullUser);
+const user = computed(() => props.status.user as components["schemas"]["User"]);
 </script>

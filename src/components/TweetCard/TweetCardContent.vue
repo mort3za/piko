@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from "vue";
-import { Status } from "twitter-d";
 import { components } from "@twitter";
 import { setEntitiesOnText, isRTL } from "@services/text";
 const MediaContent = defineAsyncComponent(() => import("@components/MediaContent/MediaContent.vue"));
@@ -19,8 +18,8 @@ const MediaContent = defineAsyncComponent(() => import("@components/MediaContent
 export default defineComponent({
   name: "Content",
   props: {
-    status: { type: Object as () => Status, required: true },
-    statusContent: { type: Object as () => Status, required: true },
+    status: { type: Object as () => components["schemas"]["Tweet"], required: true },
+    statusContent: { type: Object as () => components["schemas"]["Tweet"], required: true },
   },
   computed: {
     lang() {

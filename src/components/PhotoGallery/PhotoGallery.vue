@@ -3,8 +3,8 @@
     <img
       class="object-contain max-h-[88vh]"
       v-for="(mediaItem, index) in media"
-      :key="mediaItem.id"
-      :src="mediaItem.media_url_https"
+      :key="index"
+      :src="mediaItem.url"
       alt=""
       :class="`gallery-image--${index}`"
       loading="lazy"
@@ -14,12 +14,11 @@
 
 <script lang="ts" setup>
 import { computed } from "@vue/reactivity";
-import { MediaEntity } from "twitter-d";
 import { components } from "@twitter";
 
 const props = defineProps({
   media: {
-    type: Array as () => MediaEntity[],
+    type: Array as () => components["schemas"]["Photo"][],
     required: true,
   },
 });

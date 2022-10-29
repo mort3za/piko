@@ -1,10 +1,10 @@
 export const RTLLanguageCodes = ["fa"];
 import { cloneDeep } from "lodash-es";
-import { Entities, QuotedStatusPermalink, Status } from "twitter-d";
 import { components } from "@twitter";
 
 type Indices = [number, number];
-export const isRTL = (langCode: Status["lang"]) => RTLLanguageCodes.includes(langCode as string);
+export const isRTL = (langCode: components["schemas"]["Tweet"]["lang"]) =>
+  RTLLanguageCodes.includes(langCode as string);
 
 export const setEntitiesOnText = ({
   rawText = "",
@@ -12,8 +12,8 @@ export const setEntitiesOnText = ({
   quoted_status_permalink,
 }: {
   rawText: string;
-  entities: Entities;
-  quoted_status_permalink?: QuotedStatusPermalink | null;
+  entities: components["schemas"]["FullTextEntities"];
+  quoted_status_permalink?: components["schemas"]["UrlEntity"] | null;
 }): string => {
   const linkProps = 'rel="noopener noreferrer" target="_blank"';
   const upgradedEntities = cloneDeep(entities);

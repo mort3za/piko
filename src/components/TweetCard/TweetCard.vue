@@ -17,7 +17,6 @@ import { defineComponent, defineAsyncComponent } from "vue";
 import TweetCardContent from "./TweetCardContent.vue";
 import TweetCardToolbar from "./TweetCardToolbar.vue";
 import TweetCardHeader from "./TweetCardHeader.vue";
-import { Status } from "twitter-d";
 import { components } from "@twitter";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
 const QuotedTweetCard = defineAsyncComponent(() => import("./QuotedTweetCard.vue"));
@@ -32,7 +31,7 @@ export default defineComponent({
     ProfileDidAction,
   },
   props: {
-    status: { type: Object as () => Status, required: true },
+    status: { type: Object as () => components["schemas"]["Tweet"], required: true },
   },
   computed: {
     statusContent() {

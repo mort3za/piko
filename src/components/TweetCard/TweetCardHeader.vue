@@ -26,15 +26,14 @@
 import { getRelativeTime } from "@services/time";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import Avatar from "@components/Avatar.vue";
-import { FullUser, Status } from "twitter-d";
 import { components } from "@twitter";
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({
-  status: { type: Object as () => Status, required: true },
-  statusContent: { type: Object as () => Status, required: true },
+  status: { type: Object as () => components["schemas"]["Tweet"], required: true },
+  statusContent: { type: Object as () => components["schemas"]["Tweet"], required: true },
   quoted: { type: Boolean, default: false },
 });
 
-const user = computed(() => props.statusContent.user as FullUser);
+const user = computed(() => props.statusContent.user as components["schemas"]["User"]);
 </script>

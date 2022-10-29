@@ -25,7 +25,7 @@
     <ComposeTweet
       v-if="showReplyCompose"
       class="mt-3"
-      :in_reply_to_status_id="status.id_str"
+      :in_reply_to_status_id="status.id"
       @success="showReplyCompose = false"
       submit-text="Reply"
     />
@@ -34,7 +34,6 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from "vue";
-import { FullUser, Status } from "twitter-d";
 import { components } from "@twitter";
 import { formatCompact } from "@services/number";
 import IconExternal from "@assets/icons/external.svg?component";
@@ -46,20 +45,20 @@ const ComposeTweet = defineAsyncComponent(() => import("@components/ComposeTweet
 const showReplyCompose = ref(false);
 const props = defineProps({
   statusContent: {
-    type: Object as () => Status,
+    type: Object as () => components["schemas"]["Tweet"],
     required: true,
   },
   status: {
-    type: Object as () => Status,
+    type: Object as () => components["schemas"]["Tweet"],
     required: true,
   },
 });
 
 const twitterLink = computed(
   () =>
-    `https://twitter.com/${(props.statusContent.user as FullUser).screen_name}/status/${
-      props.statusContent.id_str
-    }`,
+    `https://twitter.com/${
+      (props.statusContent.user as components["schemas"]["User"]).username
+    }/status/${props.statusContent.id}`,
 );
 
 function toggleReply() {
