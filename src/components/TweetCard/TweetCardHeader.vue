@@ -13,7 +13,7 @@
       <!-- time -->
       <router-link
         class="flex items-center justfiy-end"
-        :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
+        :to="{ name: 'Status', params: { id: status.id, screen_name: user.username } }"
         ><time class="muted text-xs shrink-0">{{
           getRelativeTime(statusContent.created_at)
         }}</time></router-link

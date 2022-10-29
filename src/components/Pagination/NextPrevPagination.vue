@@ -29,8 +29,8 @@ import IconChevronLeft from "@assets/icons/chevron-left.svg?component";
 import { useTimelineStore } from "@stores/timeline-module";
 const timelineStore = useTimelineStore();
 
-// const sinceId = computed(() => timelineStore.statuses.at(0)?.id_str);
-const maxId = computed(() => timelineStore.statuses.at(-1)?.id_str);
+// const sinceId = computed(() => timelineStore.statuses.at(0)?.id);
+const maxId = computed(() => timelineStore.statuses.at(-1)?.id);
 
 const route = useRoute();
 const router = useRouter();
