@@ -41,12 +41,12 @@ export const useTimelineStore = defineStore("timeline", {
         });
     },
 
-    profileStatusesFetch(screen_name: string) {
-      const qParams = { ...this.timelineParams, screen_name };
+    profileStatusesFetch(username: string) {
+      const qParams = { ...this.timelineParams, username };
       const path = `/timelines/profile-statuses${getQueryParamsString(qParams)}`;
       return api(path)
         .then(onJsonResponse)
-        .then((result: Status[]) => {
+        .then((result: components["schemas"]["Tweet"][]) => {
           this.statuses = result;
         });
     },
@@ -56,7 +56,7 @@ export const useTimelineStore = defineStore("timeline", {
       const path = `/timelines/list-statuses${getQueryParamsString(qParams)}`;
       return api(path)
         .then(onJsonResponse)
-        .then((result: Status[]) => {
+        .then((result: components["schemas"]["Tweet"][]) => {
           this.statuses = result;
         });
     },
@@ -84,7 +84,7 @@ export const useTimelineStore = defineStore("timeline", {
         .then(({ data, includes }) => {
           return statusesAdaptorV2(data, includes);
         })
-        .then((result: Status[]) => {
+        .then((result: components["schemas"]["Tweet"][]) => {
           this.statuses = result;
         });
     },

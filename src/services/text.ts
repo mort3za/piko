@@ -8,11 +8,11 @@ export const isRTL = (langCode: components["schemas"]["Tweet"]["lang"]) =>
 
 export const setEntitiesOnText = ({
   rawText = "",
-  entities,
+  entities = {},
   quoted_status_permalink,
 }: {
   rawText: string;
-  entities: components["schemas"]["FullTextEntities"];
+  entities?: components["schemas"]["FullTextEntities"];
   quoted_status_permalink?: components["schemas"]["UrlEntity"] | null;
 }): string => {
   const linkProps = 'rel="noopener noreferrer" target="_blank"';
@@ -25,7 +25,7 @@ export const setEntitiesOnText = ({
       type: "hashtag",
     };
   });
-  upgradedEntities.symbols = (upgradedEntities.symbols ?? []).map((symbol) => {
+  upgradedEntities.cashtags = (upgradedEntities.cashtags ?? []).map((symbol) => {
     return {
       ...symbol,
       linkStart: `<a class="link link--symbol" ${linkProps} href="https://twitter.com/search?q=%23${symbol.text}">`,
@@ -33,10 +33,10 @@ export const setEntitiesOnText = ({
       type: "symbol",
     };
   });
-  upgradedEntities.user_mentions = (upgradedEntities.user_mentions ?? []).map((mention) => {
+  upgradedEntities.mentions = (upgradedEntities.mentions ?? []).map((mention) => {
     return {
       ...mention,
-      linkStart: `<a class="link link--mention inline-flex ltr" ${linkProps} href="https://twitter.com/${mention.screen_name}">`,
+      linkStart: `<a class="link link--mention inline-flex ltr" ${linkProps} href="https://twitter.com/${mention.username}">`,
       linkEnd: "</a>",
       type: "mention",
     };
@@ -50,21 +50,21 @@ export const setEntitiesOnText = ({
       type: "url",
     };
   });
-  upgradedEntities.media = (upgradedEntities.media ?? []).map((media) => {
-    return {
-      ...media,
-      type: "media",
-    };
-  });
+  // upgradedEntities.media = (upgradedEntities.media ?? []).map((media) => {
+  //   return {
+  //     ...media,
+  //     type: "media",
+  //   };
+  // });
 
   const entities_all = [
     ...upgradedEntities.hashtags,
-    ...upgradedEntities.symbols,
-    ...upgradedEntities.user_mentions,
+    ...upgradedEntities.cashtags,
+    ...upgradedEntities.mentions,
     ...upgradedEntities.urls,
-    ...upgradedEntities.media,
+    // ...upgradedEntities.media,
   ].sort((a, b) => {
-    return (a.indices as Indices)[0] - (b.indices as Indices)[0];
+    return a.start - b.start;
   });
 
   let plainTextIndex = 0;
@@ -72,22 +72,20 @@ export const setEntitiesOnText = ({
   const rawTextInArray = Array.from(rawText);
 
   entities_all.forEach((entity_item) => {
-    const indices_item = entity_item.indices as Indices;
-
     // add plain text part to the text slices
-    if (plainTextIndex < indices_item[0]) {
+    if (plainTextIndex < entity_item.start) {
       textSlices.push({
-        text: rawTextInArray.slice(plainTextIndex, indices_item[0]).join(""),
+        text: rawTextInArray.slice(plainTextIndex, entity_item.start).join(""),
       });
-      plainTextIndex = indices_item[1];
+      plainTextIndex = entity_item.end;
     }
 
     // add entity part to the text slices
     textSlices.push({
-      text: rawTextInArray.slice(indices_item[0], indices_item[1]).join(""),
+      text: rawTextInArray.slice(entity_item.start, entity_item.end).join(""),
       entity: entity_item,
     });
-    plainTextIndex = indices_item[1];
+    plainTextIndex = entity_item.end;
   });
   // add the last plain text part to the text slices
   if (plainTextIndex < rawTextInArray.length) {
