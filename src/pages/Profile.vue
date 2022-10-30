@@ -20,6 +20,6 @@ import { useRoute } from "vue-router";
 
 const route = useRoute();
 const { profileStatusesFetch } = useTimelineStore();
-const load = () => profileStatusesFetch(route.params.screen_name as string);
+const load = () => profileStatusesFetch(route.params.username as string);
 const { error, loading, statuses, loadTimeline } = useTimeline(load);
 </script>

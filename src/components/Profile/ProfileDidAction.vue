@@ -6,7 +6,7 @@
         class="link"
         :to="{
           name: 'Status',
-          params: { screen_name: status.in_reply_to_screen_name, id: status.in_reply_to_status_id_str },
+          params: { username: status.in_reply_to_screen_name, id: status.in_reply_to_status_id_str },
         }"
         >{{ status.in_reply_to_screen_name }}</router-link
       ></span

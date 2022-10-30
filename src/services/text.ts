@@ -20,17 +20,17 @@ export const setEntitiesOnText = ({
   upgradedEntities.hashtags = (upgradedEntities.hashtags ?? []).map((hashtag) => {
     return {
       ...hashtag,
-      linkStart: `<a class="link link--hashtag" ${linkProps} href="https://twitter.com/hashtag/${hashtag.text}">`,
+      linkStart: `<a class="link link--hashtag" ${linkProps} href="https://twitter.com/hashtag/${hashtag.tag}">`,
       linkEnd: "</a>",
       type: "hashtag",
     };
   });
-  upgradedEntities.cashtags = (upgradedEntities.cashtags ?? []).map((symbol) => {
+  upgradedEntities.cashtags = (upgradedEntities.cashtags ?? []).map((cashtag) => {
     return {
-      ...symbol,
-      linkStart: `<a class="link link--symbol" ${linkProps} href="https://twitter.com/search?q=%23${symbol.text}">`,
+      ...cashtag,
+      linkStart: `<a class="link link--cashtag" ${linkProps} href="https://twitter.com/search?q=%23${cashtag.tag}">`,
       linkEnd: "</a>",
-      type: "symbol",
+      type: "cashtag",
     };
   });
   upgradedEntities.mentions = (upgradedEntities.mentions ?? []).map((mention) => {

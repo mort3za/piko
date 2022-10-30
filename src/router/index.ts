@@ -41,12 +41,12 @@ export const router = createRouter({
     },
     {
       name: "Status",
-      path: getPath(":screen_name/status/:id"),
+      path: getPath(":username/status/:id"),
       component: Status,
     },
     {
       name: "Profile",
-      path: getPath(":screen_name"),
+      path: getPath(":username"),
       component: Profile,
     },
     {

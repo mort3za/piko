@@ -12,8 +12,9 @@
       </div>
       <!-- time -->
       <router-link
+        v-if="statusContent.created_at"
         class="flex items-center justfiy-end"
-        :to="{ name: 'Status', params: { id: status.id, screen_name: user.username } }"
+        :to="{ name: 'Status', params: { id: status.id, username: user.username } }"
         ><time class="muted text-xs shrink-0">{{
           getRelativeTime(statusContent.created_at)
         }}</time></router-link

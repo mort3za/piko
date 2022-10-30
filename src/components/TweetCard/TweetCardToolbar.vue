@@ -7,14 +7,14 @@
 
       <span class="flex items-center">
         <IconRetweet class="w-5 h-5 mr-1" />
-        <small class="text-xs" :class="{ invisible: !status.retweet_count }">{{
-          formatCompact(status.retweet_count)
+        <small class="text-xs" :class="{ invisible: !status.public_metrics?.retweet_count }">{{
+          status.public_metrics?.retweet_count && formatCompact(status.public_metrics?.retweet_count)
         }}</small>
       </span>
       <span class="flex items-center">
         <IconHeart class="w-5 h-5 mr-1" />
-        <small class="text-xs" :class="{ invisible: !status.favorite_count }">{{
-          formatCompact(status.favorite_count)
+        <small class="text-xs" :class="{ invisible: !status.public_metrics?.like_count }">{{
+          status.public_metrics?.like_count && formatCompact(status.public_metrics?.like_count)
         }}</small></span
       >
 

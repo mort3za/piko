@@ -3,7 +3,7 @@
   <router-link
     class="flex items-center muted text-xs gap-1"
     :class="[large ? 'sm:text-sm' : '']"
-    :to="{ name: 'Profile', params: { screen_name: user.username } }"
+    :to="{ name: 'Profile', params: { username: user.username } }"
   >
     <span class="profile-name sm:max-w-none">{{ user.name }}</span>
     <IconCheckCircle class="block w-4 h-4 rounded-full text-blue-400/[0.5]" v-if="showVerified" />
