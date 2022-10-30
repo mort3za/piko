@@ -2,8 +2,9 @@
   "name": "piko-client",
   "version": "0.1.1",
   "scripts": {
+    "start": "vite --port 3000",
+    "dev": "npm start",
     "build": "vue-tsc --noEmit && vite build",
-    "dev": "vite --port 3000",
     "preview": "vite preview",
     "deploy-preview": "ntl deploy",
     "deploy": "ntl deploy --prod"
