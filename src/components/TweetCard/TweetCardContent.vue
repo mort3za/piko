@@ -2,9 +2,10 @@
   <div :class="{ rtl: isRTL, ltr: !isRTL }" :dir="lang === 'und' ? 'auto' : undefined">
     <div class="user-content whitespace-pre-line leading-6 break-words" v-html="text"></div>
 
-    <div class="mt-2" v-if="media">
+    <!-- fixme: -->
+    <!-- <div class="mt-2" v-if="media">
       <MediaContent :media="media" />
-    </div>
+    </div> -->
     <slot />
   </div>
 </template>
@@ -37,6 +38,7 @@ export default defineComponent({
       });
     },
     media() {
+      // fixme: unhandled error
       return this.statusContent.extended_entities?.media ?? this.statusContent.entities.media;
     },
   },

@@ -17,7 +17,7 @@ import TweetCard from "@components/TweetCard/TweetCard.vue";
 import IconLoading from "@assets/icons/loading.svg?component";
 import { components } from "@twitter";
 
-defineProps({
+const props = defineProps({
   title: { type: String, default: "" },
   loading: {
     type: Boolean,
@@ -28,4 +28,5 @@ defineProps({
     required: true,
   },
 });
+console.log("props.statuses", props.statuses);
 </script>
