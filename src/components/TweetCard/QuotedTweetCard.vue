@@ -18,8 +18,6 @@ export default defineComponent({
   },
   computed: {
     statusContent(): Tweet {
-      console.log("this.status", this.status);
-
       return this.status.retweeted ?? this.status;
     },
   },

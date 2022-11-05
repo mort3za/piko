@@ -28,5 +28,4 @@ const props = defineProps({
     required: true,
   },
 });
-console.log("props.statuses", props.statuses);
 </script>

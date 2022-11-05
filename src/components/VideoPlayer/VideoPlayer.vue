@@ -30,7 +30,7 @@
       class="w-full block video dark:bg-slate-700"
       ref="video"
       :src="getChosenVideo(currentBitrateIndex)"
-      :poster="mediaItem.preview_image_url"
+      :poster="video.preview_image_url"
       controls
       :preload="shouldPreload"
       :loop="false"
@@ -49,7 +49,7 @@ import IconSettings from "@assets/icons/settings.svg?component";
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({
-  mediaItem: {
+  video: {
     type: Object as () => components["schemas"]["Video"],
     required: true,
   },
@@ -59,7 +59,7 @@ const isSettingsVisible = ref(false);
 const currentBitrateIndex = ref(0);
 
 const shouldPreload = "none";
-const videoLength = props.mediaItem?.duration_ms;
+const videoLength = props.video?.duration_ms;
 const videoLengthDisplay =
   videoLength && `${Math.floor(videoLength / 1000 / 60)}:${Math.floor((videoLength / 1000) % 60)}`;
 const played = ref(false);
@@ -87,7 +87,7 @@ onBeforeUnmount(() => {
 });
 
 const bitrates = computed(() => {
-  return (props.mediaItem.variants ?? [])
+  return (props.video.variants ?? [])
     .filter((variant) => variant.content_type === "video/mp4")
     .sort((a: any, b: any) => a?.bit_rate - b?.bit_rate);
 });
