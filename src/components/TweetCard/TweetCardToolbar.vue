@@ -55,9 +55,9 @@ const props = defineProps({
 });
 
 const twitterLink = computed(() =>
-  props.statusContent.user
-    ? `https://twitter.com/${props.statusContent.user.username}/status/${props.statusContent.id}`
-    : undefined,
+  props.status.user
+    ? `https://twitter.com/${props.status.user.username}/status/${props.statusContent.id}`
+    : null,
 );
 
 function toggleReply() {
