@@ -1,14 +1,14 @@
 <template>
   <div class="flex muted leading-5 gap-1">
-    <span v-if="status.in_reply_to_screen_name" class="text-xs"
+    <span v-if="status.in_reply_to_user" class="text-xs"
       >In reply to
       <router-link
         class="link"
         :to="{
           name: 'Status',
-          params: { username: status.in_reply_to_screen_name, id: status.in_reply_to_status_id_str },
+          params: { username: status.in_reply_to_user.username, id: status.in_reply_to_user.id },
         }"
-        >{{ status.in_reply_to_screen_name }}</router-link
+        >{{ status.in_reply_to_user.username }}</router-link
       ></span
     >
     <span v-if="isRetweeted" class="inline-flex gap-1">
@@ -22,16 +22,16 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { components } from "@twitter";
 import ProfileLink from "./ProfileLink.vue";
+import { Tweet } from "@services/tweet";
 
 const props = defineProps({
   status: {
-    type: Object as () => components["schemas"]["Tweet"],
+    type: Object as () => Tweet,
     required: true,
   },
 });
 
-const isRetweeted = computed(() => props.status.retweeted_status);
-const user = computed(() => props.status.user as components["schemas"]["User"]);
+const isRetweeted = computed(() => props.status.retweeted);
+const user = computed(() => props.status.user);
 </script>

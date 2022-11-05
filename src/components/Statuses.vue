@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import TweetCard from "@components/TweetCard/TweetCard.vue";
 import IconLoading from "@assets/icons/loading.svg?component";
-import { components } from "@twitter";
+import { Tweet } from "@services/tweet";
 
 const props = defineProps({
   title: { type: String, default: "" },
@@ -24,7 +24,7 @@ const props = defineProps({
     default: false,
   },
   statuses: {
-    type: Array as () => components["schemas"]["Tweet"][],
+    type: Array as () => Tweet[],
     required: true,
   },
 });

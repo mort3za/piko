@@ -3,7 +3,7 @@ import { components } from "@twitter";
 import { defineStore } from "pinia";
 import { getQueryParamsString } from "@services/url";
 import { onJsonResponse } from "@services/response";
-import { onTimelineResponse } from "@services/tweet";
+import { onTimelineResponse, Tweet } from "@services/tweet";
 import { router } from "@router/index";
 
 export type TimelineTypes = "latestStatuses" | "profileStatuses" | "mentionStatuses";
@@ -34,16 +34,11 @@ export const useTimelineStore = defineStore("timeline", {
       return api(path)
         .then(onJsonResponse)
         .then(onTimelineResponse)
-        .then((result) => {
-          console.log(result, result?.data, result?.data?.data);
-
-          // todo: type is "extended" tweet[].
-          this.statuses = result as components["schemas"]["Tweet"][];
+        .then((result: Tweet[]) => {
+          console.log({ result });
+          this.statuses = result;
+          return result;
         });
-
-      // onJsonResponse().then((result) => {
-      //   this.statuses = result.data.data as any;
-      // });
     },
 
     profileStatusesFetch(username: string) {

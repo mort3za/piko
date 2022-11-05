@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user">
     <div
       class="grid grid-cols-[1fr,auto] gap-1 sm:flex justify-between sm:justify-start items-center mb-1 w-full"
     >
@@ -27,14 +27,13 @@
 import { getRelativeTime } from "@services/time";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import Avatar from "@components/Avatar.vue";
-import { components } from "@twitter";
 import { computed } from "@vue/reactivity";
+import { Tweet } from "@services/tweet";
 
 const props = defineProps({
-  status: { type: Object as () => components["schemas"]["Tweet"], required: true },
-  statusContent: { type: Object as () => components["schemas"]["Tweet"], required: true },
-  quoted: { type: Boolean, default: false },
+  status: { type: Object as () => Tweet, required: true },
+  statusContent: { type: Object as () => Tweet, required: true },
 });
 
-const user = computed(() => props.statusContent.user as components["schemas"]["User"]);
+const user = computed(() => props.statusContent.user);
 </script>

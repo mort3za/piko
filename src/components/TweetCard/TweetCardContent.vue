@@ -30,7 +30,7 @@ export default defineComponent({
       return isRTL(this.lang);
     },
     text() {
-      const rawText = this.statusContent.full_text;
+      const rawText = this.statusContent.text;
       return setEntitiesOnText({
         rawText,
         entities: this.statusContent.entities,

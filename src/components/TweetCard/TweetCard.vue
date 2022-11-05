@@ -5,7 +5,7 @@
       <TweetCardHeader :status="status" :status-content="statusContent" />
 
       <TweetCardContent :status="status" :status-content="statusContent">
-        <QuotedTweetCard v-if="statusContent.quoted_status" :status="statusContent.quoted_status" />
+        <QuotedTweetCard v-if="statusContent.quoted" :status="statusContent.quoted" />
       </TweetCardContent>
       <TweetCardToolbar :status="statusContent" :status-content="statusContent" />
     </div>
@@ -17,8 +17,8 @@ import { defineComponent, defineAsyncComponent } from "vue";
 import TweetCardContent from "./TweetCardContent.vue";
 import TweetCardToolbar from "./TweetCardToolbar.vue";
 import TweetCardHeader from "./TweetCardHeader.vue";
-import { components } from "@twitter";
 import ProfileDidAction from "@components/Profile/ProfileDidAction.vue";
+import { Tweet } from "@services/tweet";
 const QuotedTweetCard = defineAsyncComponent(() => import("./QuotedTweetCard.vue"));
 
 export default defineComponent({
@@ -31,11 +31,13 @@ export default defineComponent({
     ProfileDidAction,
   },
   props: {
-    status: { type: Object as () => components["schemas"]["Tweet"], required: true },
+    status: { type: Object as () => Tweet, required: true },
   },
   computed: {
-    statusContent() {
-      return this.status.retweeted_status ?? this.status;
+    statusContent(): Tweet {
+      console.log("this.status.retweeted", this.status.retweeted);
+
+      return this.status.retweeted ?? this.status;
     },
   },
 });

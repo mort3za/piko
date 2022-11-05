@@ -34,31 +34,30 @@
 
 <script lang="ts" setup>
 import { computed, defineAsyncComponent, ref } from "vue";
-import { components } from "@twitter";
 import { formatCompact } from "@services/number";
 import IconExternal from "@assets/icons/external.svg?component";
 import IconReply from "@assets/icons/reply.svg?component";
 import IconHeart from "@assets/icons/heart.svg?component";
 import IconRetweet from "@assets/icons/retweet.svg?component";
+import { Tweet } from "@services/tweet";
 const ComposeTweet = defineAsyncComponent(() => import("@components/ComposeTweet.vue"));
 
 const showReplyCompose = ref(false);
 const props = defineProps({
   statusContent: {
-    type: Object as () => components["schemas"]["Tweet"],
+    type: Object as () => Tweet,
     required: true,
   },
   status: {
-    type: Object as () => components["schemas"]["Tweet"],
+    type: Object as () => Tweet,
     required: true,
   },
 });
 
-const twitterLink = computed(
-  () =>
-    `https://twitter.com/${
-      (props.statusContent.user as components["schemas"]["User"]).username
-    }/status/${props.statusContent.id}`,
+const twitterLink = computed(() =>
+  props.statusContent.user
+    ? `https://twitter.com/${props.statusContent.user.username}/status/${props.statusContent.id}`
+    : undefined,
 );
 
 function toggleReply() {
