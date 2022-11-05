@@ -50,19 +50,12 @@ export const setEntitiesOnText = ({
       type: "url",
     };
   });
-  // upgradedEntities.media = (upgradedEntities.media ?? []).map((media) => {
-  //   return {
-  //     ...media,
-  //     type: "media",
-  //   };
-  // });
 
   const entities_all = [
     ...upgradedEntities.hashtags,
     ...upgradedEntities.cashtags,
     ...upgradedEntities.mentions,
     ...upgradedEntities.urls,
-    // ...upgradedEntities.media,
   ].sort((a, b) => {
     return a.start - b.start;
   });
@@ -97,7 +90,7 @@ export const setEntitiesOnText = ({
   return textSlices
     .map((slice) => {
       // remove media text from status text
-      if (slice.entity?.type === "media") {
+      if (slice.entity?.media_key) {
         return "";
       }
       if (quoted_status_permalink && quoted_status_permalink.url === slice.entity?.url) {

@@ -35,7 +35,6 @@ export const useTimelineStore = defineStore("timeline", {
         .then(onJsonResponse)
         .then(onTimelineResponse)
         .then((result: Tweet[]) => {
-          console.log({ result });
           this.statuses = result;
           return result;
         });
