@@ -39,7 +39,9 @@ function attachMedia(tweet: PureTweet, mediaList: components["schemas"]["Media"]
   return { ...tweet, photos, videos, hasMedia };
 }
 
-export const onTimelineResponse = ({ data }: any) => {
+export const onTimelineResponse = (data: any) => {
+  console.log("data", data);
+
   let tweets = data;
   tweets = tweets.data
     .map((tweet: Tweet) => attachUser(tweet, data.includes.users))
