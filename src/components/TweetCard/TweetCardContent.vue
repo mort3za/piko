@@ -33,7 +33,8 @@ export default defineComponent({
       return setEntitiesOnText({
         rawText,
         entities: this.statusContent.entities,
-        quoted_status_permalink: this.status.quoted_status_permalink,
+        // todo: not working in api-v2
+        // quoted_status_permalink: this.status.quoted_status_permalink,
       });
     },
   },

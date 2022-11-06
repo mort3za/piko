@@ -4,7 +4,7 @@
     <div class="w-full mx-auto pb-8 padding-x" v-if="state.status">
       <TweetCard :status="state.status" />
     </div>
-    <MentionStatuses v-if="state.status" :status-id="state.status.id_str" />
+    <!-- <MentionStatuses v-if="state.status" :status-id="state.status.id_str" /> -->
   </div>
 </template>
 
@@ -13,17 +13,15 @@ import HeaderBar from "@components/Layout/HeaderBar.vue";
 import { defineAsyncComponent, onMounted, shallowReactive } from "vue";
 import { useStatusStore } from "@stores/status-module";
 import { useRoute } from "vue-router";
-import { components } from "@twitter";
+import { Tweet } from "@services/tweet";
 const TweetCard = defineAsyncComponent(() => import("@components/TweetCard/TweetCard.vue"));
-const MentionStatuses = defineAsyncComponent(() => import("@components/MentionStatuses.vue"));
+// const MentionStatuses = defineAsyncComponent(() => import("@components/MentionStatuses.vue"));
 
 const statusStore = useStatusStore();
 const route = useRoute();
 
-const state = shallowReactive({ status: null as unknown as components["schemas"]["Tweet"] });
+const state = shallowReactive({ status: null as unknown as Tweet });
 onMounted(async () => {
-  state.status = (await statusStore.statusFetch(
-    route.params.id as string,
-  )) as components["schemas"]["Tweet"];
+  state.status = (await statusStore.statusFetch(route.params.id as string)) as Tweet;
 });
 </script>

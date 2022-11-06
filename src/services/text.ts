@@ -1,10 +1,10 @@
 export const RTLLanguageCodes = ["fa"];
 import { cloneDeep } from "lodash-es";
 import { components } from "@twitter";
+import { PureTweet } from "./tweet";
 
 type Indices = [number, number];
-export const isRTL = (langCode: components["schemas"]["Tweet"]["lang"]) =>
-  RTLLanguageCodes.includes(langCode as string);
+export const isRTL = (langCode: PureTweet["lang"]) => RTLLanguageCodes.includes(langCode as string);
 
 export const setEntitiesOnText = ({
   rawText = "",

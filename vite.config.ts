@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
+// @ts-ignore
 import SvgLoader from "vite-svg-loader";
 
 // https://vitejs.dev/config/

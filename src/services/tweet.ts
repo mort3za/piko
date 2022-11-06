@@ -4,7 +4,7 @@ type ReferencedTweetType = "retweeted" | "quoted" | "replied_to";
 
 export type PureTweet = components["schemas"]["Tweet"];
 
-export type Tweet = components["schemas"]["Tweet"] & {
+export type Tweet = PureTweet & {
   retweeted?: Tweet;
   replied_to?: Tweet;
   quoted?: Tweet;

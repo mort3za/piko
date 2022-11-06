@@ -1,6 +1,7 @@
 <template>
-  <!-- todo: user.protected, user.verified -->
+  <!-- todo: user.protected -->
   <router-link
+    v-if="user"
     class="flex items-center muted text-xs gap-1"
     :class="[large ? 'sm:text-sm' : '']"
     :to="{ name: 'Profile', params: { username: user.username } }"
@@ -21,7 +22,6 @@ import IconCheckCircle from "@assets/icons/check-circle.svg?component";
 const props = defineProps({
   user: {
     type: Object as () => components["schemas"]["User"],
-    required: true,
   },
   showScreenName: {
     type: Boolean,
@@ -37,5 +37,5 @@ const props = defineProps({
   },
 });
 
-const showVerified = computed(() => props.user.verified && !props.minimal);
+const showVerified = computed(() => props.user?.verified && !props.minimal);
 </script>
