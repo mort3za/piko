@@ -15,11 +15,9 @@ export const useTimelineStore = defineStore("timeline", {
   }),
   getters: {
     timelineParams: (state) => {
-      const until_id = router.currentRoute.value.query.oldest_id;
-      const since_id = router.currentRoute.value.query.newest_id;
+      const pagination_token = router.currentRoute.value.query.pagination_token;
       const result = {
-        ...(since_id && { since_id }),
-        ...(until_id && { until_id }),
+        ...(pagination_token && { pagination_token }),
         ...(router.currentRoute.value.meta?.timeline ?? {}),
       };
       return result as Partial<TimelinePaginationParams>;

@@ -15,9 +15,9 @@ body {
 
 a, button[type="button"] {
   @apply cursor-pointer;
-}
-a.disabled {
-  @apply pointer-events-none opacity-25;
+  &.disabled {
+    @apply pointer-events-none opacity-25;
+  }
 }
 
 

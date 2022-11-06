@@ -21,7 +21,7 @@ function attachUser(tweet: PureTweet, users: components["schemas"]["User"][]) {
   return { ...tweet, user, in_reply_to_user };
 }
 
-function attachMedia(tweet: PureTweet, mediaList: components["schemas"]["Media"][]): Tweet {
+function attachMedia(tweet: PureTweet, mediaList: components["schemas"]["Media"][] = []): Tweet {
   const photos: Tweet["photos"] = [];
   const videos: Tweet["videos"] = [];
   let hasMedia = false;
@@ -40,8 +40,6 @@ function attachMedia(tweet: PureTweet, mediaList: components["schemas"]["Media"]
 }
 
 export const onTimelineResponse = (data: any) => {
-  console.log("data", data);
-
   let tweets = data;
   tweets = tweets.data
     .map((tweet: Tweet) => attachUser(tweet, data.includes.users))

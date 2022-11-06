@@ -54,11 +54,11 @@ const props = defineProps({
   },
 });
 
-const twitterLink = computed(() =>
-  props.status.user
+const twitterLink = computed(() => {
+  return props.status.user
     ? `https://twitter.com/${props.status.user.username}/status/${props.statusContent.id}`
-    : undefined,
-);
+    : undefined;
+});
 
 function toggleReply() {
   showReplyCompose.value = !showReplyCompose.value;

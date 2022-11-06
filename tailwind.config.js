@@ -3,9 +3,8 @@ module.exports = {
   darkMode: "class",
   content: [
     "./public/**/*.html",
-    "./src/**/*.html",
-    "./src/**/*.vue",
-    "./src/**/*.ts",
+    "./index.html",
+    "./src/**/*.{html,vue,js,ts,jsx,tsx}",
     // "./src/VueTailwind.js",
     // "./node_modules/vue-tailwind/**/*.{js,jsx,ts,tsx,vue}",
   ],
