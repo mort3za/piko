@@ -26,9 +26,10 @@
         </button>
       </div>
     </dialog>
+
     <video
       class="w-full block video dark:bg-slate-700"
-      ref="video"
+      ref="videoRef"
       :src="getChosenVideo(currentBitrateIndex)"
       :poster="video.preview_image_url"
       controls
@@ -65,25 +66,25 @@ const videoLengthDisplay =
 const played = ref(false);
 const playing = ref(false);
 
-const video = ref(null as unknown as HTMLVideoElement);
+const videoRef = ref(null as unknown as HTMLVideoElement);
 // pause video when it's not in viewport
 const observer = new IntersectionObserver(
   (entries, observer) => {
     entries.forEach((entry) => {
-      if (entry.intersectionRatio != 1 && !video.value.paused) {
-        video.value.pause();
+      if (entry.intersectionRatio != 1 && !videoRef.value.paused) {
+        videoRef.value.pause();
       }
     });
   },
   { threshold: 0 },
 );
 onMounted(() => {
-  if (!video.value) return;
-  observer.observe(video.value);
+  if (!videoRef.value) return;
+  observer.observe(videoRef.value);
 });
 onBeforeUnmount(() => {
-  if (!video.value) return;
-  observer.unobserve(video.value);
+  if (!videoRef.value) return;
+  observer.unobserve(videoRef.value);
 });
 
 const bitrates = computed(() => {

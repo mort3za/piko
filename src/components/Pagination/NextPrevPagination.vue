@@ -12,7 +12,7 @@
     <button
       type="button"
       class="px-5 py-3 text-5xl leading-3"
-      @click.prevent="updateRoute({ max_id: maxIdFixed })"
+      @click.prevent="updateRoute({ newest_id: maxIdFixed })"
     >
       <IconChevronRight />
     </button>
@@ -29,8 +29,7 @@ import IconChevronLeft from "@assets/icons/chevron-left.svg?component";
 import { useTimelineStore } from "@stores/timeline-module";
 const timelineStore = useTimelineStore();
 
-// const sinceId = computed(() => timelineStore.statuses.at(0)?.id);
-const maxId = computed(() => timelineStore.statuses.at(-1)?.id);
+const maxId = computed(() => timelineStore.meta?.oldest_id);
 
 const route = useRoute();
 const router = useRouter();
@@ -42,7 +41,7 @@ const maxIdFixed = computed(() => {
   return String(BigInt(maxId.value) - BigInt(1));
 });
 
-const isPrevDisabled = computed(() => !route.query.max_id && !route.query.since_id);
+const isPrevDisabled = computed(() => !route.query.newest_id && !route.query.oldest_id);
 
 const emit = defineEmits(["change"]);
 const fullPath = computed(() => route.fullPath.split("#")[0]);

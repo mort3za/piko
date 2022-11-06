@@ -40,11 +40,11 @@ function attachMedia(tweet: PureTweet, mediaList: components["schemas"]["Media"]
 }
 
 export const onTimelineResponse = ({ data }: any) => {
-  let result = data;
-  result = result.data
+  let tweets = data;
+  tweets = tweets.data
     .map((tweet: Tweet) => attachUser(tweet, data.includes.users))
     .map((tweet: Tweet) => attachMedia(tweet, data.includes.media));
-  result = result.map((tweet: Tweet) => {
+  tweets = tweets.map((tweet: Tweet) => {
     const referencedTweetTypes: ReferencedTweetType[] = ["retweeted", "quoted", "replied_to"];
     referencedTweetTypes.forEach((type: ReferencedTweetType) => {
       const tweetRef = tweet?.referenced_tweets?.find((reference) => reference.type === type);
@@ -57,5 +57,5 @@ export const onTimelineResponse = ({ data }: any) => {
     });
     return tweet;
   });
-  return result;
+  return { tweets, meta: data.meta };
 };

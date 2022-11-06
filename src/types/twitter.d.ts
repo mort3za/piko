@@ -19,8 +19,8 @@ interface StatusPayload {
 
 interface TimelinePaginationParams {
   count: number;
-  since_id: string;
-  max_id: string;
+  oldest_id: string;
+  newest_id: string;
   trim_user: boolean;
   exclude_replies: boolean;
   include_entities: boolean;

@@ -22,7 +22,7 @@ export const router = createRouter({
       name: "Home",
       path: getPath("home"),
       component: Home,
-      meta: { timeline: { exclude_replies: true } },
+      meta: { timeline: { exclude: "replies" } },
     },
     {
       name: "Settings",

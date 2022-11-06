@@ -3,7 +3,7 @@ import { components } from "@twitter";
 import { defineStore } from "pinia";
 import { getQueryParamsString } from "@services/url";
 import { onJsonResponse } from "@services/response";
-import { onTimelineResponse, Tweet } from "@services/tweet";
+import { onTimelineResponse } from "@services/tweet";
 import { router } from "@router/index";
 
 export type TimelineTypes = "latestStatuses" | "profileStatuses" | "mentionStatuses";
@@ -11,15 +11,16 @@ export type TimelineTypes = "latestStatuses" | "profileStatuses" | "mentionStatu
 export const useTimelineStore = defineStore("timeline", {
   state: () => ({
     statuses: [] as components["schemas"]["Tweet"][],
+    meta: {} as components["schemas"]["Get2UsersIdTimelinesReverseChronologicalResponse"]["meta"],
   }),
   getters: {
     timelineParams: (state) => {
-      const since_id = router.currentRoute.value.query.since_id as string;
-      const max_id = router.currentRoute.value.query.max_id as string;
+      const until_id = router.currentRoute.value.query.oldest_id;
+      const since_id = router.currentRoute.value.query.newest_id;
       const result = {
         ...(since_id && { since_id }),
-        ...(max_id && { max_id }),
-        ...((router.currentRoute.value.meta?.timeline as Object) ?? {}),
+        ...(until_id && { until_id }),
+        ...(router.currentRoute.value.meta?.timeline ?? {}),
       };
       return result as Partial<TimelinePaginationParams>;
     },
@@ -34,9 +35,10 @@ export const useTimelineStore = defineStore("timeline", {
       return api(path)
         .then(onJsonResponse)
         .then(onTimelineResponse)
-        .then((result: Tweet[]) => {
-          this.statuses = result;
-          return result;
+        .then((result) => {
+          this.statuses = result.tweets;
+          this.meta = result.meta;
+          return result.tweets;
         });
     },
 
