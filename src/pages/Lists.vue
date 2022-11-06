@@ -10,13 +10,11 @@
         <li
           class="first:border-t border-b dark:border-slate-700/[0.5]"
           v-for="item in listsList"
-          :key="item.id_str"
+          :key="item.id"
         >
-          <router-link
-            class="link py-2 my-1 block"
-            :to="{ name: 'List', params: { id: item.id_str } }"
-            >{{ item.name }}</router-link
-          >
+          <router-link class="link py-2 my-1 block" :to="{ name: 'List', params: { id: item.id } }">{{
+            item.name
+          }}</router-link>
         </li>
       </ul>
     </div>
@@ -29,12 +27,13 @@
 import HeaderBar from "@components/Layout/HeaderBar.vue";
 import NavigationPrimary from "@components/NavigationPrimary/NavigationPrimary.vue";
 import { useAccountStore } from "@stores/account-module";
-import { ref } from "vue";
+import { ref, Ref } from "vue";
+import { components } from "@twitter";
 
 const accountStore = useAccountStore();
 
-const listsList: any = ref(null as unknown as any[]);
-accountStore.listsListFetch().then((lists: any) => {
+const listsList: Ref<components["schemas"]["List"][]> = ref([]);
+accountStore.listsListFetch().then((lists: components["schemas"]["List"][]) => {
   listsList.value = lists.reverse();
 });
 </script>

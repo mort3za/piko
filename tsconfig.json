@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -13,6 +14,7 @@
     "noUncheckedIndexedAccess": true,
     "typeRoots": ["./src/types", "./node_modules/@types"],
     "paths": {
+      "@twitter": ["./node_modules/twitter-api-sdk/dist/gen/openapi-types"],
       "@assets/*": ["./src/assets/*"],
       "@mixins/*": ["./src/mixins/*"],
       "@components/*": ["./src/components/*"],
@@ -24,5 +26,6 @@
       "@types/*": ["./src/types/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": ["node_modules"]
 }

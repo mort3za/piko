@@ -1,41 +1,42 @@
 export const RTLLanguageCodes = ["fa"];
 import { cloneDeep } from "lodash-es";
-import { Entities, QuotedStatusPermalink, Status } from "twitter-d";
+import { components } from "@twitter";
+import { PureTweet } from "./tweet";
 
 type Indices = [number, number];
-export const isRTL = (langCode: Status["lang"]) => RTLLanguageCodes.includes(langCode as string);
+export const isRTL = (langCode: PureTweet["lang"]) => RTLLanguageCodes.includes(langCode as string);
 
 export const setEntitiesOnText = ({
   rawText = "",
-  entities,
+  entities = {},
   quoted_status_permalink,
 }: {
   rawText: string;
-  entities: Entities;
-  quoted_status_permalink?: QuotedStatusPermalink | null;
+  entities?: components["schemas"]["FullTextEntities"];
+  quoted_status_permalink?: components["schemas"]["UrlEntity"] | null;
 }): string => {
   const linkProps = 'rel="noopener noreferrer" target="_blank"';
   const upgradedEntities = cloneDeep(entities);
   upgradedEntities.hashtags = (upgradedEntities.hashtags ?? []).map((hashtag) => {
     return {
       ...hashtag,
-      linkStart: `<a class="link link--hashtag" ${linkProps} href="https://twitter.com/hashtag/${hashtag.text}">`,
+      linkStart: `<a class="link link--hashtag" ${linkProps} href="https://twitter.com/hashtag/${hashtag.tag}">`,
       linkEnd: "</a>",
       type: "hashtag",
     };
   });
-  upgradedEntities.symbols = (upgradedEntities.symbols ?? []).map((symbol) => {
+  upgradedEntities.cashtags = (upgradedEntities.cashtags ?? []).map((cashtag) => {
     return {
-      ...symbol,
-      linkStart: `<a class="link link--symbol" ${linkProps} href="https://twitter.com/search?q=%23${symbol.text}">`,
+      ...cashtag,
+      linkStart: `<a class="link link--cashtag" ${linkProps} href="https://twitter.com/search?q=%23${cashtag.tag}">`,
       linkEnd: "</a>",
-      type: "symbol",
+      type: "cashtag",
     };
   });
-  upgradedEntities.user_mentions = (upgradedEntities.user_mentions ?? []).map((mention) => {
+  upgradedEntities.mentions = (upgradedEntities.mentions ?? []).map((mention) => {
     return {
       ...mention,
-      linkStart: `<a class="link link--mention inline-flex ltr" ${linkProps} href="https://twitter.com/${mention.screen_name}">`,
+      linkStart: `<a class="link link--mention inline-flex ltr" ${linkProps} href="https://twitter.com/${mention.username}">`,
       linkEnd: "</a>",
       type: "mention",
     };
@@ -49,21 +50,14 @@ export const setEntitiesOnText = ({
       type: "url",
     };
   });
-  upgradedEntities.media = (upgradedEntities.media ?? []).map((media) => {
-    return {
-      ...media,
-      type: "media",
-    };
-  });
 
   const entities_all = [
     ...upgradedEntities.hashtags,
-    ...upgradedEntities.symbols,
-    ...upgradedEntities.user_mentions,
+    ...upgradedEntities.cashtags,
+    ...upgradedEntities.mentions,
     ...upgradedEntities.urls,
-    ...upgradedEntities.media,
   ].sort((a, b) => {
-    return (a.indices as Indices)[0] - (b.indices as Indices)[0];
+    return a.start - b.start;
   });
 
   let plainTextIndex = 0;
@@ -71,22 +65,20 @@ export const setEntitiesOnText = ({
   const rawTextInArray = Array.from(rawText);
 
   entities_all.forEach((entity_item) => {
-    const indices_item = entity_item.indices as Indices;
-
     // add plain text part to the text slices
-    if (plainTextIndex < indices_item[0]) {
+    if (plainTextIndex < entity_item.start) {
       textSlices.push({
-        text: rawTextInArray.slice(plainTextIndex, indices_item[0]).join(""),
+        text: rawTextInArray.slice(plainTextIndex, entity_item.start).join(""),
       });
-      plainTextIndex = indices_item[1];
+      plainTextIndex = entity_item.end;
     }
 
     // add entity part to the text slices
     textSlices.push({
-      text: rawTextInArray.slice(indices_item[0], indices_item[1]).join(""),
+      text: rawTextInArray.slice(entity_item.start, entity_item.end).join(""),
       entity: entity_item,
     });
-    plainTextIndex = indices_item[1];
+    plainTextIndex = entity_item.end;
   });
   // add the last plain text part to the text slices
   if (plainTextIndex < rawTextInArray.length) {
@@ -98,7 +90,7 @@ export const setEntitiesOnText = ({
   return textSlices
     .map((slice) => {
       // remove media text from status text
-      if (slice.entity?.type === "media") {
+      if (slice.entity?.media_key) {
         return "";
       }
       if (quoted_status_permalink && quoted_status_permalink.url === slice.entity?.url) {

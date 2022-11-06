@@ -3,7 +3,7 @@
     <HeaderBar class="mb-4" @clicked-home="loadTimeline" />
 
     <ErrorMessage v-if="error.message" :error="error" />
-    <Statuses v-else :statuses="statuses" :loading="loading" />
+    <Statuses class="mt-auto" v-else :statuses="statuses" :loading="loading" />
 
     <NavigationPrimary @change-navigation="loadTimeline" />
   </div>

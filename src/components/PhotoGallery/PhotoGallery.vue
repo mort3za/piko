@@ -2,9 +2,9 @@
   <div class="gallery grid" :class="rootClasses">
     <img
       class="object-contain max-h-[88vh]"
-      v-for="(mediaItem, index) in media"
-      :key="mediaItem.id"
-      :src="mediaItem.media_url_https"
+      v-for="(mediaItem, index) in photos"
+      :key="index"
+      :src="mediaItem.url"
       alt=""
       :class="`gallery-image--${index}`"
       loading="lazy"
@@ -14,17 +14,17 @@
 
 <script lang="ts" setup>
 import { computed } from "@vue/reactivity";
-import { MediaEntity } from "twitter-d";
+import { components } from "@twitter";
 
 const props = defineProps({
-  media: {
-    type: Array as () => MediaEntity[],
+  photos: {
+    type: Array as () => components["schemas"]["Photo"][],
     required: true,
   },
 });
 
 const rootClasses = computed(() => {
-  switch (props.media.length) {
+  switch (props.photos.length) {
     case 2:
       return "grid-cols-2 grid-rows-1";
     case 3:

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user">
     <div
       class="grid grid-cols-[1fr,auto] gap-1 sm:flex justify-between sm:justify-start items-center mb-1 w-full"
     >
@@ -12,8 +12,9 @@
       </div>
       <!-- time -->
       <router-link
+        v-if="statusContent.created_at"
         class="flex items-center justfiy-end"
-        :to="{ name: 'Status', params: { id: status.id_str, screen_name: user.screen_name } }"
+        :to="{ name: 'Status', params: { id: status.id, username: user.username } }"
         ><time class="muted text-xs shrink-0">{{
           getRelativeTime(statusContent.created_at)
         }}</time></router-link
@@ -26,14 +27,13 @@
 import { getRelativeTime } from "@services/time";
 import ProfileLink from "@components/Profile/ProfileLink.vue";
 import Avatar from "@components/Avatar.vue";
-import { FullUser, Status } from "twitter-d";
 import { computed } from "@vue/reactivity";
+import { Tweet } from "@services/tweet";
 
 const props = defineProps({
-  status: { type: Object as () => Status, required: true },
-  statusContent: { type: Object as () => Status, required: true },
-  quoted: { type: Boolean, default: false },
+  status: { type: Object as () => Tweet, required: true },
+  statusContent: { type: Object as () => Tweet, required: true },
 });
 
-const user = computed(() => props.statusContent.user as FullUser);
+const user = computed(() => props.statusContent.user);
 </script>

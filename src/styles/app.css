@@ -15,9 +15,9 @@ body {
 
 a, button[type="button"] {
   @apply cursor-pointer;
-}
-a.disabled {
-  @apply pointer-events-none opacity-25;
+  &.disabled {
+    @apply pointer-events-none opacity-25;
+  }
 }
 
 
@@ -31,7 +31,7 @@ a.disabled {
   min-height: 100vh;
 }
 .layout--fill {
-  @apply h-fit-screen flex flex-col;
+  @apply h-fit-screen flex flex-col justify-between;
 }
 .rtl {
   direction: rtl;
@@ -43,7 +43,7 @@ a.disabled {
 .link {
   @apply text-blue-600 dark:text-blue-300 cursor-pointer;
 }
-.link--hashtag, .link--symbol {
+.link--hashtag, .link--cashtag {
   @apply font-bold;
 }
 .muted {

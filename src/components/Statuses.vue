@@ -5,7 +5,7 @@
     <div
       class="first:border-t border-b block dark:border-slate-700/[0.5]"
       v-for="status in statuses"
-      :key="status.id_str"
+      :key="status.id"
     >
       <TweetCard class="padding-x" :status="status" />
     </div>
@@ -14,17 +14,17 @@
 
 <script lang="ts" setup>
 import TweetCard from "@components/TweetCard/TweetCard.vue";
-import { Status } from "twitter-d";
 import IconLoading from "@assets/icons/loading.svg?component";
+import { Tweet } from "@services/tweet";
 
-defineProps({
+const props = defineProps({
   title: { type: String, default: "" },
   loading: {
     type: Boolean,
     default: false,
   },
   statuses: {
-    type: Array as () => Status[],
+    type: Array as () => Tweet[],
     required: true,
   },
 });

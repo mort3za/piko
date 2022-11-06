@@ -7,18 +7,18 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Status } from "twitter-d";
 import TweetCardHeader from "./TweetCardHeader.vue";
 import TweetCardContent from "./TweetCardContent.vue";
+import { Tweet } from "@services/tweet";
 
 export default defineComponent({
   components: { TweetCardHeader, TweetCardContent },
   props: {
-    status: { type: Object as () => Status, required: true },
+    status: { type: Object as () => Tweet, required: true },
   },
   computed: {
-    statusContent() {
-      return this.status.retweeted_status ?? this.status;
+    statusContent(): Tweet {
+      return this.status.retweeted ?? this.status;
     },
   },
 });

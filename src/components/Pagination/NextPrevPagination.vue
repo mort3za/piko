@@ -9,40 +9,23 @@
       <IconChevronLeft />
     </button>
 
-    <button
-      type="button"
-      class="px-5 py-3 text-5xl leading-3"
-      @click.prevent="updateRoute({ max_id: maxIdFixed })"
-    >
+    <button type="button" class="px-5 py-3 text-5xl leading-3" @click.prevent="updateRoute()">
       <IconChevronRight />
     </button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { supportsBigInt } from "@services/number";
 import { computed, watch } from "vue";
-import { LocationQueryRaw, useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import IconChevronRight from "@assets/icons/chevron-right.svg?component";
 import IconChevronLeft from "@assets/icons/chevron-left.svg?component";
 
 import { useTimelineStore } from "@stores/timeline-module";
 const timelineStore = useTimelineStore();
-
-// const sinceId = computed(() => timelineStore.statuses.at(0)?.id_str);
-const maxId = computed(() => timelineStore.statuses.at(-1)?.id_str);
-
 const route = useRoute();
 const router = useRouter();
-
-// fixed maxId = maxId - 1
-const maxIdFixed = computed(() => {
-  if (!maxId.value) return;
-  if (!supportsBigInt) return maxId.value;
-  return String(BigInt(maxId.value) - BigInt(1));
-});
-
-const isPrevDisabled = computed(() => !route.query.max_id && !route.query.since_id);
+const isPrevDisabled = computed(() => !route.query.pagination_token);
 
 const emit = defineEmits(["change"]);
 const fullPath = computed(() => route.fullPath.split("#")[0]);
@@ -52,10 +35,11 @@ function onPathChange() {
   emit("change");
 }
 
-function updateRoute(queryParams: LocationQueryRaw) {
+function updateRoute() {
+  const pagination_token = timelineStore.meta?.next_token;
   router.push({
     name: route.name as string,
-    query: queryParams,
+    query: { pagination_token },
   });
 }
 function goBack() {

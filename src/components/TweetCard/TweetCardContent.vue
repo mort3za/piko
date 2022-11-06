@@ -2,8 +2,8 @@
   <div :class="{ rtl: isRTL, ltr: !isRTL }" :dir="lang === 'und' ? 'auto' : undefined">
     <div class="user-content whitespace-pre-line leading-6 break-words" v-html="text"></div>
 
-    <div class="mt-2" v-if="media">
-      <MediaContent :media="media" />
+    <div class="mt-2" v-if="statusContent.hasMedia">
+      <MediaContent :status="statusContent" />
     </div>
     <slot />
   </div>
@@ -11,15 +11,15 @@
 
 <script lang="ts">
 import { defineComponent, defineAsyncComponent } from "vue";
-import { Status } from "twitter-d";
 import { setEntitiesOnText, isRTL } from "@services/text";
 const MediaContent = defineAsyncComponent(() => import("@components/MediaContent/MediaContent.vue"));
+import { Tweet } from "@services/tweet";
 
 export default defineComponent({
   name: "Content",
   props: {
-    status: { type: Object as () => Status, required: true },
-    statusContent: { type: Object as () => Status, required: true },
+    status: { type: Object as () => Tweet, required: true },
+    statusContent: { type: Object as () => Tweet, required: true },
   },
   computed: {
     lang() {
@@ -29,15 +29,13 @@ export default defineComponent({
       return isRTL(this.lang);
     },
     text() {
-      const rawText = this.statusContent.full_text;
+      const rawText = this.statusContent.text;
       return setEntitiesOnText({
         rawText,
         entities: this.statusContent.entities,
-        quoted_status_permalink: this.status.quoted_status_permalink,
+        // todo: not working in api-v2
+        // quoted_status_permalink: this.status.quoted_status_permalink,
       });
-    },
-    media() {
-      return this.statusContent.extended_entities?.media ?? this.statusContent.entities.media;
     },
   },
   components: { MediaContent },
